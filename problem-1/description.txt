@@ -1,0 +1,21 @@
+Napisati dvije funkcije “TestPerioda” i “OdrediOsnovniPeriod”, vezane za testiranje periodičnosti
+slijeda brojeva pohranjenih u vektoru i nalaženje osnovnog perioda tog slijeda (u slučaju da slijed
+jeste periodičan). Prva funkcija prima dva parametra, pri čemu je prvi parametar vektor realnih
+brojeva, dok je drugi parametar cijeli broj 𝑝. Funkcija treba da vrati kao rezultat logičku vrijednost
+“tačno” ili “netačno” ovisno od toga da li slijed brojeva pohranjen u vektoru periodičan sa periodom
+𝑝 ili ne. Druga funkcija prima samo jedan parametar koji je vektor realnih brojeva, a ona kao rezultat
+vraća osnovni period slijeda pohranjenog u vektoru ukoliko je slijed periodičan, ili nulu ukoliko slijed
+nije periodičan. Napisane funkcije treba iskoristiti u glavnom programu u kojem se unose elemente
+s tastature u neki vektor sve dok se sa tastature ne unese nula, koja označava kraj unosa (ta nula se
+ne smješta u vektor). Nakon završetka unosa, program treba pozvati funkciju “OdrediOsnovniPeriod”
+sa ciljem da utvrdi da li se elementi periodično ponavljaju ili ne, nakon čega ispisuje odgovarajuči
+komentar na ekranu (informaciju o dužini perioda, ili da elementi ne čine periodičan slijed). Pri
+tome, nije unaprijed poznato koliko će korisnik unijeti elemenata prije nego što unese nulu kao
+oznaku završetka unosa. Dijalozi između korisnika i programa trebali bi izgledati poput sljedećih
+(ovisno da li je slijed periodičan ili ne):
+
+Unesite slijed brojeva (0 za kraj): 1 3 1 4 2 1 3 1 4 2 1 3 0
+Slijed je periodican sa osnovnim periodom 5.
+
+Unesite slijed brojeva (0 za kraj): 4 5 1 7 1 5 0
+Slijed nije periodican!
