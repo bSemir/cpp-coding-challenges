@@ -1,0 +1,20 @@
+```
+Za dva prirodna broja 𝑚 i 𝑛 kažemo da čine prijateljski par brojeva ukoliko je suma svih djelilaca
+jednog broja (ne računajući njega samog) jednaka drugom broju i obrnuto. Na primjer, brojevi 220
+i 284 su jedan takav par. Zaista, djelioci broja 220 (osim njega samog), su 1, 2, 4, 5, 10, 11, 20, 22,
+44, 55 i 110, čija je suma 284, a isto tako suma svih djelioca broja 284 (osim njega samog) iznosi
+220. Pored (220, 284), još neki parovi prijateljskih brojeva su (1184, 1210), (2620, 2924), itd.
+Napisati funkciju “BrojPrijateljskihParova” koja kao parametar prima vektor cijelih brojeva a koja
+vraća kao rezultat koliko se u tom vektoru može naći parova prijateljskih brojeva (naravno, ukoliko
+takvih parova nema, rezultat će biti 0). Pri tome se, radi jednostavnosti, pretpostavlja da ulazni
+vektor ne sadrži duplikate, tj. elemente koji se ponavljaju (prisustvo duplikata može osjetno otežati
+rješavanje zadatka, s obzirom da će bez vođenja računa o tome da li je neki element duplikat ili ne
+često biti nađeno daleko više parova nego što ih zaista ima). Također treba napisati i glavni program
+kojem se za slijed od 𝑛 brojeva koji se unose s tastature (pri čemu se 𝑛 također unosi sa tastature)
+ispisuje koliko u tom slijedu ima prijateljskih parova brojeva. Dijalog između korisnika i programa
+treba izgledati poput sljedećeg:
+
+Koliko ima brojeva: 8
+Unesite brojeve: 5 284 2620 377 2924 49 220 3522
+Broj prijateljskih parova: 2
+```
