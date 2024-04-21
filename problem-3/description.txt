@@ -1,0 +1,15 @@
+Napisati prvo funkciju “DaLiJeProst” sa jednim parametrom “n” koji predstavlja neki cijeli broj, a koja
+kao rezultat vraća logičku vrijednost “tačno” ili “netačno” u ovisnosti od toga da li je parametar
+prost broj ili ne. Zatim napisati funkciju “ProstiBrojeviUOpsegu”, također sa dva cjelobrojna
+parametra “a” i “b” koja kao rezultat vraća vektor koji se sastoji od svih prostih brojeva u intervalu od
+“a” do “b” uključivo. Napisanu funkciju iskoristiti u glavnom programu koji traži da se sa tastature
+unesu dva cijela broja, a zatim za sve cijele brojeve u opsegu između ta dva unesena broja ispisuje
+koji su prosti brojevi u datom opsegu, ili informaciju da nema prostih brojeva u datom opsegu.
+Dijalozi između korisnika i programa trebali bi izgledati poput sljedećih (ovisno ima li ili nema
+prostih brojeva u zadanom opsegu):
+
+Unesite pocetnu i krajnju vrijednost: 15 30
+Prosti brojevi u rasponu od 15 do 30 su: 17, 19, 23, 29
+
+Unesite pocetnu i krajnju vrijednost: 24 28
+Nema prostih brojeva u rasponu od 24 do 28!
