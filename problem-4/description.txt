@@ -1,0 +1,15 @@
+```
+Napisati funkciju “IzvrniRedoslijedRijeci” koja za ulazni string koji joj se zadaje kao parametar daje
+kao rezultat novi string u kojem je redoslijed riječi izvrnut u odnosu na ulazni string (tj. prva riječ
+postaje posljednja, druga pretposljednja, itd.). Pri tome, izlazni string ne treba da sadrži nikakve
+suvišne razmake, tj. na početku i na kraju stringa ne treba da bude razmaka, a između riječi treba biti
+tačno jedan razmak. Pretpostaviti da je riječ svaki maksimalni podniz uzastopnih znakova stringa koji
+ne sadrži razmake. Na primjer, ukoliko se funkciji pošalje string “ Na vrh brda, vrba mrda “,
+funkcija kao rezultat treba vratiti string “mrda vrba brda, vrh Na”.
+Napisanu funkciju treba demonstrirati u isječku programa koji će za neki string unesen sa tastature
+ispisati odgovarajući transformirani string s izvrnutim redoslijedom riječi. Dijalog između programa
+i korisnika treba izgledati ovako:
+
+Unesite string: Na vrh brda, vrba mrda!!!
+Izvrnuti string: mrda!!! vrba brda, vrh Na
+```
