@@ -14,10 +14,10 @@ int main() {
 std::string IzvrniRedoslijedRijeci(const std::string &s) {
     std::string reversed;
     for (int i = 0; i < s.length(); i++) {
-        if (s[i] != ' ' && (i == 0 || s[i - 1] == ' ')) { // finding the beggining of the word (first word or nth word)
+        if (s[i] != ' ' && (i == 0 || s[i - 1] == ' ')) { // finding the beginning of the word (first word or nth word)
             std::string word;
             while (i < s.length() && s[i] != ' ') word += s[i++];
-            if (reversed == "") reversed = word;
+            if (reversed.empty()) reversed = word; // if it's the first word, we don't need to add space
             else { reversed = word + ' ' + reversed; } // word + space + everything that was before
         }
     }
