@@ -1,0 +1,16 @@
+Implementirajte funkciju kreirajMatricu, koja se može pozvati kao: kreirajMatricu(x)(y), gdje je x broj redova a y broj kolona matrice.
+Funkcija kreiraj Matricu(x)(y) treba generisati matricu i vratiti dvostruki pametni pokazivač. Dvodimenzionalni niz pametnih pokazivača na vektore cijelih brojeva treba biti tipa unique ptr.
+Svaki red matrice se inicijalizuje sa pametnim pokazivačem (tipa shared ptr) na vektor cijelih brojeva veličine y.
+Elementi matrice izvan glavne dijagonale trebaju biti inicijalizirani na 0, dok elementi na glavnoj dijagonali trebaju biti postavljeni na 1.
+
+Napisati kratki testni program za testiranje funkcije, gdje ćete kreirati I ispisati matricu proizvoljnih dimenzija.
+U slučaju problema sa memorijom funkcija treba da baci izuzetak, te ispis treba biti: "Problemi sa memorijom.".
+
+Primjer ispisa za matricu 5x5:
+
+Ispis matrice:
+10000
+01000
+00100
+00010
+00001
