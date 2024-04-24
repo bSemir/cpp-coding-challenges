@@ -1,0 +1,23 @@
+Minimax vrijednost matrice po redovima definira se tako što se za svaki red matrice nađe najveća
+vrijednost u tom redu, a onda se uzme najmanja od tako nađenih najvećih vrijednosti po redovima.
+Analogno se definira i maximin vrijednost matrice po redovima. Napisati funkciju “Minimax” koja
+kao prvi parametar prima neku matricu organiziranu kao vektor vektōrâ realnih brojeva, a koja u
+svoj drugi i treći parametar smješta minimax odnosno maximin vrijednosti po redovima za tu
+matricu. U slučaju da prvi parametar nema oblik matrice (tj. ukoliko njegovi redovi nemaju isti broj
+elemenata), treba baciti izuzetak tipa “domain_error” uz prateći tekst “Parametar nema formu
+matrice”. Isto tako, ukoliko matrica nema barem jedan red ili kolonu, treba baciti izuzetak istog tipa,
+ali uz prateći tekst “Neispravna matrica”. Funkcija ne vraća nikakav rezultat. Za realizaciju funkcije
+nije dozvoljeno koristiti nikakve pomoćne nizove ili vektore. Napišite i kratki isječak programa koji
+prikazuje kako se koristi napisana funkcija (uključujući i hvatanje eventualno bačenog izuzetka).
+
+Napisanu funkciju treba demonstrirati u kratkom testnom programu, koji traži unos dimenzija
+matrice s tastature, te elemente matrice, a zatim ispisuje minimax i maximin vrijednost unesene
+matrice na ekran. Dijalog između korisnika i programa treba da izgleda ovako:
+
+Unesite dimenzije matrice: 3 5
+Unesite elemente:
+2 6 3 1 7
+5 2 4 8 6
+0 7 5 4 3
+Minimax vrijednost po redovima: 7
+Maximin vrijednost po redovima: 2
