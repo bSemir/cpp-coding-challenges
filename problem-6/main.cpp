@@ -33,6 +33,6 @@ void Minimax(const std::vector<std::vector<double>> &v, double &minimax, double 
             if(el < min_reda) min_reda = el;
         }
         if(max_reda < minimax) minimax = max_reda;
-        if(min_reda < maximin) maximin = min_reda;
+        if(min_reda > maximin) maximin = min_reda;
     }
 }
