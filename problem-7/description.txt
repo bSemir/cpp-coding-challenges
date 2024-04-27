@@ -1,0 +1,13 @@
+Napisati funkciju “IzdvojiSimetricneRijeci” koja kao parametar prima neki string (tj. objekat tipa
+“string”), a kao rezultat vraća vektor stringova koji sadrži spisak višeslovnih riječi pronađenih u
+rečenici koje se isto čitaju s obje strane (jednoslovne riječi su svakako simetrične). Svaka riječ se u
+vektoru čuva kao zaseban string. Na primjer, ukoliko se kao argument funkciji pošalje string “Pop je
+podigao kapak na sporetu”, funkcija kao rezultat treba da vrati vektor koji se sastoji od dva stringa
+“Pop” i “kapak”. Pri tome, treba smatrati da je riječ svaki maksimalni uzastopni niz slova ili cifara
+(dakle, interpunkcijski znakovi nisu dio riječi). Prilikom testiranja da li se riječ isto čita s obje
+strane, ne treba praviti razliku između malih i velikih slova. Napisanu funkciju treba demonstrirati
+u testnom programu koji iz stringa unesenog sa tastature izdvaja sve višeslovne riječi koje se isto
+čitaju s obje strane i ispisuje ih na ekran, razdvojene zarezima, kao na sljedećoj slici:
+
+Unesite string: Aziza, uberi taj mirisni neven i udji u kajak!
+Simetricne rijeci: Aziza, neven, kajak
