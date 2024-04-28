@@ -1,0 +1,4 @@
+Napisati funkcije “plus2” i “plus3” koje implementiraju respektivno funkcije 𝑓 i 𝑔 definirane na
+sljedeći način. 𝑓 je funkcija takva da izraz 𝑓(𝑥)(𝑦) treba da kao rezultat da vrijednost 𝑥 + 𝑦, dok je 𝑔
+funkcija takva da izraz 𝑔(𝑥)(𝑦)(𝑧) treba da kao rezultat da vrijednost 𝑥 + 𝑦 + 𝑧. Ovdje su 𝑥, 𝑦 i 𝑧
+realni brojevi. Napisane funkcije treba demonstrirati u kratkom testnom programu
