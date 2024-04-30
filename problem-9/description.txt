@@ -1,0 +1,48 @@
+Zadatak: Zamjena elemenata u Povezanoj Listi
+
+Napišite GENERIČKU funkciju Zamijeni, koja će zamijeniti elemente u povezanoj listi prema zadanoj mapi zamjena.
+Funkcija treba zamijeniti svaki element u listi prema parovima ključ vrijednost iz mape zamjena, a elemente koje se ne nalaze u mapi izbaciti iz liste.
+Elementi liste i elementi mape trebaju biti istog tipa.
+
+Za rješenje ovog zadatka koristite funkcije Kreirajl istu i Unistil istu iz riješenih zadataka uz predavanje 8.
+Objašnjenje funkcije Zamijeni:
+
+Ulazni parametri:
+- pocetak: Pokazivač na početak povezane liste čiji se elementi zamjenjuju
+- mapa: std::map koja sadrži parove ključ vrijednost. Ključevi predstavljaju originalne elemente, a vrijednosti predstavljaju elemente kojima se zamjenjuju originalne, oboje treba biti istog tipa.
+
+Opis funkcije:
+Funkcija prolazi kroz svaki čvor u povezanoj listi.
+Za svaki čvor, provjerava se nalazi li se njegov element u mapi zamjena.
+Ako se element nalazi u mapi, zamjenjuje se s odgovarajućom vrijednošću iz mape.
+Ako se element ne nalazi u mapi čvor se briše iz liste
+
+Napišite kratki testni program u kojem ćete pozvati funkciju, te ispisati listu nakon poziva funkcije.
+
+Primjer mape I ispisa 1:
+
+std::map<int, int> mapa ({1, 10), (2, 20), (3, 30), (4, 40), (5, 50)};
+
+Unesite slijed elemenata, o za kraj:1
+23
+32
+4
+5
+35
+0
+Lista nakon izmjene:
+10 40 50
+
+Primjer mape ! ispisa 2:
+
+std::map<std::string, std::string> moj_rjecnik{{"jabuka", "apple"}, {"da", "yes"}, {"kako", "how"}, {"ne", "no"}, {"majmun", "monkey"}};
+
+Unesite slijed elemenata, kraj za kraj: tp
+jabuka
+kruska
+majmun
+kako
+kraj
+
+Lista nakon izmjene:
+apple monkey how
