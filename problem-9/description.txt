@@ -1,4 +1,4 @@
-Zadatak: Zamjena elemenata u Povezanoj Listi
+Zadatak: Zamjena (ili brisanje) elemenata u Povezanoj Listi s elementima iz proslijedjene mape
 
 Napišite GENERIČKU funkciju Zamijeni, koja će zamijeniti elemente u povezanoj listi prema zadanoj mapi zamjena.
 Funkcija treba zamijeniti svaki element u listi prema parovima ključ vrijednost iz mape zamjena, a elemente koje se ne nalaze u mapi izbaciti iz liste.
