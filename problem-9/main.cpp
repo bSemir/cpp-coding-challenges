@@ -21,7 +21,37 @@ Cvor<tipElemenata> *KreirajPovezanuListu(tipElemenata zavrsni) {
     }
 }
 
+template <typename tipElemenata>
+void Zamijeni(Cvor<tipElemenata> *pocetak, std::map<tipElemenata, tipElemenata> &m) {
+    Cvor<tipElemenata> *prethodni = nullptr;
+    auto trenutni = pocetak;;
+    while(trenutni) {
+        auto it = m.find(trenutni->element);
+        if(it != m.end()) {
+            // zamjena
+            trenutni->element = it->second;
+            prethodni = trenutni; // prethodni cvor postaje trenutni cvor
+            trenutni = trenutni->veza; // p pokazuje na sljedeci cvor
+
+        } else {
+            // brisanje
+            Cvor<tipElemenata> *pom = trenutni;
+            trenutni = trenutni->veza;
+            delete pom;
+            if(prethodni) prethodni->veza = trenutni;
+            else pocetak = trenutni;
+        }
+    }
+}
 int main() {
-    std::cout << "Hello, World!" << std::endl;
+    std::map<int, int> m {{1, 10}, {2, 20}, {3, 30}, {4, 40}, {5, 50}};
+//    std::map<std::string, std::string> moj_rijecnik {{"jabuka", "apple"}, {"da", "yes"}, {"ne", "no"}, {"kako", "how"}, {"zasto", "why"}, };
+    std::cout << "Unesite elemente liste (0 za kraj): \n";
+    auto lista = KreirajPovezanuListu(0);
+    Zamijeni(lista, m);
+    std::cout << "Lista nakon zamjene: \n";
+    for (auto p = lista; p != nullptr; p = p->veza) {
+        std::cout << p->element << " ";
+    }
     return 0;
 }
