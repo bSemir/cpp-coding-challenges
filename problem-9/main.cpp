@@ -22,7 +22,8 @@ Cvor<tipElemenata> *KreirajPovezanuListu(tipElemenata zavrsni) {
 }
 
 template <typename tipElemenata>
-void Zamijeni(Cvor<tipElemenata> *pocetak, std::map<tipElemenata, tipElemenata> &m) {
+void Zamijeni(Cvor<tipElemenata> *&pocetak, std::map<tipElemenata, tipElemenata> &m) {
+    // *&pocetak - referenca na pokazivac zato sto se moze desiti da se prvi element liste zamijeni, pa se mora promijeniti pocetak liste
     Cvor<tipElemenata> *prethodni = nullptr;
     auto trenutni = pocetak;;
     while(trenutni) {
