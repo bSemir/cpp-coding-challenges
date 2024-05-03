@@ -1,0 +1,3 @@
+Prepraviti program za obradu učenika sa Predavanja 8_a, koji koristi vektor pokazivača na dinamički
+alocirane objekte tipa “Ucenik” tako da se umjesto običnih pokazivača koriste pametni pokazivači
+(obični pokazivači se ne smiju pojaviti nigdje u programu).
