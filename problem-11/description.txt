@@ -1,0 +1,36 @@
+Napravite klasu naziva Artikal koja će predstavljati artikal u trgovini. Svaki artikal će imati sljedeće atribute:
+
+ime (string) - naziv artikla
+
+cijena (float) cijena artikla
+
+Ova klasa treba imati sljedeće metode:
+
+postaviNazivICijenu metoda koja postavlja naziv i cijenu artikla. kao parametre prima naziv i cijenu artikla
+
+dodajPopust metoda koja dodaje popust na trenutnu cijenu artikla, prima parametar postotak Popusta popust izražen u postocima.
+
+prosjecnaCijena statička metoda koja izračunava prosječnu cijenu svih artikala u nizu, prima dva parametra: pokazivač na niz artikala i broj artikala.
+
+Dodatno, implementirajte friend funkciju prikazilnformacije koja će ispisivati informacije o artiklu.
+
+Napišite testni program, u kojem ćete testirati sve navedene metode, te friend funkciju.
+
+Primjer ispisa:
+
+Informacije o artiklima:
+Naziv: Laptop
+Cijena: 1500 Naziv: Monitor
+Cijena: 300
+Naziv: Miš
+Cijena: 20
+
+Informacije o artiklima nakon primijenjenog popusta od 10%:
+Naziv: Laptop
+Cijena: 1350
+Naziv: Monitor
+Cijena: 270
+Naziv: Miš
+Cijena: 18
+
+Prosjecna cijena svih artikala: 546
