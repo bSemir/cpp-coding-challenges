@@ -4,6 +4,7 @@
 #include <algorithm>
 #include <vector>
 #include <iomanip>
+#include <memory>
 
 const int brojPredmeta = 8;
 
@@ -19,16 +20,16 @@ struct Ucenik {
     bool prolaz;
 };
 
-void UnesiUcenike(std::vector<Ucenik*> &p_ucenici) {
-    void UnesiJednogUcenika(Ucenik *p_ucenik);
+void UnesiUcenike(std::vector<std::shared_ptr<Ucenik>> &p_ucenici) {
+    void UnesiJednogUcenika(std::shared_ptr<Ucenik> p_ucenik);
     for(int i = 0; i < p_ucenici.size(); i++) {
         std::cout << "Unesite podatke za " << i + 1 << ". ucenika:\n";
-        p_ucenici[i] = new Ucenik; // kreiranje novog objekta tipa Ucenik i smjestanje adrese u vektor
+        p_ucenici[i] = std::make_shared<Ucenik>(); // kreiranje novog objekta tipa Ucenik i smjestanje adrese u vektor
         UnesiJednogUcenika(p_ucenici[i]);
     }
 }
 
-void UnesiJednogUcenika(Ucenik *p_ucenik) {
+void UnesiJednogUcenika(std::shared_ptr<Ucenik> p_ucenik) {
     void UnesiDatum(Datum &datum);
     void UnesiOcjene(int ocjene[], int broj_predmeta);
     std::cout << "  Ime: ";
@@ -60,16 +61,16 @@ void UnesiOcjenu(int &ocjena) {
 //    }
 }
 
-void ObradiUcenike(std::vector<Ucenik*> &p_ucenici) {
-    void ObradiJednogUcenika(Ucenik *p_ucenik);
-    for(Ucenik *p_ucenik : p_ucenici)
+void ObradiUcenike(std::vector<std::shared_ptr<Ucenik>> &p_ucenici) {
+    void ObradiJednogUcenika(std::shared_ptr<Ucenik> p_ucenik);
+    for(auto p_ucenik : p_ucenici)
         ObradiJednogUcenika(p_ucenik);
-    std::sort(p_ucenici.begin(), p_ucenici.end(), [](const Ucenik *p_u1, const Ucenik *p_u2) {
+    std::sort(p_ucenici.begin(), p_ucenici.end(), [](std::shared_ptr<Ucenik> p_u1, std::shared_ptr<Ucenik>p_u2) {
         return p_u1->prosjek > p_u2->prosjek;
     });
 }
 
-void ObradiJednogUcenika(Ucenik *p_ucenik) {
+void ObradiJednogUcenika(std::shared_ptr<Ucenik> p_ucenik) {
     // funkcija koja izracunava prosjek ocjena i postavlja prolaznost
     double suma_ocjena = 0;
     p_ucenik->prosjek = 1, p_ucenik->prolaz = false;
@@ -77,18 +78,18 @@ void ObradiJednogUcenika(Ucenik *p_ucenik) {
         if(ocjena == 1) return;
         suma_ocjena += ocjena;
     }
+    p_ucenik->prolaz = true;
     p_ucenik->prosjek = suma_ocjena / brojPredmeta;
     // p_ucenik->prolaz = p_ucenik->prosjek >= 2.5;
-    p_ucenik->prolaz = true;
 }
 
-void IspisiIzvjestaj(const std::vector<Ucenik*> &p_ucenici) {
-    void IspisiJednogUcenika(const Ucenik *p_ucenik);
+void IspisiIzvjestaj(const std::vector<std::shared_ptr<Ucenik>>& p_ucenici) {
+    void IspisiJednogUcenika(std::shared_ptr<Ucenik> p_ucenik);
     std::cout << "\n";
-    for(const Ucenik *p_ucenik : p_ucenici) IspisiJednogUcenika(p_ucenik);
+    for(auto p_ucenik : p_ucenici) IspisiJednogUcenika(p_ucenik);
 }
 
-void IspisiJednogUcenika(const Ucenik *p_ucenik) {
+void IspisiJednogUcenika(std::shared_ptr<Ucenik> p_ucenik) {
     void IspisiDatum(const Datum &datum);
     std::cout << "Učenik " << p_ucenik->ime << " " << p_ucenik->prezime
               << " rođen ";
@@ -109,28 +110,22 @@ void OslobodiMemoriju(std::vector<Ucenik*> &p_ucenici) {
 }
 
 int main() {
-    void UnesiUcenike(std::vector<Ucenik*> &p_ucenici);
-    void ObradiUcenike(std::vector<Ucenik*> &p_ucenici);
-    void IspisiIzvjestaj(const std::vector<Ucenik*> &p_ucenici);
-    void OslobodiMemoriju(std::vector<Ucenik*> &p_ucenici);
+    void UnesiUcenike(std::vector<std::shared_ptr<Ucenik>> &p_ucenici);
+    void ObradiUcenike(std::vector<std::shared_ptr<Ucenik>> &p_ucenici);
+    void IspisiIzvjestaj(const std::vector<std::shared_ptr<Ucenik>> &p_ucenici);
+//    void OslobodiMemoriju(std::vector<Ucenik*> &p_ucenici); // this function is not needed anymore
     int broj_ucenika;
     std::cout << "Koliko ima ucenika: ";
     std::cin >> broj_ucenika;
     try {
-        std::vector<Ucenik*> p_ucenici(broj_ucenika);
-        try {
-            UnesiUcenike(p_ucenici);
-        }
-        catch(...) {
-            OslobodiMemoriju(p_ucenici);
-            throw;
-        }
+        // std::vector<Ucenik*> p_ucenici(broj_ucenika); // raw pointer to Ucenik (old way)
+        std::vector<std::shared_ptr<Ucenik>> p_ucenici(broj_ucenika); // vector of shared pointers to Ucenik (new way)
+        UnesiUcenike(p_ucenici);
         ObradiUcenike(p_ucenici);
         IspisiIzvjestaj(p_ucenici);
-        OslobodiMemoriju(p_ucenici);
     }
     catch(std::exception &e) {
-        std::cout << "Izuzetak: " << e.what();
+        std::cout << "Problemi s memorijom...\nIzuzetak: " << e.what();
     }
     return 0;
 }
