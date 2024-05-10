@@ -1,0 +1,27 @@
+Napisati funkciju “RotirajKoloneMatrice” koja kao parametar prihvata matricu organiziranu kao
+listu listi realnog tipa (tipa "double") a kao rezultat vraća red čiji su elementi tipa "bool".
+
+Funkcija treba da transformira matricu proslijeđenu kao parametar na način da pomjeri redoslijed njenih
+kolona, tako da prva kolona dođe na drugo mjesto, druga na treće mjesto, i slično do pretposljednje
+koja dolazi na posljednje mjesto, a posljednja na prvo mjesto. U slučaju da parametar nema oblik
+matrice (tj. ukoliko svi njegovi redovi nemaju isti broj elemenata), treba baciti izuzetak tipa
+“domain_error” uz prateći tekst “Parametar nema formu matrice”. Pored obrtanja kolona, kao
+rezultat treba vratiti red čiji su elementi logičkog tipa (tj. kontejner tipa “queue<bool>”), a čiji se
+elementi kreiraju na način da je 𝑖-ti element reda logička vrijednost “tačno” ako i samo ako je
+produkt elemenata 𝑖-tog reda pozitivan (u suprotnom se vraća “netačno”). Za realizaciju funkcije
+nije dozvoljeno koristiti nikakve pomoćne kontejnerske tipove podataka.
+
+Napisanu funkciju treba demonstrirati u testnom programu koji ilustrira kako se koristi napisana
+funkcija. Dijalog između korisnika i programa treba izgledati ovako (pri čemu za ispis elemenata
+matrice treba koristiti širinu od 8 mjesta):
+
+Unesite broj redova: 5
+Unesite broj kolona: 3
+Unesite elemente matrice: 1 2 -3 1.5 2.5 3.5 4 5 6 5.5 -3.5 -5.5 9 8 7
+Transformirana matrica:
+       2      -3       1
+     2.5     3.5     1.5
+       5       6       4
+     -3.5   -5.5     5.5
+       8       7       9
+Rezultirajuci red: false true true true true
