@@ -13,6 +13,8 @@ std::queue<bool> RotirajKoloneMatrice(std::list<std::list<double>> &matrica) {
         double p = 1;
         for(double e : row) p *= e; // proizvod elemenata tekuceg reda matrice
         result_queue.push(p > 0); // ako je proizvod pozitivan, dodaje se true u red
+
+        // NOTE: rotate is called for each row(list) in the matrix
         auto start = row.begin();
         std::rotate(row.begin(), ++start, row.end());
     }
