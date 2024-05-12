@@ -1,0 +1,23 @@
+Definirati i implementirati klasu “StedniRacun”. U klasi treba da postoji konstruktor koji postavlja
+stanje računa za zadanu početnu vrijednost (realni broj), ili na nulu ukoliko se nikakva početna
+vrijednost ne zada. U slučaju da je početna vrijednost negativna, konstruktor treba baciti izuzetak
+tipa “logic_error” uz prateći tekst “Nedozvoljeno pocetno stanje”. Ovaj konstruktor treba omogućiti
+automatsku konverziju realnih brojeva u objekte tipa “StedniRacun”.
+
+Metode “Ulozi“ i “Podigni“ imaju parametar koji je realni broj, a simuliraju ulaganje zadanog iznosa odnosno podizanje zadanog
+iznosa s računa. Pri tome, podizanje je dozvoljeno jedino ukoliko je iznos koji se podiže manji ili
+jednak od trenutnog stanja računa, u suprotnom se baca izuzetak tipa “logic_error” uz prateći tekst
+“Transakcija odbijena”. Metoda “DajStanje” nema parametara, a daje kao rezultat trenutno stanje
+računa.
+
+Konačno, metoda “ObracunajKamatu” ima realni parametar koji predstavlja kamatnu stopu u
+procentima, a uvećava glavnicu (trenutno stanje) za iznos kamate koja se dobija množenjem
+glavnice s kamatnom stopom. Kamatna stopa mora biti pozitivna, u suprotnom se baca izuzetak
+tipa “logic_error” uz prateći tekst “Nedozvoljena kamatna stopa”. Sve tri metode “Ulozi“, “Podigni“
+i “ObracunajKamatu” kao rezultat vraćaju referencu na izmijenjeni objekat, da se podrži kaskadno
+pozivanje metoda.
+
+Potrebno je također napisati i testni program u kojem će se testirati svi elementi
+razvijene klase. Naročito je potrebno testirati mogu li se metode inspektori korektno pozvati nad
+konstantnim objektima tipa “StedniRacun”, te da li se korektno bacaju izuzeci u svim situacijama u
+kojima je predviđeno njihovo bacanje.
