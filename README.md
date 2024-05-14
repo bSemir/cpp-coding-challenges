@@ -3,13 +3,19 @@ Here I push one algorithmic coding problem every (or every other) day until I le
 Using: C++ (14/17)
 #
 Covered the following areas so far:
-- Vectors (<vector>)
-- Arrays ("modern" array" <array>)
+- Vectors (std::vector)
+- Arrays ("modern" array" std::array)
 - arrays
-- Strings (<string>)
-- list (<list>)
+- Strings (std::string)
+- list (std::list)
+- queue (std::queue)
+- map (std::map)
 - pointers and pointer arithmetic
 - references
 - anonymous functions (lambdas)
 - dynamic memory allocation
 - structs
+
+OOP:
+- classes
+- explicit constructors
