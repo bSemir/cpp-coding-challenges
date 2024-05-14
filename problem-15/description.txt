@@ -1,0 +1,26 @@
+Definirajte i implementirajte dvije klase “Tacka” i “Krug”. Klasa “Tacka” je vrlo jednostavna klasa
+koja modelira tačku u ravni, predstavljenu putem svojih Descartesovih koordinata, koje su privatni
+atributi ove klase (realnog tipa). Klasa treba sadržavati konstruktor s dva parametra, koji kreira
+tačku s koordinatama zadanim putem parametara (konstruktor bez parametara nije predviđen),
+kao i metodu koja obavlja istu ulogu kao i konstruktor, samo što omogućava izmjenu već kreirane
+tačke. Dalje, treba predvidjeti trivijalne funkcije članice koje vraćaju koordinate tačke, te metodu
+bez parametara koja ispisuje tačku na ekran u vidu para koordinata u zagradama, koje su
+međusobno razdvojene zarezima.
+
+S druge strane, klasa “Krug” modelira krug u ravni, čija je pozicija
+u ravni fiksno definirana. Ova klasa treba imati privatni atribut koji predstavlja centar kruga (koji je
+tačka, odnosno objekat tipa “Tacka”, te privatni atribut koji predstavlja poluprečnik kruga. Za ovu
+klasu predviđena su tri konstruktora. Prvi treba da ima dva parametra, od kojih je prvi željeni
+centar kruga (kao objekat tipa “Tacka”), a drugi željeni poluprečnik kruga. Ukoliko je zadani
+poluprečnik negativan, treba baciti odgovarajući izuzetak. Drugi konstruktor ima tri parametra i
+treba da radi istu stvar kao i prvi konstruktor, samo što se pozicija centra daje putem prva dva
+parametra koji predstavljaju željene koordinate centra, dok je treći parametar poluprečnik. Treći
+konstruktor prima dva parametra tipa “Tacka”, od kojih je jedan centar kruga, a drugi neka tačka
+koja leži na rubu kruga (tako da je poluprečnik kruga zapravo jednak rastojanju između te dvije
+tačke). Potrebno je također implementirati i metode koje obavljaju isti zadatak kao i konstruktori,
+samo što omogućavaju izmjenu već kreiranog kruga. Dalje, predviđene su i metode bez parametara
+koje vraćaju respektivno centar kruga (kao objekat tipa “Tacka”), 𝑥 odnosno 𝑦 koordinatu kruga,
+njegov obim, te površnu. Konačno, potrebna je i metoda bez parametara koja ispisuje krug na ekran
+u obliku “{(𝑥,𝑦),𝑟}”, pri čemu su 𝑥 i 𝑦 koordinate centra, a 𝑟 poluprečnik kruga.
+
+Napišite i kratki testni program u kojem ćete upotrijebiti sve elemente napisane klase.
