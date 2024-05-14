@@ -1,0 +1,6 @@
+Napraviti klasu “NeobicnaKlasa” kod koje direktna i kopirajuća inicijalizacija cijelim brojem dovode
+do različitih efektata. Konkretno, pokušaj direktne odnosno kopirajuće inicijalizacije treba da
+proizvedu na ekran ispis “Direknta inicijalizacija” odnosno “Kopirajuća inicijalizacija”. Na primjer:
+
+NeobicnaKlasa k1(5); // Proizvodi ispis "Direktna inicijalizacija"
+NeobicnaKlasa k2 = 5; // Proizvodi ispis "Kopirajuca inicijalizacija"
