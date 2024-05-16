@@ -1,0 +1,99 @@
+U većini programa za obradu teksta postoji opcija za kreiranje indeksa pojmova, koji predstavlja
+popis pojmova koji se nalaze u tekstu, pri čemu se uz svaki pojam navode i pozicije na kojima se
+taj pojam javlja u tekstu. U ovom zadatku ćete trebati uraditi nešto slično tome.
+
+Tekst koji se analizira nalazi se u objektu tipa “Knjiga”, pri čemu je ovaj tip definiran pomoću deklaracije
+typedef std::map<std::string, std::vector<std::string>> Knjiga;
+
+Dakle, “Knjiga” je mapa čija su ključna polja tipa “string”, a pridružene vrijednosti vektori
+stringova. Ključna polja predstavljaju oznake poglavlja knjige (oni su stringovnog tipa, jer oznake
+poglavlja ne moraju nužno biti brojčane). Odgovarajuće pridružene vrijednosti su vektori
+stringova, pri čemu svaki string u vektoru predstavlja sadržaj jedne stranice razmatranog
+poglavlja knjige. Na primjer, neka je “k” neki objekat tipa “Knjiga”. Tada je “k["XIV"][5]” sadržaj
+šeste stranice XIV-og poglavlja knjige (šeste a ne pete, jer indeksacija počinje od nule).
+Prvo ćete napraviti funkciju “KreirajIndeksPojmova” koja kao parametar prima neki objekat tipa
+“Knjiga”, koji predstavlja tekst koji se analizira. Funkcija kao rezultat treba vratiti mapu koja
+predstavlja traženi indeks pojmova. Ključna polja ove mape su tipa “string”, a pridružene
+vrijednosti su skupovi čiji su elementi uređene trojke (tipa “tuple”), čija je prva koordinata tipa
+“string”, a druga i treća su cijeli brojevi. Vrijednosti ključnih polja predstavljaju različite riječi
+pronađene u analiziranom tekstu, dok su odgovarajuće pridružene vrijednosti skupovi čiji
+elementi opisuju pozicije na kojima se odgovarajuća riječ nalazi unutar razmatranog teksta.
+Svaka pozicija opisana je kao uređena trojka, pri čemu prva koordinata predstavlja oznaku
+poglavlja, druga koordinata redni broj stranice (uz numeraciju koja počinje od jedinice, a ne od
+nule), dok treća koordinata predstavlja poziciju razmatrane riječi unutar stranice (tj. indeks od
+kojeg počinje riječ). Na primjer, pretpostavimo radi jednostavnosti da tekst ima samo jedno
+poglavlje koje se zove “I”, u kojem ima samo jedna stranica (koja naravno ima indeks 0), čiji je
+sadržaj string “ABC QWE STSDA ABC ABC DHI QWE HRKW DHI”. Funkcija tada treba da vrati
+mapu u kojoj se nalazi 5 parova (toliko ukupno ima različitih riječi u tekstu), čija su ključna polja
+stringovi “ABC”, “DHI”, “HRKW”, “QWE” i “STSDA” (odnosno riječi koje se nalaze u tekstu), dok su
+odgovarajuće pridružene vrijednosti skupovi {(“I”, 1, 1), (“I”, 1, 15), (“I”, 1, 19)}, {(“I”, 1, 23),
+(“I”, 1, 36)}, {(“I”, 1, 31)}, {(“I”, 1, 5), (“I”, 1, 27)} i {(“I”, 1, 9)}. Jasno je zbog čega su u svim
+trojkama prve dvije koordinate “I” odnosno 1, a što se tiče treće koordinate, riječ “ABC” se nalazi
+na pozicijama 1, 15 i 19 u razmatranom stringu (pozicije se također broje od jedinice, odnosno
+prvi znak je na poziciji 1), riječ “DHI” nalazi se na pozicijama 22 i 35, itd.
+
+Sljedeća funkcija koju treba napraviti je “PretraziIndeksPojmova”. Ova funkcija kao parametar
+prima neku riječ (tipa “string”) i mapu koja predstavlja indeks pojmova, a koja kao rezultat
+vraća odgovarajući skup pozicija za datu riječ pronađen u datom indeksu pojmova, ili prazan
+skup u slučaju da data riječ nije nađena u indeksu pojmova. U slučaju da parametar ne predstavlja
+riječ, odnosno da sadrži bilo kakve druge znakove osim slova i cifri, funkcija treba baciti izuzetak
+tipa “domain_error” uz prateći tekst “Neispravna rijec”.
+
+Konačno, posljednja funkcija koju treba napraviti je “IspisiIndeksPojmova”. Ova funkcija kao
+parametar prima mapu koja predstavlja indeks pojmova, a ispisuje njen kompletan sadržaj na
+ekranu u obliku tako da se u svakom redu ispisuje prvo pojam, zatim dvotačka praćena
+razmakom, i na kraju, spisak pozicija međusobno razdvojenih zarezom iza kojeg slijedi razmak.
+Svaka pozicija ispisuje se kao oznaka poglavlja, broj stranice i pozicije unutar stranice, pri čemu
+se između tih podataka nalazi kosa crta (bez razmaka ispred i iza nje). Na primjer, za indeks
+pojmova kreiran na osnovu teksta iz prethodnog primjera, ova funkcija bi trebala proizvesti ispis
+poput sljedećeg:
+
+ABC: I/1/1, I/1/15, I/1/19
+DHI: I/1/23, I/1/36
+HRKW: I/1/31
+QWE: I/1/5, I/1/27
+STSDA: I/1/9
+
+Stringovi koji predstavljaju sadržaje stranica mogu sadržavati ma kakve znakove (slova, cifre i
+znake interpunkcije), pri čemu se ne pravi razlika između malih i velikih slova, tako da “ABC”,
+“Abc”, “abc”, “aBc” i “aBC” predstavljaju istu riječ. Pri tome se u mapi uvijek bilježi riječ koja se
+sastoji samo od velikih slova (tako da će sve ove riječi zapravo biti evidentirane kao riječ “ABC”).
+Kao riječ unutar teksta smatra se svaka neprekinuta sekvenca znakova koji su slova ili cifre koja
+je sa obe strane omeđena razmakom ili znakom interpunkcije (tačnije, znakom koji nije niti slovo
+niti cifra), osim eventualno na početku ili kraju stringa, kad ne mora biti razmaka ili znaka
+interpunkcije ispred odnosno iza riječi. Na primjer, u stringu “pqr, ab/123 (qwe) tt2 ” riječi su
+“pqr”, “ab”, “123”, “qwe” i “tt2”.
+
+Napisane funkcije demonstrirajte u glavnom programu u kojem se prvo sa tastature unosi tekst
+za analizu (na način koji će biti vidljiv iz primjera koji slijedi), nakon čega se na ekranu ispisuje
+kreirani indeks pojmova. Potom program ulazi u petlju u kojoj se za svaku riječ unesenu sa
+tastature ispisuje pozicije na kojima se riječ nalazi u analiziranom tekstu, pri čemu su pozicije
+međusobno razdvojene razmacima (koristeći pri tome kreirani indeks pojmova), ili informaciju
+da unesena riječ nije nađena (u vidu teksta “Unesena rijec nije nadjena!”). U slučaju da se unese
+nešto što nije riječ, program treba da ispiše “Neispravna rijec!”. Program treba da prekine rad kada
+korisnik ne unese ništa, odnosno odmah pritisne ENTER kada se očekuje unos. Na isti način se
+signalizira i da ne želimo unositi novo poglavlje ili novu stranicu. Dijalog između korisnika i
+programa trebao bi izgledati poput sljedećeg:
+
+Unesite naziv poglavlja: I (ENTER)
+Unesite sadržaj stranice 1: abc qwe stsda abc abc dhi qwe hrkw dhi (ENTER)
+Unesite sadržaj stranice 2: (ENTER)
+Unesite naziv poglavlja: (ENTER)
+
+Kreirani indeks pojmova:
+ABC: I/1/1, I/1/15, I/1/19
+DHI: I/1/23, I/1/36
+HRKW: I/1/31
+QWE: I/1/5, I/1/27
+STSDA: I/1/9
+
+Unesite rijec: Abc (ENTER)
+Rijec nadjena na pozicijama: I/1/1 I/1/15 I/1/19
+Unesite rijec: hrkw (ENTER)
+Rijec nadjena na pozicijama: I/1/31
+Unesite rijec: xyzzy (ENTER)
+Rijec nije nadjena!
+Unesite rijec: #?@@! (ENTER)
+Neispravna rijec!
+Unesite rijec: (ENTER)
+Dovidjenja!
