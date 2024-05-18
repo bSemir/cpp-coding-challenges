@@ -1,0 +1,45 @@
+Jedne sušne godine, količina vode u rezervoarima iz kojih se snabdijeva grad bila je tako loša da
+je direktor gradske uprave vodododa i kanalizacije gospodin Izmet Fekalović bio prisiljen da
+uvede redukcije vode u pojedinim dijelovima grada. Grad je podijeljen u gradske distrikte koji su
+numerirani redom od 1 do N. Plan je da svaki M-ti distrikt počev od disktrikta 1 redom bude
+stavljen na redukciju, nakon čega on ne dolazi u konkurenciju za ponovno stavljanje na redukciju
+sve dok svaki distrikt ne bude barem jednom stavljen na redukciju. Pri tome se podrazumijeva da
+iza posljednjeg distrikta ponovo dolazi distrikt 1, tako da se razbrajanje obavlja ciklično. Nakon
+što svi distrikti dođu na red, postupak se ponavlja ispočetka. Na primjer, ukoliko u gradu ima 10
+distrikata (numeriranih od 1 do 10) i ukoliko je M = 4, redoslijed redukcija je 1, 5, 9, 4, 10, 7, 6, 8,
+3 i 2 (nacrtajte sliku), nakon čega ponovo započinje isti ciklus redukcija.
+
+Predložena strategija je očigledno vrlo pravična. Međutim, vlasnica najekskluzivnijeg restorana u
+gradu, gospođa Splačina Nejestivović, želi da distrikt K u kojem se nalazi njen restoran bude
+posljednji stavljen na redukciju, da ne bi došlo do remećenja rada restorana u kritično vrijeme kada
+se planira dolazak komisije koja treba da ocijeni da li restoran zaslužuje Michelinovu zvjezdicu.
+Zbog toga gospođa Splačina planira da iskoristi svoja lična poznanstva s gospodinom Izmetom sa
+ciljem da on odabere takav broj M da distrikt K bude posljednji stavljen na redukciju.
+
+Potrebno je napraviti program koji će gospođi Splačini pomoći da njen restoran dobije Michelinovu
+zvjezdicu (koju će sigurno dobiti ukoliko je redukcija vode ne omete). U programu treba
+implementirati dvije funkcije, “Razbrajanje” i “OdabirKoraka”. Funkcija “Razbrajanje” prima kao
+parametre broj distrikta N i korak razbrajanja M, a kao rezultat daje vektor koji redom sadrži
+blojeve distrikata koji se stavljaju na redukciju, poredane u redoslijedu vršenja redukcija. Na
+primjer, ukoliko je N = 10 i M = 4, ova funkcija vraća vektor čiji su elementi redom 1, 5, 9, 4, 10, 7,
+6, 8, 3 i 2. Pri tome, funkcija treba biti zasnovana na bibliotečkom tipu “list”, koji se često
+primjenjuje upravo za rješavanje problema koji su srodni opisanom problemu. Naime, funkcija
+“Razbrajanje” će prvo napuniti listu rednim brojevima od 1 do N. Nakon što je formirana lista,
+vrši se kretanje kroz listu, polazeći od početka (prvog distrikta), pri čemu se nakon svakih M
+napravljenih koraka odstranjuje onaj element iz liste na kojem se trenutno nalazimo (čime se
+odgovarajući distrikt efektivno odstranjuje iz razmatranja), a njegov redni broj se smješta u
+izlazni vektor, nakon čega prelazimo na sljedeći element. Pri tome, kad god dostignemo kraj liste,
+vraćamo se ponovo na početak liste, čime zapravo simuliramo “kružnu” listu (koja nije direktno
+podržana kao bibliotečki tip podataka). Postupak se ponavlja sve dok se ne eliminira svih N
+elemenata, nakon čega vraćamo vektor u kojem smo zapamtili redoslijed odstranjivanja.
+
+Već je rečeno da u programu pored funkcije “Razbrajanje”, treba također implementirati i
+funkciju “OdabirKoraka”. Ova funkcija kao parametre prima ukupan broj distrikta N i broj
+odabranog distrikta K, a kao rezultat daje korak razbrajanja M koji treba uzeti da bi posljednji
+distrikt stavljen na redukciju bio upravo distrikt K. Ukoliko takvih koraka ima više, funkcija vraća
+najmanji mogući korak, a ukoliko slučajno takva vrijednost koraka ne postoji, funkcija kao
+rezultat vraća 0 (postavljaču zadatka nije poznato može li se ovo ikada desiti, ali predvidimo i
+ovo za svaki slučaj). Rad ove funkcije zasniva se na pozivanju funkcije “Razbrajanje” za razne
+vrijednosti M sve dok se ne pronađe potrebni korak. Napisane funkcije demonstrirajte u testnom
+programu koji za zadane vrijednosti N i K ispisuje traženi korak razbrajanja koji gospođa
+Splačina treba dogovoriti s gospodinom Izmetom da bi se postigao željeni cilj.
