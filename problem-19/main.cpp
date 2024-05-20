@@ -1,5 +1,7 @@
 #include <iostream>
 #include <iomanip>
+#include <cstring>
+#include <stdexcept>
 
 class Tim {
 private:
@@ -20,16 +22,9 @@ public:
     void IspisiPodatke() const;
 };
 
-Tim::Tim(const char ime[]) {
-    if(strlen(ime) > 20) throw std::range_error("Predugacko ime tima");
-    strcpy(ime_tima, ime);
-    broj_odigranih = 0;
-    broj_pobjeda = 0;
-    broj_nerijesenih = 0;
-    broj_poraza = 0;
-    broj_datih = 0;
-    broj_primljenih = 0;
-    broj_poena = 0;
+Tim::Tim(const char ime[]) : broj_odigranih(0), broj_pobjeda(0), broj_nerijesenih(0), broj_poraza(0), broj_datih(0), broj_primljenih(0), broj_poena(0) {
+    if (strlen(ime) > 20) throw std::range_error("Predugacko ime tima");
+    std::strcpy(ime_tima, ime);
 }
 
 void Tim::ObradiUtakmicu(int broj_datih, int broj_primljenih) {
@@ -49,13 +44,22 @@ void Tim::ObradiUtakmicu(int broj_datih, int broj_primljenih) {
 }
 
 void Tim::IspisiPodatke() const {
-    std::cout << std::left << std::setw(20) << ime_tima << std::right << std::setw(4) << broj_odigranih << std::setw(4) << broj_pobjeda << std::setw(4) << broj_nerijesenih << std::setw(4) << broj_poraza << std::setw(4) << broj_datih << std::setw(4) << broj_primljenih << std::setw(4) << broj_poena << std::endl;
+    std::cout <<
+    std::left << std::setw(20) << ime_tima <<
+    std::right << std::setw(4) << broj_odigranih <<
+    std::setw(4) << broj_pobjeda <<
+    std::setw(4) << broj_nerijesenih <<
+    std::setw(4) << broj_poraza <<
+    std::setw(4) << broj_datih <<
+    std::setw(4) << broj_primljenih <<
+    std::setw(4) << broj_poena <<
+    std::endl;
 }
 
 int main() {
     Tim t1("Al-Nassr FC"), t2("Inter Miami");
-    t1.ObradiUtakmicu(2, 1);
-    t2.ObradiUtakmicu(1, 2);
+    t1.ObradiUtakmicu(6, 0);
+    t2.ObradiUtakmicu(0, 6);
     t1.IspisiPodatke();
     t2.IspisiPodatke();
     return 0;
