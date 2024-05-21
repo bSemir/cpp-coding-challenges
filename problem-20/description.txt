@@ -1,0 +1,108 @@
+Napisati klasu “Liga” koja se oslanja na klasu “Tim” napisanu u "problem-19". Klasa treba da ima privatne atribute “broj_timova” i “max_br_timova” koji čuvaju
+redom broj timova odnosno maksimalni dozvoljeni broj timova u ligi (atribut “max_br_timova”
+treba da bude konstantni atribut), kao i privatni atribut “timovi” koji će služiti za pristup dinamički
+alociranom nizu od “max_br_timova” elemenata, pri čemu je svaki element niza pokazivač na
+objekat tipa “Tim”. Interfejs klase treba da izgleda ovako:
+
+explicit Liga(int velicina_lige);
+explicit Liga(std::initializer_list<Tim> lista_timova);
+~Liga();
+Liga(const Liga &l);
+Liga(Liga &&l);
+Liga &operator =(const Liga &l);
+Liga &operator =(Liga &&l);
+void DodajNoviTim(const char ime_tima[]);
+void RegistrirajUtakmicu(const char tim1[], const char tim2[],
+ int rezultat_1, int rezultat_2);
+void IspisiTimove() const;
+void IspisiTabelu() const;
+
+Konstruktor treba da izvrši dinamičku alokaciju memorije za prihvatanje onoliko timova koliko je
+navedeno parametrom, dok destruktor treba da izvrši oslobađanje svih resursa koje je klasa “Liga”
+alocirala tokom svog rada.
+Sekvencijski konstruktor treba omogućiti konstrukciju objekata tipa “Liga” iz inicijalizacijske liste čiji su elementi imena timova. Kopirajući konstruktor i kopirajući
+operator dodjele treba da se brinu za ispravno kopiranje i međusobno dodjeljivanje objekata tipa
+“Liga”. Pri tome, kako je kapacitet lige (tj. maksimalni dozvoljeni broj timova) nepromjenljiv, treba
+podržati samo međusobnu dodjelu između dva objekta tipa “Liga” istog kapaciteta, u suprotnom
+treba baciti izuzetak tipa “logic_error” uz prateći tekst “Nesaglasni kapaciteti liga”.
+Pomjerajući konstruktor i pomjerajući operator dodjele predviđeni su da djeluju kao optimizirane varijante
+kopirajućeg konstruktora i kopirajućeg operatora dodjele za slučaj kada se kopiraju privremeni
+objekti, te za podršku semantici pomjeranja.
+Metoda “DodajNoviTim” kreira tim sa navedenim imenom (tj. dinamički kreira objekat tipa “Tim”) i upisuje ga na prvo slobodno mjesto u ligu (tj. upisuje
+pokazivač na njega na odgovarajuće mjesto u nizu pokazivača na objekte tipa “Tim”). Pri tome se,
+naravno, broj timova u ligi povećava za jedinicu. U slučaju da je ime tima predugačko, baca se izuzetak
+(isti kakav baca izuzetak klase “Tim” u tom slučaju). U slučaju da je dostignut maksimalni broj timova,
+treba baciti izuzetak tipa “range_error” uz prateći tekst “Liga popunjena”.
+Također, ukoliko se pokuša upisati tim čije ime već postoji, baca se izuzetak tipa “logic_error” uz prateći tekst “Tim vec postoji”.
+
+Ključna metoda klase je metoda “RegistrirajUtakmicu”, čija prva dva parametra predstavljaju
+imena timova koji su odigrali utakmicu, dok su treći i četvrti parametar broj golova koji su dali prvi
+i drugi tim respektivno. Ova metoda treba da ažurira rezultate u tabeli za oba tima, odnosno da baci
+izuzetak tipa “logic_error” uz prateći tekst “Tim nije nadjen” ukoliko timovi sa navedenim imenima
+ne postoje u tabeli (tačnije, ukoliko makar jedan od timova nije nađen). Isto tako, u slučaju da se zada
+besmislen (negativan) broj golova, treba baiti isti izuzetak kao u metodi “ObradiUtakmicu” u klasi
+“Tim”. Pri tome, ukoliko dođe do bacanja izuzetka, stanje lige mora biti identično kao da ova metoda
+uopće nije bila pozvana, tj. ne smije se desiti da dođe do parcijalne izmjene evidentiranih podataka
+(jaka sigurnost na izuzetke). Konačno, metoda “IspisiTimove” treba da ispiše imena svih timova u
+redoslijedu dodavanja u ligu (svaki tim u posebnom redu), dok metoda “IspisiTabelu” treba da
+ispiše tabelu lige sortiranu u opadajućem poretku po broju bodova. Ukoliko dva tima imaju isti broj
+poena, tada prvo dolazi tim sa većom gol razlikom, a ako je i gol razlika ista, onda prije dolazi tim
+koji je prije po abecedi. Sortiranje treba vršiti pozivom funkcije “sort”, uz pogodno definiranu
+funkciju kriterija. Ispis treba vršiti pozivom metode “IspisiPodatke” iz klase “Tim”, tako da bi
+prikazana tabela trebala da ima izgled poput sljedećeg:
+
+Čelik               18 11 5 1 34 10 38
+Borac               18 10 3 5 27 13 33
+Jedinstvo           18 9 4 5 33 20 31
+Željeznicar         18 9 4 5 25 19 31
+Zrinjski            18 8 6 4 23 24 30
+Sarajevo            18 8 5 5 32 16 29
+
+Potrebno je napisati i mali testni program u kojem se demonstriraju razvijene klase “Tim” i “Liga”.
+Testni program treba prvo kreirati malu fiksnu ligu sa 6 timova kao u tabeli prikazanoj iznad,
+nakon čega ulazi u petlju u kojoj se prikazuje trenutno stanje table. Zatim se unose podaci o
+odigranoj utakmici, iza koje slijedi ponovo prikaz stanja tabele i tako u krug sve dok se ne zahtijeva
+kraj rada. Slijedi primjer dijaloga između korisnika i programa:
+
+Borac                   0 0 0 0 0 0 0
+Celik                   0 0 0 0 0 0 0
+Jedinstvo               0 0 0 0 0 0 0
+Sarajevo                0 0 0 0 0 0 0
+Zeljeznicar             0 0 0 0 0 0 0
+Zrinjski                0 0 0 0 0 0 0
+
+Unesite ime prvog tima (ENTER za kraj): Celik
+Unesite ime drugog tima: Zrinjski
+Unesite broj postigutih golova za oba tima: 2 3
+
+Zrinjski                1 1 0 0 3 2 3
+Borac                   0 0 0 0 0 0 0
+Jedinstvo               0 0 0 0 0 0 0
+Sarajevo                0 0 0 0 0 0 0
+Zeljeznicar             0 0 0 0 0 0 0
+Celik                   1 0 0 1 2 3 0
+
+Unesite ime prvog tima (ENTER za kraj): Jedinstvo
+Unesite ime drugog tima: Cekrcici United
+Unesite broj postigutih golova za oba tima: 3 2
+Tim nije nadjen
+
+Zrinjski                1 1 0 0 3 2 3
+Borac                   0 0 0 0 0 0 0
+Jedinstvo               0 0 0 0 0 0 0
+Sarajevo                0 0 0 0 0 0 0
+Zeljeznicar             0 0 0 0 0 0 0
+Celik                   1 0 0 1 2 3 0
+
+Unesite ime prvog tima (ENTER za kraj): Zeljeznicar
+Unesite ime drugog tima: Celik
+Unesite broj postigutih golova za oba tima: 1 1
+
+Zrinjski                1 1 0 0 3 2 3
+Zeljeznicar             1 0 1 0 1 1 1
+Celik                   2 0 1 1 3 4 1
+Borac                   0 0 0 0 0 0 0
+Jedinstvo               0 0 0 0 0 0 0
+Sarajevo                0 0 0 0 0 0 0
+
+Unesite ime prvog tima (ENTER za kraj):
