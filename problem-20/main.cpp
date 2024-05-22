@@ -45,15 +45,15 @@ void Tim::ObradiUtakmicu(int broj_datih, int broj_primljenih) {
 
 void Tim::IspisiPodatke() const {
     std::cout <<
-              std::left << std::setw(20) << ime_tima <<
-              std::right << std::setw(4) << broj_odigranih <<
-              std::setw(4) << broj_pobjeda <<
-              std::setw(4) << broj_nerijesenih <<
-              std::setw(4) << broj_poraza <<
-              std::setw(4) << broj_datih <<
-              std::setw(4) << broj_primljenih <<
-              std::setw(4) << broj_poena <<
-              std::endl;
+    std::left << std::setw(20) << ime_tima <<
+    std::right << std::setw(4) << broj_odigranih <<
+    std::setw(4) << broj_pobjeda <<
+    std::setw(4) << broj_nerijesenih <<
+    std::setw(4) << broj_poraza <<
+    std::setw(4) << broj_datih <<
+    std::setw(4) << broj_primljenih <<
+    std::setw(4) << broj_poena <<
+    std::endl;
 }
 
 class Liga {
@@ -82,7 +82,7 @@ void Liga::dealociraj() {
     delete[] timovi;
 }
 
-// NOTE: we have to initialize attributes inside constructor initializer list because we have const attribute
+// NOTE: must initialize attributes inside constructor initializer list because we have const attribute
 
 // sequence constructor
 Liga::Liga(std::initializer_list<Tim> lista_timova) : broj_timova(lista_timova.size()), max_br_timova(lista_timova.size()), timovi(new Tim*[max_br_timova]{}) {
@@ -112,8 +112,27 @@ Liga::Liga(const Liga &l) : broj_timova(l.broj_timova), max_br_timova(l.max_br_t
 // move constructor
 Liga::Liga(Liga &&l) : broj_timova(l.broj_timova), max_br_timova(l.max_br_timova), timovi(l.timovi) {
     // literally steal the resources from l
-    l.broj_timova = 0;
+    l.broj_timova = 0; // important because of delete timovi[i] (illegal pointer dereference in `dealociraj` method)
     l.timovi = nullptr;
+}
+
+// assignment operator
+Liga &Liga::operator=(const Liga &l) {
+    if(l.max_br_timova != max_br_timova) throw std::logic_error("Nesaglasni kapaciteti liga");
+    // not so efficient and secure way
+    if(this != &l) {
+       for(int i = 0; i < broj_timova; i++)
+           delete timovi[i];
+       broj_timova = l.broj_timova;
+       try {
+           for(int i = 0; i < broj_timova; i++)
+               timovi[i] = new Tim(*l.timovi[i]);
+       } catch (...) {
+           dealociraj();
+           throw;
+       }
+    }
+    return *this;
 }
 
 int main() {
