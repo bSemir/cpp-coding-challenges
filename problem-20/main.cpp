@@ -2,6 +2,7 @@
 #include <iomanip>
 #include <cstring>
 #include <stdexcept>
+#include <algorithm>
 
 class Tim {
 private:
@@ -119,20 +120,38 @@ Liga::Liga(Liga &&l) : broj_timova(l.broj_timova), max_br_timova(l.max_br_timova
 // assignment operator
 Liga &Liga::operator=(const Liga &l) {
     if(l.max_br_timova != max_br_timova) throw std::logic_error("Nesaglasni kapaciteti liga");
-    // not so efficient and secure way
     if(this != &l) {
-       for(int i = 0; i < broj_timova; i++)
-           delete timovi[i];
-       broj_timova = l.broj_timova;
+       Tim *new_teams = new Tim*[l.max_broj_timova] {};
        try {
-           for(int i = 0; i < broj_timova; i++)
-               timovi[i] = new Tim(*l.timovi[i]);
+           for(int i = 0; i < broj_timova; i++) new_teams[i] = new Tim(*l.timovi[i]);
        } catch (...) {
-           dealociraj();
+           for(int i = 0; i < broj_timova; i++) delete new_teams[i];
+           delete [] new_teams;
            throw;
        }
+       dealociraj();
+       timovi = new_teams;
+       broj_timova = l.broj_timova;
     }
     return *this;
+}
+
+// move assignment operator
+Liga &Liga::operator=(Liga &&l) {
+    if(max_br_timova != l.max_br_timova) throw std::logic_error("Nesaglasni kapaciteti liga");
+    if(&l != this) {
+        dealociraj();
+        timovi = l.timovi;
+        broj_timova = l.broj_timova;
+        l.broj_timova = 0;
+        l.timovi = nullptr;
+    }
+    return *this;
+}
+
+void Liga::DodajNoviTim(const char *ime_tima) {
+    if(broj_timova >= max_br_timova) throw std::logic_error("Dostignut maksimalni broj timova");
+    timovi[broj_timova++] = new Tim(ime_tima);
 }
 
 int main() {
