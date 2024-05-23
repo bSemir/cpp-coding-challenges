@@ -10,7 +10,7 @@ Covered the following areas so far:
 - list (std::list)
 - queue (std::queue)
 - map (std::map)
-- pointers and pointer arithmetic
+- pointers, double pointers and pointer arithmetic
 - references
 - anonymous functions (lambdas)
 - dynamic memory allocation
@@ -18,4 +18,8 @@ Covered the following areas so far:
 
 OOP:
 - classes
+- constructors
 - explicit constructors
+- copy and move constructors
+- copy and move assignment operators
+- destructors
