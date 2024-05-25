@@ -28,15 +28,15 @@ Tim::Tim(const char ime[]) : broj_odigranih(0), broj_pobjeda(0), broj_nerijeseni
     std::strcpy(ime_tima, ime);
 }
 
-void Tim::ObradiUtakmicu(int broj_datih, int broj_primljenih) {
-    if(broj_datih < 0 || broj_primljenih < 0) throw std::range_error("Neispravan broj golova");
+void Tim::ObradiUtakmicu(int dati, int primljeni) {
+    if(dati < 0 || primljeni < 0) throw std::range_error("Neispravan broj golova");
     broj_odigranih++;
-    this->broj_datih += broj_datih;
-    this->broj_primljenih += broj_primljenih;
-    if(broj_datih > broj_primljenih) {
+    broj_datih += dati;
+    broj_primljenih += primljeni;
+    if(dati > primljeni) {
         broj_pobjeda++;
         broj_poena += 3;
-    } else if(broj_datih == broj_primljenih) {
+    } else if(dati == primljeni) {
         broj_nerijesenih++;
         broj_poena++;
     } else {
@@ -122,7 +122,7 @@ Liga::Liga(Liga &&l) : broj_timova(l.broj_timova), max_br_timova(l.max_br_timova
 Liga &Liga::operator=(const Liga &l) {
     if(l.max_br_timova != max_br_timova) throw std::logic_error("Nesaglasni kapaciteti liga");
     if(this != &l) {
-       Tim *new_teams = new Tim*[l.max_broj_timova] {};
+       Tim **new_teams = new Tim*[l.max_br_timova] {};
        try {
            for(int i = 0; i < broj_timova; i++) new_teams[i] = new Tim(*l.timovi[i]);
        } catch (...) {
@@ -176,15 +176,50 @@ void Liga::IspisiTimove() const {
 }
 
 void Liga::IspisiTabelu() const {
-    std::sort(timovi, timovi + broj_timova, [](Tim *t1, Tim *t2) {
+//     old version that can modify the array (sort it) even though it is const. We don't want that
+//    std::sort(timovi, timovi + broj_timova, [](Tim *t1, Tim *t2) {
+//        if(t1->DajBrojPoena() != t2->DajBrojPoena()) return t1->DajBrojPoena() > t2->DajBrojPoena();
+//        if(t1->DajGolRazliku() != t2->DajGolRazliku()) return t1->DajGolRazliku() > t2->DajGolRazliku();
+//        return std::strcmp(t1->DajImeTima(), t2->DajImeTima()) < 0;
+//    });
+    Tim **kopija_timova = new Tim*[broj_timova];
+    std::copy(timovi, timovi + broj_timova, kopija_timova);
+    std::sort(kopija_timova, kopija_timova + broj_timova, [](Tim *t1, Tim *t2) {
         if(t1->DajBrojPoena() != t2->DajBrojPoena()) return t1->DajBrojPoena() > t2->DajBrojPoena();
         if(t1->DajGolRazliku() != t2->DajGolRazliku()) return t1->DajGolRazliku() > t2->DajGolRazliku();
         return std::strcmp(t1->DajImeTima(), t2->DajImeTima()) < 0;
     });
-    for(int i = 0; i < broj_timova; i++) timovi[i]->IspisiPodatke();
+    for(int i = 0; i < broj_timova; i++) kopija_timova[i]->IspisiPodatke();
+    delete [] kopija_timova; // delete the copy
 }
 
+
 int main() {
+    try {
+        Liga l{"Manchester United", "Arsenal", "Chelsea", "Liverpool", "Manchester City", "Tottenham"};
+        l.RegistrirajUtakmicu("Manchester United", "Manchester City", 3, 0);
+        l.RegistrirajUtakmicu("Manchester City", "Manchester United", 1, 1);
+        l.RegistrirajUtakmicu("Chelsea", "Liverpool", 1, 1);
+        l.RegistrirajUtakmicu("Arsenal", "Tottenham", 2, 0);
+        l.RegistrirajUtakmicu("Arsenal", "Tottenham", 1, 1);
+        l.IspisiTabelu();
+        std::cout << std::endl;
+        std::cout << "Kopija lige l(copy constructor): \n";
+        Liga l2 = l; // copy constructor
+        l2.IspisiTabelu();
+        std::cout << std::endl;
+        std::cout << "Liga nakon premjestanja(move constructor): \n";
+        Liga l3 = std::move(l2); // move constructor
+        l3.IspisiTabelu();
+//        std::cout << std::endl;
+//        l2.IspisiTabelu(); // l2 is empty
+        std::cout << "\nAssignment operator: ";
+        l = l3; // assignment operator
+        std::cout << std::endl;
+        l.IspisiTabelu();
+    } catch(std::exception &e) {
+        std::cout << e.what() << std::endl;
+    }
 
     return 0;
 }
