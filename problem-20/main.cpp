@@ -63,6 +63,7 @@ private:
     const int max_br_timova;
     Tim **timovi;
     void dealociraj();
+    int gdjeJeTim(const char tim[]) const;
 public:
     explicit Liga(int velicina_lige) : broj_timova(0), max_br_timova(velicina_lige), timovi(new Tim *[velicina_lige]{}) {};
     explicit Liga(std::initializer_list<Tim> lista_timova);
@@ -152,6 +153,35 @@ Liga &Liga::operator=(Liga &&l) {
 void Liga::DodajNoviTim(const char *ime_tima) {
     if(broj_timova >= max_br_timova) throw std::logic_error("Dostignut maksimalni broj timova");
     timovi[broj_timova++] = new Tim(ime_tima);
+}
+
+int Liga::gdjeJeTim(const char *tim) const {
+    for(int i = 0; i < broj_timova; i++)
+        if(std::strcmp(timovi[i]->DajImeTima(), tim) == 0) return i;
+    return -1;
+//    auto it = std::find_if(timovi, timovi + broj_timova, [tim](Tim *t) { return std::strcmp(t->DajImeTima(), tim) == 0; });
+//    return it == timovi + broj_timova ? -1 : it - timovi;
+}
+
+void Liga::RegistrirajUtakmicu(const char *tim1, const char *tim2, int rezultat_1, int rezultat_2) {
+    int i = gdjeJeTim(tim1), j = gdjeJeTim(tim2);
+    if(i == -1 || j == -1) throw std::logic_error("Tim nije nadjen");
+    if(rezultat_1 < 0 || rezultat_2 < 0) throw std::range_error("Neispravan broj golova");
+    timovi[i]->ObradiUtakmicu(rezultat_1, rezultat_2);
+    timovi[j]->ObradiUtakmicu(rezultat_2, rezultat_1);
+}
+
+void Liga::IspisiTimove() const {
+    for(int i = 0; i < broj_timova; i++) timovi[i]->DajImeTima();
+}
+
+void Liga::IspisiTabelu() const {
+    std::sort(timovi, timovi + broj_timova, [](Tim *t1, Tim *t2) {
+        if(t1->DajBrojPoena() != t2->DajBrojPoena()) return t1->DajBrojPoena() > t2->DajBrojPoena();
+        if(t1->DajGolRazliku() != t2->DajGolRazliku()) return t1->DajGolRazliku() > t2->DajGolRazliku();
+        return std::strcmp(t1->DajImeTima(), t2->DajImeTima()) < 0;
+    });
+    for(int i = 0; i < broj_timova; i++) timovi[i]->IspisiPodatke();
 }
 
 int main() {
