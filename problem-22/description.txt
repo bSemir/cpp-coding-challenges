@@ -1,0 +1,63 @@
+Zadatak: Rad s razlomcima
+Potrebno je kreirati klasu Razlomak, koja će omogućiti osnovne aritmetičke operacije poput
+sabiranja, oduzimanja, te prefiksnog i postfiksnog inkrementa i dekrementa razlomaka.
+
+Klasa Razlomak:
+
+Atributi: Svaki razlomak se sastoji od brojnika i nazivnika, pri čemu je nazivnik različit od
+nule.
+
+Konstruktor: Klasa treba imati konstruktor koji omogućuje inicijalizaciju razlomka zadanim
+brojnikom i nazivnikom. Ako se nazivnik ne navede, pretpostavljena vrijednost je 1. Ako se
+za nazivnik pošalje vrijednost 0, baciti odgovarajući izuzetak.
+
+Aritmetičke operacije: Omogućite sabiranje i oduzimanje razlomaka: +, -.
+
+Operacije s dodjelom: Preklopite operatore += i -= za izvođenje odgovarajućih aritmetičkih
+operacija s dodjelom.
+
+Prefiksni i postfiksni inkrement i dekrement: Implementirajte operatore ++ i -- kako biste
+omogućili povećanje ili smanjenje razlomka za 1.
+
+Pojednostavljenje razlomaka: Implementirajte funkciju koja pojednostavljuje razlomak,
+odnosno reducira ga na najjednostavniji oblik.
+
+Ispis i unos razlomka: Omogućite ispis i unos razlomka u obliku brojnik/nazivnik.
+
+Testni program(main funkcija):
+
+int main() {
+Razlomak f1, f2;
+std::cout << "Unesite prvi razlomak u formatu brojnik/nazivnik: ";
+std::cin >> f1;
+std::cout << "Unesite drugi razlomak u formatu brojnik/nazivnik: ";
+std::cin >> f2;
+std::cout << "f1: " << f1 << std::endl;
+std::cout << "f2: " << f2 << std::endl;
+std::cout << "f1 + f2: " << f1+f2 << std::endl;
+std::cout << "f1 - f2: " << f1-f2 << std::endl;
+
+std::cout << "++f1: " << ++f1 << std::endl;
+std::cout<< "f1++: " << f1++ <<std::endl;
+
+std::cout << "--f1: " << --f1 << std::endl;
+std::cout << "f1--: " << f1-- << std::endl;
+std::cout<<"f1: "<<f1<<std::endl;
+return 0;
+}
+
+Ispis:
+
+Unesite prvi razlomak u formatu brojnik/nazivnik: 2/3
+Unesite drugi razlomak u formatu brojnik/nazivnik: 3/4
+f1: 2/3
+f2: 3/4
+f1 + f2: 17/12
+f1 - f2: 1/-12
+++f1: 5/3
+f1++: 5/3
+--f1: 5/3
+f1--: 5/3
+f1: 2/3
+
+Napomena: Pazite na ispis negativnih razlomaka.
