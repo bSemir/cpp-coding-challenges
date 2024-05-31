@@ -1,0 +1,11 @@
+Izmijeniti klasu “Liga” razvijenu u "problem-20", tako što će se za evidenciju pokazivača na
+dinamički alocirane objekte tipa “Tim” umjesto dinamički alociranog niza pokazivača koristiti vektor
+čiji su elementi pametni pokazivači na objekte tipa “Tim”. Jedina izmjena u interfejsu klase biće u
+tome što konstruktoru više neće biti potreban parametar (zahvaljujući fleksibilnosti vektora, u ligu
+će se moći dodati onoliko timova koliko želimo, bez potrebe da unaprijed specificiramo njihov
+maksimalan broj).
+Što se tiče semantičkih aspekata (tj. šta metode klase “Liga” treba da rade),
+jedina razlika će biti u tome što metoda “DodajNoviTim” ne mora provjeravati da li je dostignut
+maksimalan broj timova, s obzirom da ograničenje na maksimalan broj timova više neće postojati
+(osim ograničenja uvjetovanih količinom raspoložive memorije). Svi ostali aspekti funkcioniranja
+klase “Liga” trebaju ostaju neizmijenjeni.
