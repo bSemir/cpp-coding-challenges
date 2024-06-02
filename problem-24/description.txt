@@ -1,0 +1,100 @@
+Date su sljedeće deklaracije na globalnom nivou:
+
+typedef std::pair<double, double> Tacka;
+enum Pozicija {GoreLijevo, GoreDesno, DoljeLijevo, DoljeDesno};
+enum Smjer {Nalijevo, Nadesno};
+
+Definirajte i implementirajte klasu “Pravougaonik” koja modelira pravougaonike u ravni čije su
+stranice paralelne koordinatnim osama. Klasa treba da ima sljedeći interfejs:
+
+Pravougaonik(const Tacka &t1, const Tacka &t2);
+void Postavi(const Tacka &t1, const Tacka &t2);
+void Postavi(Pozicija p, const Tacka &t);
+void Centriraj(const Tacka &t);
+Tacka DajTjeme(Pozicija p) const;
+Tacka DajCentar() const;
+double DajHorizontalnu() const;
+double DajVertikalnu() const;
+double DajObim() const;
+double DajPovrsinu() const;
+static Pravougaonik Presjek(const Pravougaonik &p1, const Pravougaonik &p2);
+void Transliraj(double delta_x, double delta_y);
+void Rotiraj(const Tacka &t, Smjer s);
+void Ispisi() const;
+friend bool DaLiSePoklapaju(const Pravougaonik &p1, const Pravougaonik &p2);
+friend bool DaLiSuPodudarni(const Pravougaonik &p1, const Pravougaonik &p2);
+friend bool DaLiSuSlicni(const Pravougaonik &p1, const Pravougaonik &p2);
+
+Konstruktor omogućava kreiranje pravougaonika na osnovu koordinata dva nasuprotna tjemena
+(vrha) pravougaonika, koje se nalaze respektivno u parametrima “t1” i “t2” (s obzirom da su
+stranice paralelne koordinatnim osama, pozicije ova dva tjemena jednoznačno određuju
+pravougaonik). Pri tome nije specificirano koja tačno tjemena “t1” i “t2” predstavljaju, jedino je
+poznato da su to dva nasuprotna tjemena (recimo “t1” može biti gornji desni, a “t2” donji lijevi
+vrh). Dozvoljeno je kreirati i pravougaonike koji se degeneriraju u duž, pa čak i u tačku (to će se
+desiti kada su “t1” i “t2” dvije iste tačke). Za naknadnu izmjenu podataka o pravougaoniku
+predviđene su dvije verzije metode “Postavi”. Prva prima iste parametre i obavlja isti zadatak kao i
+konstruktor, samo nad već postojećim objektom, dok druga omogućava da se zada koordinata
+samo jednog tjemena koje se mijenja, dok njemu nasuprotno tjeme ostaje na istoj poziciji. Koje se
+tjeme mijenja, zadaje se parametrom “p” (koji može imati vrijednosti “GoreLijevo”, “GoreDesno”,
+“DoljeLijevo” i “DoljeDesno”), dok parametar “t” predstavlja novu poziciju tjemena. Predviđena je
+i funkcija “Centriraj”, nakon čijeg poziva centar pravougaonika treba da se nađe u zadanoj tački,
+dok mu dužine stranica i orijentacija ostaju nepromijenjeni.
+
+Funkcija ”DajTjeme” omogućava da se sazna pozicija svakog od 4 moguća tjemena pravougaonika,
+pri čemu preko parametra “p” zadajemo koje nas tjeme zanima, dok funkcija ”DajCentar” vraća
+informacije o koordinatama centra pravougaonika. Funkcije ”DajHorizontalnu” i ”DajVertikalnu”
+vraćaju dužine horizontalne i vertikalne stranice pravougaonika respektivno, dok funkcije
+”DajObim” i ”DajPovrsinu” vraćaju respektivno njegov obim i površinu (za pravougaonike koji se
+degeneriraju na duž ili tačku, moguće je da dužina neke od stranica bude 0).
+
+Statička funkcija članica ”Presjek” prima kao parametre dva objekta tipa ”Pravougaonik”, a kao
+rezultat vraća novi objekat tipa ”Pravougaonik” koji predstavlja presjek (tj. skup svih zajedničkih
+tačaka) pravougaonika koji su preneseni kao parametri. Naime, presjek dva pravougaonika,
+ukoliko uopće postoji, uvijek je također pravougaonik (pretpostavlja se da pravougaonik čine i
+sve tačke u njegovoj unutrašnjosti). Ukoliko pravougaonici preneseni kao parametar nemaju
+zajedničkih tačaka, funkcija baca izuzetak tipa ”domain_error” uz prateći tekst “Pravougaonici se
+ne presijecaju”. Dozvoljeno je da presjek bude i pravougaonik koji se degenerira na duž ili tačku.
+
+Funkcija ”Transliraj” vrši tranlsaciju pravougaonika za ”delta_x” jedinica horizontalno i
+”delta_y” jedinica vertikalno, dok funkcija ”Rotiraj” rotira pravougaonik za 90 ° oko tačke čije su
+koordinate zadane parametrom “t” nalijevo (u smjeru suprotnom od kazaljke na satu) ili
+nadesno (u smjeru kazaljke na satu) ovisno od toga kakav je parametar ”s”. Ugao rotacije je
+ograničen isključivo na 90° da bi stranice pravougaonika i dalje ostale paralelne koordinatnim
+osama.
+Funkcija “Ispisi” ispisuje podatke o pravougaoniku u formatu "{{x', y'}, {x', y'}}", gdje su (x' i y') i (x'' y'').
+koordinate gornjeg lijevog odnosno donjeg desnog ugla respektivno.
+
+Prijateljska funkcija ”DaLiSePoklapaju” testira da li se pravougaonici koji joj se prenose kao
+parametri poklapaju, tj. da li su im vrhovi na istim mjestima u ravni, i vraća logičku vrijednost
+“true” ili “false”, ovisno od rezultata testiranja. Vodite računa da se pravougaonik zadaje preko
+samo dva vrha, tako da se na primjer pravougaonik zadan vrhovima (1, 1) i (7, 5) poklapa sa
+pravougaonikom zadanim vrhovima (7, 1) i (1, 5). Prijateljska funkcija ”DaLiSuPodudarni” testira
+da li su pravougaonici koji se prenose kao parametri podudarni ili ne. Pravougaonici su
+podudarni ukoliko se mogu dovesti na poklapanje translacijom i rotacijom, što se u suštini svodi
+na to da su im stranice istih dužina, neovisno od orjentacije (tako da recimo horizontalna
+stranica jednog pravougaonika može biti jednaka vertikalnoj stranici drugog i obrnuto).
+Konačno, prijateljska funkcija ”DaLiSuSlicni” ispituje da li su dva pravougaonika slična ili ne. Dva
+pravougaonika su slična ukoliko su im stranice međusobno proporcionalne.
+
+Napisanu klasu demonstrirajte u testnom programu koji traži da se tastature unese prirodan broj
+𝑛, koji zatim treba dinamički alocirati niz od 𝑛 pokazivača na objekte tipa “Pravougaonik” koje
+treba dinamički alocirati i inicijalizirati na osnovu podataka koji se unose sa tastature (podaci o
+svakom pravougaoniku se unose posebno, prvo za jedno, a zatim za drugo tjeme). Nakon
+okončanja unosa, program treba prvo translirati sve pravougaonike u skladu sa podacima koji se
+unose sa tastature, a zatim ih rotirati oko njihovog centra. Za tu svrhu treba koristiti funkciju
+“transform” iz biblioteke “algorithm”, pri čemu transformacionu funkciju koja se prosljeđuje
+funkciji “transform” treba izvesti kao lambda funkciju. Nakon obavljenih transformacija, treba
+ispisati podatke o svim unesenim pravougaonicima nakon obavljenih transformacija. Podaci za
+svaki pravougaonik trebaju biti u posebnom redu. Ispis izvršite uz pomoć funkcije “foreach” i
+prikladne lambda funkcije. Na kraju, program treba ispisati podatke o pravougaoniku koji ima
+najveću površinu, za šta ćete iskoristiti funkciju “max_element” uz definiranje prikladne funkcije
+kriterija (ponovo kao lambda funkcije). Tačan izgled dijaloga između korisnika i programa biće
+specificiran putem javnih autotestova.
+
+Uputa: Vjerovatno će Vam najteže biti naći presjek dva pravougaonika, jer izgleda da treba
+ispitati jako mnogo situacija koje mogu nastupiti. Međutim, to uopće nije tako teško kako izgleda.
+Naime, neki pravougaonik čiji gornji lijevi ugao odnosno donji desni ugao imaju koordinate (x', y') i (x'', y'')
+respektivno, može se prikazati kao presjek četiri poluravni x >= x', x <= x'', y <= y' i y >= y'.
+Stoga, da bismo presjekli neki pravougaonik s ovim pravougaonikom, dovoljno ga
+je presjeći redom s ove četiri poluravni, što je mnogo lakše uraditi (svako od ova četiri
+presijecanja može eventualno promijeniti poziciju samo jednog od dva nasuprotna tjemena).
