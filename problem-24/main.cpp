@@ -36,52 +36,6 @@ public:
                 t2 = t;
                 break;
         }
-        // switch (p) {
-        // case GoreLijevo:
-        //   if (t.first < t2.first && t.second > t2.second) {
-        //     std::swap(t1, t2);
-        //   } else if (t.first > t2.first && t.second < t2.second) {
-        //     std::swap(t1.first, t2.first);
-        //   } else if (t.first < t2.first) {
-        //     std::swap(t1.first, t2.first);
-        //     std::swap(t1.second, t2.second);
-        //   } else {
-        //     std::swap(t1, t2);
-        //   }
-        //   break;
-        // case GoreDesno:
-        //   if (t.first > t1.first && t.second > t2.second) {
-        //     std::swap(t1, t2);
-        //   } else if (t.first < t1.first && t.second < t2.second) {
-        //     std::swap(t1.first, t2.first);
-        //   } else if (t.first > t1.first) {
-        //     std::swap(t1.first, t2.first);
-        //     std::swap(t1.second, t2.second);
-        //   }
-        //   break;
-        // case DoljeLijevo:
-        //   if (t.first < t2.first && t.second < t1.second) {
-        //     std::swap(t1, t2);
-        //   } else if (t.first > t2.first && t.second > t1.second) {
-        //     std::swap(t1.first, t2.first);
-        //   } else if (t.first < t2.first) {
-        //     std::swap(t1.first, t2.first);
-        //     std::swap(t1.second, t2.second);
-        //   } else {
-        //     std::swap(t1, t2);
-        //   }
-        //   break;
-        // case DoljeDesno:
-        //   if (t.first > t1.first && t.second < t1.second) {
-        //     std::swap(t1, t2);
-        //   } else if (t.first < t1.first && t.second > t1.second) {
-        //     std::swap(t1.first, t2.first);
-        //   } else if (t.first > t1.first) {
-        //     std::swap(t1.first, t2.first);
-        //     std::swap(t1.second, t2.second);
-        //   }
-        //   break;
-        // }
 
         if (t1.first != t2.first && t1.second != t2.second) {
             if (t1.first > t2.first && t1.second > t2.second) {
