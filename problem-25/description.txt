@@ -1,0 +1,50 @@
+Napravite klasu ”GradjaninBiH” koja modelira jednog građanina Bosne i Hercegovine (misli se na građanina u pravnom smislu kao stanovnika države, a ne nužno osobu koja živi u gradu).
+Za kreiranje objekata tipa ”GradjaninBiH” predviđena su dva konstruktora. Oba konstruktora kao prvi parametar prihvataju ime građanina (sa prezimenom), koje se zadaje kao objekat tipa “string”.
+Prvi konstruktor, kao drugi parametar zahtijeva jedinstveni matični broj građanina (JMBG), koji je cijeli broj tipa “long long int”.
+Inače, JMBG je 13-cifreni broj koji sadrži vrlo mnogo informacija o građaninu. Ako predstavimo JMBG u obliku c1c2c3c4c5c6c7c8c9c10c11c12c13,
+tada c1c2 predstavlja dan rođenja, c3c4 mjesec rođenja, c5c6c7 posljednje 3 cifre godine rođenja. c8c9 predstavljaju šifru regije rođenja (npr. 17 za Sarajevo), c10c11c12 je kôd po kojem se međusobno razlikuju osobe rođene na isti dan u istoj regiji, pri čemu su za muške osobe
+rezervirani kodovi od 000 do 499, a za ženske osobe od 500 do 999, dok je c13 kontrolna cifra koja zavisi od ostalih 12 cifara prema formuli:
+
+c13 = 11−(7∙ (c1 + c7)+6∙ (c2 + c8)+5∙ (c3 + c9)+4∙ (c4 + c10)+3∙ (c5 + c11)+2∙ (c6 + c12))%11
+
+pri čemu se ukoliko se dobije c13 = 11, uzima se da je c13 = 0, a ako se dobije c13 = 10 smatra se da je kôd osobe neprikladan (pri dodjeljivanju JMBG tada se bira novi kôd).
+U slučaju da se zada JMBG koji nije validan, treba baciti izuzetak tipa ”logic_error” uz prateći tekst “JMBG nije validan”.
+JMBG nije validan ukoliko prvih 7 cifara ne mogu formirati ispravan datum, ili ukoliko
+se posljednja cifra razlikuje od onoga što bi se dobilo gore prikazanom formulom, što uključuje i slučaj za koji bi formula dala da treba biti c13 = 10.
+Ukoliko se zadani JMBG poklapa sa JMBG nekog drugog građanina (tj. nekog drugog objekta tipa ”GradjaninBiH”), treba baciti izuzetak tipa ”logic_error” uz prateći tekst “Vec postoji gradjanin sa istim JMBG”. Na primjer, ukoliko pokušamo izvršiti deklaracije
+GradjaninBiH g1("Rambo Sulejmanovic", 1305956174235);
+GradjaninBiH g2("Zan Klod Sejdic", 1305956174235);
+druga deklaracija treba da baci izuzetak, zbog toga što već postoji građanin sa istim JMBG.
+Kopiranje i međusobno dodjeljivanje objekata ovog tipa treba zabraniti (s obzirom da bi kopija nekog objekta tipa ”GradjaninBiH” svakako imala isti JMBG). Kako riješiti problem da li postoji neki drugi objekta tipa ”GradjaninBiH” koji ima isti JMBG biće uskoro opisano.
+
+Drugi konstruktor omogućava da se podaci o građaninu daju putem dana, mjeseca i godine rođenja, šifre regije rođenja, te pola, koji se zadaji kao parametri (navedenim redom).
+Svi parametri su cijeli brojevi (tipa “int”), osim parametra kojim se zadaje pol koji je tipa “Pol”, pri čemu je “Pol” pobrojani tip definiran u javnom dijelu klase deklaracijom
+
+enum Pol {Musko, Zensko};
+
+Ukoliko se pokušaju zadati neispravni podaci, treba baciti izuzetak tipa ”logic_error” uz prateći tekst “Neispravni podaci”.
+Podaci su neispravni ukoliko dan, mjesec i godina rođenja nemaju smisla, ili ako šifra regije nije u opsegu od 0 do 99 (nisu ni sve šifre u ovom opsegu validne, ali tu činjenicu ćemo ovdje ignorirati).
+Ovaj konstruktor također na osnovu zadanih podataka treba da automatski kreira JMBG. Svi podaci za tu svrhu su poznati, osim kôda osobe. Za tu svrhu, treba uzeti prvi slobodni kôd, tj. najmanji kôd koji dosad nije iskorišten ni za jednu drugu osobu istog pola rođenu na isti dan u istoj regiji.
+Kako pronaći JMBG drugih građanina (tj. drugih već kreiranih objekata tipa ”GradjaninBiH”) biće također uskoro opisano.
+
+Pored konstruktora, klasa ”GradjaninBiH” treba da podržava pristupne funkcije “DajImeIPrezime”, “DajJMBG”, “DajDanRodjenja”, “DajMjesecRodjenja”, “DajGodinuRodjenja”, “DajSifruRegije” i “DajPol” koje vraćaju informacije koje su jasne iz imena funkcija (sve ove funkcije su bez parametara).
+Pri tome, treba imati na umu ukoliko je građanin zadan putem JMBG, nije moguće jednoznačno odrediti godinu rođenja, jer prva cifra godine rođenja nije sadržana u JMBG.
+Zbog toga, za realizaciju funkcije koja daje godinu rođenja uzeti pretpostavku da nijedan građanin nije stariji od 100 godina, kao i da je trenutno 2021. godina.
+
+Pored ovih pristupnih funkcija, klasa treba da podržava još jedino funkciju “PromijeniImeIPrezime”, koja omogućava promjenu imena
+građanina, a korisna je ukoliko recimo Brus Li Ramadanović poželi da promijeni ime i prezime u Čak Noris Bičakčić.
+
+Očigledno, najveći problem u ovom zadatku je kako detektirati da li građanin kojeg kreiramo ima isti JMBG kao građani koji su već kreirani, odnosno kako konstruktor objekta tipa ”GradjaninBiH” kojeg kreiramo može znati za druge objekte istog tipa.
+Jedno loše rješenje (koje nećete izvesti) je koristiti neki dijeljeni (statički) atribut koji bi bio recimo vektor pokazivača koji bi čuvao pokazivače na sve kreirane građane).
+Međutim, postoji rješenje koje je mnogo bolje sa aspekta utroška resursa (koje trebate izvesti u ovoj zadaći). Svaki objekat tipa “GradjaninBiH” će u sebi sadržavati jedan pokazivač na posljednjeg građanina koji je kreiran prije njega (osim prvog kreiranog građanina koji će na tom mjestu imati nul-pokazivač), tako da će svi kreirani objekti tipa “GradjaninBiH” faktički biti povezani u jednostruko povezanu listu (a sami objekti će biti čvorovi te liste).
+Pored toga, biće potreban i jedan dijeljeni statički atribut koji će sadržavati pokazivač na posljednjeg kreiranog građanina (ili nul-pokazivač ukoliko niti jedan građanin nije kreiran).
+Ovaj atribut je potreban da bismo znali gdje počinje “lanac” povezanih građana.
+Sad se test na jednakost JMBG izvodi tako što se prođe kroz čitavu listu i testira da li je JMBG građanina kojeg želimo kreirati jednak JMBG ma kojeg elementa liste.
+Ukoliko testiranje prođe uspješno, novokreirani građanin se također “uvezuje” u listu. Interesantno je da će klasa “GradjaninBiH” morati imati i destruktor, iako nigdje nema nikakve dinamičke alokacije memorije.
+Naime, kad objekat tog tipa prestane postojati, on mora sebe “isključiti” iz lanca. Obratite pažnju na specijalne slučajeve (tj. šta tačno treba ažurirati) kada se “isključuje” objekat koji se nalazi na jednom ili drugom kraju lanca. Na sličan način se izvodi i postupak pretrage koji su slobodni kôdovi u drugoj varijanti konstruktora koja treba automatski generirati JMBG.
+
+Obavezno napišite i kratak testni program u kojem ćete testirati napisanu klasu (eventualni
+dijalozi između korisnika i programa biće specificirani javnim autotestovima). Za realizaciju
+programa najstrože je zabranjeno koristiti bibliotečke kontejnerske tipove podataka, kao što su
+vektori, dekovi, liste, skupovi, mape, itd. Nepoštovanje ove zabrane biće kažnjeno davanjem 0
+poena na čitav zadatak!
