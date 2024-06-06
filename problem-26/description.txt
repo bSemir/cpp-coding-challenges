@@ -1,0 +1,139 @@
+Zadatak
+
+Specifikacije:
+
+1. Klasa "Shape":
+        ⚫ virtual double area() const = 0: Virtuelna funkcija koja vraća površinu oblika.
+        ⚫ virtual double perimeter() const = 0: Virtuelna funkcija koja vraća obim oblika.
+        ⚫ virtual std::shared_ptr<Shape> clone() const = 0: Virtuelna funkcija koja vraća pametni pokazivač na novi klonirani objekat.
+        ⚫ Virtualni destruktor.
+
+2. Klasa "Circle" koja nasljedjuje klasu "Shape":
+        ⚫Konstruktor koji prima poluprečnik.
+        ⚫Implementacija funkcija area, perimeter į clone.
+
+3. Klasa "Rectangle" koja nasljedjuje klasu "Shape":
+        ⚫Konstruktor koji prima širinu i visinu.
+        ⚫Implementacija funkcija area, perimeter į clone.
+
+4. Klasa "ShapeCollection" za kolekciju oblika:
+        ⚫Privatni član std::vector<std::shared_ptr<Shape>> shapes za čuvanje oblika.
+        ⚫Podrazumijevani konstruktor.
+        ⚫Kopirajući i pomjerajući kontruktor.
+        ⚫Operator dodjele kopiranjem i pomjerajući operator dodjele.
+        ⚫Funkcija void addShape(std::shared_ptr<Shape> shape) za dodavanje oblika u kolekciju.
+        ⚫Funkcija double totalArea() const koja vraća zbir površina svih oblika u kolekciji.
+        ⚫Funkcija void printShapes() const koja ispisuje površinu i obim svakog oblika u kolekciji.
+        ⚫Funkcija std::shared_ptr<Shape> shapeWithMinArea() const koja vraća oblik sa najmanjom površinom u kolekciji.
+        ⚫Funkcija int countShapes WithAreaGreaterThan(double t) const koja vraća broj oblika čija je površina veća od zadate vrijednosti t.
+
+Napomene:
+       ⚫Funkcije shapeWithMinArea() i countShapes WithArea GreaterThan(double t) trebaju biti implementirane uz pomoć funkcija iz biblioteke "algorithm".
+
+
+U kodu ispod implementirati sve spomenute klase i funkcije:
+
+#include <iostream>
+#include <cmath>
+#include <memory>
+#include <algorithm>
+#include <limits>
+#include <vector>
+
+class Shape {
+public:
+    virtual double area() const = 0;
+    virtual double perimeter() const = 0;
+    virtual std::shared_ptr<Shape> clone() const = 0;
+    virtual ~Shape() {}
+};
+
+class Circle : public Shape {
+private:
+    double radius;
+public:
+    Circle(double r) : radius(r) {}
+    virtual double area() const override;
+    virtual double perimeter() const override;
+    virtual std::shared_ptr<Shape> clone() const override;
+};
+
+class Rectangle : public Shape {
+private:
+    double width, height;
+public:
+    Rectangle(double w, double h) : width(w), height(h) {}
+    virtual double area() const override;
+    virtual double perimeter() const override;
+    virtual std::shared_ptr<Shape> clone() const override;
+};
+
+class ShapeCollection {
+private:
+    std::vector<std::shared_ptr<Shape>> shapes;
+public:
+    ShapeCollection() = default;
+    ShapeCollection(const ShapeCollection& other);
+    ShapeCollection(ShapeCollection&& other);
+    ShapeCollection& operator=(const ShapeCollection& other);
+    ShapeCollection& operator=(ShapeCollection&& other);
+    void addShape(std::shared_ptr<Shape> shape);
+    double totalArea() const;
+    void printShapes() const {
+        for (const auto& shape : shapes) {
+            std::cout << "Area: " << shape->area() << ", Perimeter: " << shape->perimeter() << std::endl;
+        }
+    }
+    std::shared_ptr<Shape> shapeWithMinArea() const;
+    int countShapesWithAreaGreaterThan(double t) const;
+};
+
+void printArea(const std::shared_ptr<Shape>& shape) {
+    std::cout << "The area is: " << shape->area() << std::endl;
+}
+void printPerimeter(const std::shared_ptr<Shape>& shape) {
+    std::cout << "The perimeter is: " << shape->perimeter() << std::endl;
+}
+
+int main() {
+    auto circle = std::make_shared<Circle>(5.0);
+    auto rectangle = std::make_shared<Rectangle>(4.0, 6.0);
+
+    ShapeCollection collection;
+    collection.addShape(circle);
+    collection.addShape(rectangle);
+
+    std::cout << "Individual Shapes:" << std::endl;
+    printArea(circle);
+    printPerimeter(circle);
+    printArea(rectangle);
+    printPerimeter(rectangle);
+
+    std::cout << "\nShape Collection:" << std::endl;
+    collection.printShapes();
+
+    std::cout << "\nTotal Area: " << collection.totalArea() << std::endl;
+
+    ShapeCollection collectionCopy = collection;
+    std::cout << "\nCopied Shape Collection:" << std::endl;
+    collectionCopy.printShapes();
+
+    ShapeCollection collectionMove = std::move(collection);
+    std::cout << "\nMoved Shape Collection:" << std::endl;
+    collectionMove.printShapes();
+
+    auto minAreaShape = collectionMove.shapeWithMinArea();
+    if (minAreaShape) {
+        std::cout << "\nShape with Minimum Area:" << std::endl;
+        printArea(minAreaShape);
+        printPerimeter(minAreaShape);
+    } else {
+        std::cout << "\nNo shapes in the collection." << std::endl;
+    }
+
+    double threshold = 30.0;
+    int count = collectionMove.countShapesWithAreaGreaterThan(threshold);
+    std::cout << "\nNumber of shapes with area greater than " << threshold << ": " << count << std::endl;
+
+    return 0;
+}
