@@ -5,23 +5,30 @@
 #include <iostream>
 #include <stdexcept>
 #include <string>
+#include <type_traits>
+
+enum Pol { Musko, Zensko };
 
 class GradjaninBiH {
 public:
-    enum Pol { Musko, Zensko };
+
     explicit GradjaninBiH(std::string ime_i_prezime, long long int jmbg);
     explicit GradjaninBiH(std::string ime_i_prezime, int dan_rodjenja,
                           int mjesec_rodjenja, int godina_rodjenja,
                           int sifra_regije, Pol p);
     ~GradjaninBiH();
+    GradjaninBiH(const GradjaninBiH &g) = delete; // zabrana kopiranja
+    GradjaninBiH &operator=(const GradjaninBiH &g) = delete; // zabrana dodjele
     std::string DajImeIPrezime() const { return ime_i_prezime; };
-    long long int DajJMBG() const { return jmbg; };
+    long long int DajJMBG() const { return jmbg; }; // TODO: AT 11 ne valja, vraca jmbg bez prve nule ako ima 12 cifara
     int DajDanRodjenja() const;
     int DajMjesecRodjenja() const { return DajDioJMBG(2, 2); };
     int DajGodinuRodjenja() const;
     int DajSifruRegije() const { return DajDioJMBG(7, 2); };
     Pol DajPol() const { return (DajDioJMBG(9, 3) < 500) ? Musko : Zensko; };
     void PromijeniImeIPrezime(std::string novo_ime_i_prezime) {
+        if(novo_ime_i_prezime == "")
+            throw std::logic_error("Ime ne moze biti prazno!");
         ime_i_prezime = novo_ime_i_prezime;
     };
 
@@ -134,10 +141,13 @@ bool GradjaninBiH::ValidirajJMBG(long long int jmbg) {
 
 // implementacija prvog konstruktora koji prima i jmbg
 GradjaninBiH::GradjaninBiH(std::string i_i_p, long long int jmbg) {
+    if (i_i_p.empty())
+        throw std::logic_error("Ime ne moze biti prazno!");
     if (!ValidirajJMBG(jmbg))
         throw std::logic_error("JMBG nije validan");
     if (PostojiLiIstiJMBG(jmbg))
         throw std::logic_error("Vec postoji gradjanin sa istim JMBG");
+
 
     this->ime_i_prezime = i_i_p;
     this->jmbg = jmbg;
@@ -152,6 +162,9 @@ GradjaninBiH::GradjaninBiH(std::string ime_i_prezime, int dan_rodjenja,
     ProvjeriDatum(dan_rodjenja, mjesec_rodjenja, godina_rodjenja);
     if (sifra_regije < 0 || sifra_regije > 99)
         throw std::logic_error("Neispravni podaci");
+
+    if (ime_i_prezime.empty())
+        throw std::logic_error("Ime ne moze biti prazno!");
 
     int kod_osobe_pocetak = (p == Musko) ? 0 : 500;
     int kod_osobe_kraj = (p == Musko) ? 499 : 999;
@@ -252,6 +265,65 @@ int GradjaninBiH::DajDanRodjenja() const {
 }
 
 int main() {
+
+    // AT 13 - passing
+//    try {
+//        GradjaninBiH osoba("Milica Milic", 5, 12, 2001, 28, Pol::Zensko);
+//        std::cout << "Ispravno kreiran: " << osoba.DajImeIPrezime() << " JMBG: " << osoba.DajJMBG() << std::endl;
+//    } catch (const std::logic_error& e) {
+//        std::cout << "Greska: " << e.what() << std::endl;
+//    }
+
+    // AT 12 - passing
+//    try {
+//        GradjaninBiH neispravanJMBG("Mujo Mujic", 1234567890123);
+//    } catch (const std::logic_error& e) {
+//        std::cout << "Greska: " << e.what() << std::endl;
+//    }
+//    try {
+//        GradjaninBiH neispravanJMBG("", 1234567890123);
+//    } catch (const std::logic_error& e) {
+//        std::cout << "Greska: " << e.what() << std::endl;
+//    }
+//    try {
+//        GradjaninBiH praznoIme("", 707995130005);
+//    } catch (const std::logic_error& e) {
+//        std::cout << "Greska: " << e.what() << std::endl;
+//    }
+//    try {
+//        GradjaninBiH ispravan("Hana Hanic", 707995135015);
+//        std::cout << "Ispravno kreiran: " << ispravan.DajImeIPrezime() << " JMBG: " << ispravan.DajJMBG() << std::endl;
+//    } catch (const std::exception& e) {
+//        std::cout << "Nesto nije u redu: " << e.what() << std::endl;
+//    }
+
+    // AT 8 - passing
+//    if (!std::is_copy_constructible<GradjaninBiH>::value)
+//        std::cout << "Kopiranje GradjaninBiH zabranjeno!" << std::endl;
+//    else std::cout << "Kopiranje GradjaninBiH treba biti zabranjeno!" << std::endl;
+
+    // AT 7 - passing
+//    if (!std::is_copy_assignable<GradjaninBiH>::value)
+//        std::cout << "Dodjeljivanje GradjaninBiH zabranjeno!" << std::endl;
+//    else std::cout << "Dodjeljivanje GradjaninBiH treba biti zabranjeno!" << std::endl;
+
+    // AT 9 - passing
+//    try {
+//        GradjaninBiH osoba("Mujo Mujic", 1305956174235);
+//        std::cout << "Ime gradjanina: " << osoba.DajImeIPrezime() << std::endl;
+//
+//        osoba.PromijeniImeIPrezime("Mujo Suljic");
+//        std::cout << "Novo ime nakon prve promjene: " << osoba.DajImeIPrezime() << std::endl;
+//
+//        osoba.PromijeniImeIPrezime("Suljo Suljic");
+//        std::cout << "Novo ime nakon druge promjene: " << osoba.DajImeIPrezime() << std::endl;
+//
+//        osoba.PromijeniImeIPrezime("");
+//        std::cout << "Novo ime nakon treće promjene: " << osoba.DajImeIPrezime() << std::endl;
+//
+//    } catch (const std::exception& e) {
+//        std::cout << "Izuzetak: " << e.what() << std::endl;
+//    }
     try {
         int broj_gradjana;
         std::cout << "Unesite broj gradjana: ";
@@ -278,7 +350,7 @@ int main() {
             std::cout << std::endl;
 
             try {
-                auto pol_enum = (pol == 1) ? GradjaninBiH::Musko : GradjaninBiH::Zensko;
+                auto pol_enum = (pol == 1) ? Pol::Musko : Pol::Zensko;
                 g[broj_kreiranih++] = new GradjaninBiH(ime_i_prezime, dan, mjesec,
                                                        godina, sifra_regije, pol_enum);
             } catch (const std::logic_error &e) {
@@ -324,6 +396,5 @@ int main() {
     } catch (const std::exception &e) {
         std::cout << "Greska: " << e.what() << std::endl;
     }
-    // TODO: add one runable test sample
     return 0;
 }
