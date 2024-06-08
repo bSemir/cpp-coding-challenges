@@ -1,0 +1,103 @@
+Za potrebe evidencije pacijenata koji dolaze na pregled kod ljekara, potrebno je implementirati
+klase “Datum”, “Vrijeme”, “Pregled” i “Pregledi”. Klasa “Datum” je krajnje minimalistička klasa koja
+sadrži samo konstruktor, te metode “Postavi”, “Ocitaj” i “Ispisi”. Konstruktor i metoda
+“Postavi” omogućavaju inicijalizaciju i naknadnu izmjenu primjeraka ove klase, pri čemu se kao
+cjelobrojni parametri (tipa “int”) zadaju redom dan, mjesec i godina. U slučaju da zadani podaci
+nisu legalni, baca se izuzetak tipa “domain_error” uz prateći tekst “Neispravan datum”. Pristupna
+metoda “Ocitaj” treba da vrati pohranjeni dan, mjesec i godinu kao uređenu trojku (tj. objekat
+tipa “tuple”) cijelih brojeva, dok metoda “Ispisi” treba da ispiše datum na ekran u obliku
+dan/mjesec/godina (npr. “25/5/2021”).
+
+Klasa “Vrijeme” je također minimalistička klasa i također sadrži samo konstruktor, te metode
+“Postavi”, “Ocitaj” i “Ispisi” (kao i klasa “Datum”). Njen konstruktor i metoda “Postavi” očekuju
+dva cjelobrojna parametra (tipa “int”) koji predstavljaju sate i minute u objektu tipa “Vrijeme”
+kojeg treba kreirati, odnosno postaviti. U slučaju da sati nisu u opsegu od 0 do 23 uključivo, a
+minute u opsegu od 0 do 59 uključivo, treba baciti izuzetak tipa “domain_error” uz prateći tekst
+“Neispravno vrijeme. Pristupna metoda “Ocitaj” treba da vrati pohranjene sate i minute kao
+uređeni par (tj. objekat tipa “pair”) cijelih brojeva), dok metoda “Ispisi” treba da ispiše vrijeme
+na ekran u obliku ss:mm (npr. “09:54”).
+
+Klasa “Pregled” opisuje podatke o jednom zakazanom pregledu. Predviđeno je da ova klasa ima
+dva konstruktora. Prvi parametar u oba konstruktora je ime pacijenta (tipa “string”). Prvi
+konstruktor ima još dva parametra koji predstavljaju informacije o zakazanom danu i vremenu
+pregleda, i oni su tipa “Datum” i “Vrijeme” respektivno. Za razliku od ovog konstruktora, drugi
+konstruktor prima razbijene informacije o danu, mjesecu, godini, satu i minutama zakazanog
+pregleda kroz 5 cjelobrojnih parametara (tipa “int”). Dalje treba podržati funkcije članice
+nazvane “PromijeniPacijenta”, “PromijeniDatum” i “PromijeniVrijeme”, koje omogućavaju da se
+naknadno promjene informacije o imenu pacijenta, odnosno o zakazanom datumu pregleda
+Njihovi parametri su novo ime pacijenta, novi datum (kao objekat tipa “Datum”) odnosno novo
+vrijeme (kao objekat tipa “Vrijeme”). Sve ove tri funkcije kao rezultat treba da vrate referencu na
+izmijenjeni objekat tipa “Pregled” (sa ciljem da se omogući ulančano pozivanje). Pored ovih
+mutatorskih funkcija, treba podržati i mutatorske funkcije nazvane “PomjeriDanUnaprijed” i
+“PomjeriDanUnazad” koje pomjeraju zakazani datum pregleda za jedan dan unaprijed odnosno
+unazad. Ove funkcije nemaju parametara i ne vraćaju nikakav rezultat.
+
+Od pristupnih metoda, treba podržati metode nazvane “DajImePacijenta”, “DajDatumPregleda” i
+“DajVrijemePregleda”, a koje vraćaju redom ime pacijenta, te datum i vrijeme zakazanog pregleda
+(sve ove metode su bez parametara). Predviđena je i statička funkcija članica “DolaziPrije”
+prima dva objekta tipa “Pregled” kao parametre i vraća “true” ukoliko je prvi pregled zakazan
+prije drugog, inače vraća “false”. Konačno, predviđena je i funkcija članica “Ispisi” koja ispisuje
+podatke o pregledu na ekran na način da se prvo ispiše ime pacijenta, poravnato ulijevo u polju
+širine 30 znakova, a zatim datum i vrijeme pregleda koji su međusobno razdvojeni jednim
+razmakom (na kraju se prelazi u novi red).
+
+Klasa “Pregledi” predstavlja kolekciju podataka o zakazanim pregledima. Podaci o pregledima se
+čuvaju u dinamički alociranim objektima, kojima se pristupa preko dinamički alociranog niza
+pokazivača (kojem se također pristupa putem odgovarajućeg pokazivača, koji je jedan od atributa
+klase). Konstruktor klase obavlja neophodnu alokaciju memorije, pri čemu njegov jedini parametar
+(tipa “int”) predstavlja maksimalan broj pregleda koji se mogu registrirati. Pri tome, treba
+onemogućiti da se ovaj konstruktor koristi za automatsku konverziju cijelih brojeva u objekte tipa
+“Pregledi”. Pored ovog konstruktora, treba podržati i sekvencijski konstruktor, koji omogućava
+kreiranje objekata tipa “Pregledi” iz inicijalizacione liste čiji su elementi tipa “Pregled”, zatim
+destruktor koji oslobađa svu memoriju koja je zauzeta tokom života objekta, te kopirajući
+konstruktor i kopirajući operator dodjele, koji omogućavaju bezbjedno kopiranje i međusobno
+dodjeljivanje objekata tipa “Pregledi” korištenjem strategije dubokog kopiranja. Također treba
+podržati i pomjerajući konstruktor odnosno pomjerajući operator dodjele koji optimiziraju
+postupak kopiranja u slučajevima kada se kopiraju privremeni objekti tipa “Pregled”, te koji
+omogućavaju podršku move-semantici za objekte tipa “Pregled”.
+
+Za registriranje pregleda, predviđene su tri verzije metode nazvane “RegistrirajPregled”. Prve
+dvije verzije kreiraju novi pregled u skladu sa zadanim parametrima, koji su identični kao kod
+dva konstruktora klase “Pregled”), nakon čega ga registriraju u kolekciji, dok treća verzija prosto
+kao parametar prihvata pokazivač na neki objekat tipa “Pregled” (za koji pretpostavljamo da je
+već na neki način kreiran) i registira ga u kolekciji. Pri tome, u trećem slučaju, podrazumijeva se
+da klasa “Pregledi” preuzima vlasništvo nad registriranim objektom, tj. preuzima odgovornost za
+njegovo brisanje. U sva tri slučaja, treba baciti izuzetak tipa “range_error” uz prateći tekst
+“Dostignut maksimalni broj pregleda” u slučaju da je dostignut maksimalan broj pregleda koji se
+mogu registrirati.
+
+Metode “DajBrojPregleda” i “DajBrojPregledaNaDatum” daju ukupan broj registriranih pregleda te
+broj pregleda zakazanih na zadani datum respektivno. Prva od njih nema parametara, dok druga
+ima parametar tipa “Datum” koji predstavlja željeni datum za koji se traži pregled. Pri tome,
+metodu “DajBrojPregledaNaDatum” obavezno treba realizirati uz pomoć funkcije “count_if” iz
+biblioteke “algorithm” uz definiranje prikladne funkcije kriterija kao lambda funkcije. Metoda
+“DajNajranijiPregled” bez parametara daje kao rezultat najraniji zakazani pregled (u vidu
+odgovarajućeg objekta tipa “Pregled”). Predviđene su dvije verzije ove metode, za konstantne i za
+nekonstantne objekte, pri čemu se za slučaj nekonstantnih objekata vraća referenca (da se izbjegne
+nepotrebno kopiranje i omogući izmjena vraćenog objekta). Ove metode treba realizirati putem
+funkcije “min element” iz biblioteke “algorithm”, uz odgovarajuću funkciju kriterija realiziranu kao
+lambda funkcija. U slučaju da nema registriranih pregleda, potrebno je baciti izuzetak tipa
+“domain error” uz prateći tekst “Nema registriranih pregleda”. Metoda “IsprazniKolekciju” bez
+parametara uklanja sve registrirane preglede, tako da nakon poziva ove metode kolekcija treba biti
+u identičnom stanju kakva je bila neposredno nakon kreiranja. Metoda “ObrisiNajranijiPregled”
+(također bez parametara) uklanja samo najraniji zakazani pregled (ova metoda se obično poziva
+nakon što se obradi odgovarajući pacijent). U slučaju da je kolekcija prazna, treba baciti izuzetak
+tipa “range_error” uz prateći tekst “Prazna kolekcija”. Ni metoda “ObrisiPregledePacijenta” koja
+briše sve preglede pacijeta čije je ime zadano kao parametar (tipa “string”). Ukoliko nema
+registriranog ni jednog pregleda sa zadanim imenom pacijenta, ne treba da se desi ništa. Sve ove
+metode ne vraćaju nikakav rezultat.
+
+Za ispis informacija o pregledima, predviđena je metoda “IspisiPregledeNaDatum”, koja ispisuje na
+ekran informacije o svim pregledima zakazanim datum koji joj se zadaje kao parametar, sortirane
+po vremenu u rastući poredak, dok metoda “IspisiSvePreglede” bez parametara ispisuje na ekran
+informacije o svim zakazanim pregledima, u hronološkom redoslijedu (tj. također sortirane po
+vremenu u rastući poredak). Obje metode ne vraćaju nikakav rezultat. Pri tome, ove metode treba
+da budu realizirane kao inspektori, odnosno da ne smiju promijeniti sadržaj objekta nad kojim se
+pozivaju, tako da se mogu primijeniti i nad konstantnim objektima. Ispis pojedinačnih pregleda vrši
+se prostim pozivom metode “Ispisi” nad objektima tipa “Pregled” pohranjenim u kolekciji.
+
+Sve metode koje nisu trivijalne obavezno implementirajte izvan deklaracije klase. Također napišite
+i testni program u kojem ćete testirati sve elemente napisanih klasa (mogući izgled dijaloga biće
+specificiran putem javnih autotestova). Posebno se trebate uvjeriti da kopirajući i pomjerajući
+konstruktor te kopirajući i pomjerajući preklopljeni operator dodjele rade ispravno, kao i da ni u
+kom slučaju ne dolazi do curenja memorije.
