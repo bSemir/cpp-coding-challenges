@@ -11,6 +11,7 @@ Covered the following areas so far:
 - queue (std::queue)
 - map (std::map)
 - pointers, double pointers and pointer arithmetic
+- smart pointers
 - references
 - anonymous functions (lambdas)
 - dynamic memory allocation
@@ -24,3 +25,4 @@ OOP:
 - copy and move assignment operators
 - destructors
 - operator overloading
+- method overriding
