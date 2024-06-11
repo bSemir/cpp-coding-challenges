@@ -1,0 +1,40 @@
+Definirati i implementirati apstraktnu baznu klasu “ApstraktniStudent”, kao i dvije konkretne klase
+“StudentBachelor” i “StudentMaster” izvedene iz bazne klase “ApstraktniStudent”.
+Bazna klasa “ApstraktniStudent” treba posjedovati privatne atribute koji čuvaju podatke o imenu i prezimenu
+studenta (oba su tipa “string”), broju indeksa (cijeli broj), broju položenih ispita (cijeli broj) i
+prosječnoj ocjeni (realan broj), i nikave druge atribute. Konstruktor klase trena inicijalizirati ime i
+prezime studenta, te broj indeksa na vrijednosti zadane parametrima, dok broj položenih ispita i
+prosječna ocjena treba inicijalizirati respektivno na 0 i 5. Klasa dalje treba posjedovati trivijalne
+pristupne metode “DajIme”, “DajPrezime”, “DajBrojIndeksa”, “DajBrojPolozenih” i “DajProsjek” koje
+vraćaju vrijednosti svih odgovarajućih atributa.
+Dalje, treba podržati metode“RegistrirajIspit” i “PonistiOcjene”. Metoda RegistrirajIspit” treba služiti za registraciju novog ispita.
+Ona treba povećati broj položenih ispita za jedinicu i ažurirati prosječnu ocjenu u skladu sa ocjenom iz
+novopoloženog ispita, koja se zadaje kao parametar (u slučaju neispravne ocjene, treba baciti
+izuzetak tipa “domain_error” uz prateći tekst “Neispravna ocjena”). Ocjena 5 se prihvata kao
+legalna, ali se ignorira (tj. niti se ažurira prosjek, niti se povežava broj položenih ispita).
+Metoda “PonistiOcjene” bez parametara poništava sve registrirane ocjene (tj. dovodi objekat u stanje
+kakvo je bilo odmah nakon kreiranja objekta).
+Konačno, klasa treba sadržavati i apstraktne metode “IspisiPodatke” i “DajKopiju” bez parametara.
+Metoda “DajKopiju” će biti potrebna za polimorfno kopiranje u kopirajućem konstruktoru klase “Fakultet” u narednom zadatku, a njene implementacije
+u izvedenim klasama treba da obezbijede kreiranje identične kopije objekta nad kojim su pozvane,
+uz vraćanje adrese novokreirane kopije kao rezultata.
+
+Izvedena klasa “StudentBachelor” treba se razlikovati se od bazne klase “ApstraktniStudent” samo
+po tome što sadrži konkretnu implementaciju apstraktnih metoda “IspisiPodatke” i “DajKopiju”.
+Metoda “DajKopiju” treba da kreira identičnu kopiju objekta tipa “StudentBachelor” nad kojim je
+pozvana, dok metoda “IspisiPodatke” u ovoj klasi treba ispisati podatke o studentu u obliku
+
+Student bachelor studija <ime> <prezime>, sa brojem indeksa <indeks>, ima prosjek <prosjek>.
+
+Izvedena klasa “StudentMaster” treba se razlikovati od bazne klase “ApstraktniStudent” prvo po
+tome što sadrži dodatni atribut koji čuva informaciju kada je student završio prvi stepen studija
+(bachelor studij), kao i dodatni parametar u konstruktoru koji omogućava postavljanje ovog atributa.
+Naravno, metodu “DajKopiju” u ovoj klasi treba implementirati tako da kreira identičnu kopiju
+objekta tipa “StudentMaster” nad kojim je pozvana, dok implementacija metode “IspisiPodatke” u
+ovoj klasi treba da ispisuje podatke o studentu u sljedećem obliku:
+
+Student master studija <ime> <prezime>, sa brojem indeksa <indeks>,
+zavrsio bachelor studij godine <godina>, ima prosjek <prosjek>.
+
+Na kraju, treba napisati i kratki testni program u kojem će se testirati sve funkcionalnosti klasa
+“StudentBachelor” i “StudentMaster”.
