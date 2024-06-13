@@ -1,0 +1,38 @@
+Napraviti klasu “Fakultet” koja treba da čuva polimorfnu kolekciju podataka izvedenih iz bazne
+klase “ApstraktniStudent” razvijene u zadatku "problem-28" (to mogu biti klase “StudentBachelor” i
+“StudentMaster” iz prethodnog zadatka, ali također može biti i bilo koja druga novonapisana klasa
+izvedena iz klase “ApstraktniStudent”). Podaci se trebaju čuvati u dinamički alociranim objektima
+čije se adrese čuvaju u vektoru (običnih) pokazivača na objekte nekog od tipova izvedenih iz tipa
+“ApstraktniStudent”, i taj vektor treba biti jedini atribut ove klase, s privatnim pravom pristupa.
+Primjerci klase “Fakultet” moraju se moći kreirati ne navodeći nikakve dopunske informacije. Dalje,
+klasa treba imati destruktor koji oslobađa sve resurse koje su objekti tipa “Fakultet” zauzeli tokom
+svog života, zatim kopirajući konstruktor i kopirajući operator dodjele koji omogućavaju da se
+objekti tipa “Fakultet” mogu bezbijedno kopirati i međusobno dodjeljivati korištenjem strategije
+dubokog kopiranja, te pomjerajući konstruktor i pomjerajući operator dodjele koji optimiziraju
+postupak kopiranja za slučaj kada su u igri privremeni objekti, ili objekti koji su pripremljeni za
+preuzimanje njihovih resursa uz pomoć funkcije “move”. Treba predvidjeti dvije metode istog imena
+“UpisiStudenta” koje služe za upis novog studenta, od kojih jedna ima tri, a druga četiri parametra.
+Metoda sa tri parametra upisuje studenta bachelor studija, pri čemu su parametri broj indeksa, ime
+i prezime, dok metoda sa četiri parametra upisuje studenta master studija, pri čemu četvrti dodatni
+parametar predstavlja godinu kada je student završio bachelor studij. Obje metode trebaju bacti
+izuzetak tipa “logic_error” uz prateći tekst “Student sa zadanim brojem indeksa vec postoji” ukoliko
+student sa zadanim brojem indeksa već postoji. Njoj je suprotna metoda “ObrisiStudenta” koja briše
+studenta sa brojem indeksa koji se zadaje kao parametar. U slučaju da student sa zadanim brojem
+indeksa ne postoji, treba baciti izuzetak tipa “logic_error” uz prateći tekst “Student sa zadanim
+brojem indeksa ne postoji”. Predviđen je i preklopljeni operator “[]” koji vraća referencu na
+studenta sa zadanim brojem indeksa (ukoliko takav ne postoji, treba baciti se isti izuzetak kao u
+prethodnom slučaju). Pri tome, ako se ovaj operator primijeni na konstantni objekat tipa “Fakultet”,
+treba vratiti referencu na konstantni objekat, da se onemogući njegova izmjena. Zahvaljujući ovom
+operatoru, trebaju biti moguće manipulacije nad studentima pohranjenim u kolekciji, bez potrebe
+da za tu svrhu dodajemo nove metode. Recimo, ako je “etf” neki objekat tipa “Fakultet”, trebaju biti
+moguće konstrukcije poput
+
+etf[14922].RegistrirajIspit(8);
+
+Konačno, treba podržati i metodu “IspisiSveStudente” koja ispisuje spisak svih studenata sa
+pripadnim podacima (pozivom metode “IspisiPodatke” za svakog studenta), sortiran u opadajućem
+poretku po prosječnoj ocjeni (tj. student sa najvećom prosječnom ocjenom se ispisuje prvi). Ukoliko
+dva studenta imaju isti prosjek, treba prije da se ispiše onaj sa manjim brojem indeksa. Ova metoda
+treba obavezno da se može primijeniti i nad konstantnim objektima tipa “Fakultet”, kao i sve ostale
+metode koje po svojoj prirodi ne mijenjaju vidljivo stanje objekta. Na kraju, treba napisati i testni
+program u kojem će se demonstrirati svi elementi razvijene klase.
