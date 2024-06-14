@@ -112,6 +112,8 @@ public:
     void IspisiSveStudente() const;
 };
 
+// TODO: implement sve metode klase Fakultet, + nadjiStudenta()
+
 template <typename TipIzuzetka, typename FunkcijskiTip>
 void TestirajIzuzetak(FunkcijskiTip akcija) {
     try { akcija(); }
