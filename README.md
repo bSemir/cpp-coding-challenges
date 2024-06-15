@@ -26,3 +26,4 @@ OOP:
 - destructors
 - operator overloading
 - method overriding
+- inheritance
