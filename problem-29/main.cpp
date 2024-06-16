@@ -112,7 +112,21 @@ public:
     void IspisiSveStudente() const;
 };
 
-// TODO: implement sve metode klase Fakultet, + nadjiStudenta()
+// copy constructor
+Fakultet::Fakultet(const Fakultet &f) : studenti(f.studenti.size()) {
+    try {
+        for(int i = 0; i < f.studenti.size(); i++)
+            studenti[i] = f.studenti[i]->DajKopiju();
+    } catch(...) {
+        for(int i = 0; i < studenti.size(); i++) delete studenti[i];
+        throw;
+    }
+}
+
+// destructor
+Fakultet::~Fakultet() {
+    for(int i = 0; i < studenti.size(); i++) delete studenti[i];
+}
 
 template <typename TipIzuzetka, typename FunkcijskiTip>
 void TestirajIzuzetak(FunkcijskiTip akcija) {
