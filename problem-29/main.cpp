@@ -86,8 +86,9 @@ public:
 class Fakultet {
 private:
     std::vector<ApstraktniStudent*> studenti;
+    int nadjiStudenta(int indeks, bool treba_postojati) const;
 public:
-    Fakultet() {}
+    Fakultet() {} // default
 
     ~Fakultet();
 
@@ -95,7 +96,7 @@ public:
 
     Fakultet(Fakultet &&f) = default;
 
-    Fakultet &operator =(const Fakultet &f);
+    Fakultet &operator =(Fakultet f);
 
     Fakultet &operator =(Fakultet &&f);
 
@@ -126,6 +127,26 @@ Fakultet::Fakultet(const Fakultet &f) : studenti(f.studenti.size()) {
 // destructor
 Fakultet::~Fakultet() {
     for(int i = 0; i < studenti.size(); i++) delete studenti[i];
+}
+
+// copy assignment operator
+Fakultet &Fakultet::operator =(Fakultet f) {
+    if (this == &f) return *this;
+    std::swap(studenti, f.studenti);
+    return *this;
+}
+
+int Fakultet::nadjiStudenta(int indeks, bool treba_postojati) const {
+    auto it = std::find_if(studenti.begin(), studenti.end(), [indeks](ApstraktniStudent *s) { return s->DajBrojIndeksa() == indeks; });
+    if (treba_postojati && it == studenti.end())
+        throw std::logic_error("Student sa zadanim brojem indeksa ne postoji");
+    return it - studenti.begin();
+}
+
+void Fakultet::UpisiStudenta(std::string ime, std::string prezime, int indeks) {
+    if (nadjiStudenta(indeks, false) != studenti.size())
+        throw std::logic_error("Student sa zadanim brojem indeksa vec postoji");
+    studenti.push_back(new StudentBachelor(ime, prezime, indeks));
 }
 
 template <typename TipIzuzetka, typename FunkcijskiTip>
