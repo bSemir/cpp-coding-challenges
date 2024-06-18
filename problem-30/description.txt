@@ -1,0 +1,98 @@
+Za lakše praćenje stanja dionica na nekoj berzi, potrebno je definirati i implementirati klasu
+nazvanu “Berza”. Ova klasa omogućava čuvanje dnevnih informacija o tekućoj cijeni dionica za
+izvjesni vremenski period u vektoru cijelih brojeva, kojem se pristupa preko odgovarajućeg
+privatnog atributa (cijene se zadaju u feninzima, tako da se mogu iskazati kao cijeli broj).
+Interfejs klase sadrži sljedeće elemente:
+
+ Konstruktor sa dva parametra koji predstavljaju minimalnu i maksimalnu cijenu koja se može
+registrirati, te konstruktor sa jednim parametrom koji je maksimalna cijena koja se može
+registrirati (minimalna cijena se tada postavlja na nulu). Ovi parametri moraju biti pozitivni, u
+suprotnom treba baciti izuzetak tipa “range_error” uz prateći tekst “Ilegalne granicne cijene”.
+Konstruktor sa jednim parametrom ne smije se koristiti za automatsku konverziju cjelobrojnih
+podataka u objekte tipa “Berza”.
+
+ Metodu “RegistrirajCijenu” koja vrši registraciju nove cijene dionice zadane putem
+parametra. U slučaju da je cijena manja ili veća od minimalne odnosno maksimalne dozvoljene
+cijene, treba baciti izuzetak tipa “range_error” uz prateći tekst “Ilegalna cijena”.
+
+ Metodu “DajBrojRegistriranihCijena” koja daje broj registriranih cijena.
+
+ Metodu “BrisiSve” koja briše sve unesene cijene.
+
+ Metode “DajMinimalnuCijenu” i “DajMaksimalnuCijenu” koje vraćaju kao rezultat minimalnu i
+maksimalnu registriranu cijenu (u slučaju da nema registriranih cijena, obje metode treba da
+bace izuzetak tipa “range_error” uz prateći tekst “Nema registriranih cijena”). Za realizaciju nije
+dozvoljeno koristiti petlje, nego isključivo odgovarajuće funkcije iz biblioteke “algorithm”.
+
+ Unarni operator “!” koji primijenjen na objekat daje logičku vrijednost “tačno” ukoliko nema
+niti jedne registrirane cijene, u suprotnom daje logičku vrijednost “netačno”.
+
+ Metodu “DajBrojCijenaVecihOd” koja vraća kao rezultat broj cijena većih od vrijednosti koja se
+zadaje kao parametar (u slučaju da nema registriranih cijena, metode treba da bace izuzetak
+tipa “range_error” uz prateći tekst “Nema registriranih cijena”). Za realizaciju nije dozvoljeno
+koristiti petlje, niti lambda funkcije ili pomoćne imenovane funkcije kriterija, nego isključivo
+samo odgovarajuće funkcije i/ili funktore iz biblioteka “algorithm” i “functional”. Napomena:
+Ovdje ćete morati koristiti veznike, a na njihovu upotrebu treba se navići. Prvo probajte riješiti
+problem uz pomoć lambda funkcija. Kada Vam funkcija proradi, probajte istu funkcionalnost
+postići pomoću jednostavnijih ali zastarjelih veznika “bind1st” ili “bind2st” (koji su, usput, u
+verziji C++17 potpuno odbačeni), kao međukorak da bolje steknete osjećaj šta se zaista dešava.
+Kada Vam i to proradi, zamijenite zastarjele veznike sa boljim i univerzalnijim veznikom “bind”
+(zastarjele verzije veznika nemojte ostavljati u završnoj verziji).
+
+ Metodu “Ispisi” koja ispisuje sve unesene (registrirane) cijene sortirane u opadajućem poretku
+(tj. najveća cijena se ispisuje prva), pri čemu se svaka cijena ispisuje u posebnom redu. Cijene
+treba ispisivati u KM (ne u feninzima), pri čemu se uvijek prikazuju dvije decimale. Pri tome je
+neophodno koristiti funkcije i/ili funktore iz biblioteka “algorithm” i “functional”. Upotreba
+petlji, lambda funkcija ili pomoćnih imenovanih funkcija nije dozvoljena, ali je dozvoljeno
+koristiti i komponente iz nekih drugih biblioteka ukoliko smatrate da vam je to potrebno za
+realizaciju (od koristi će Vam biti i neke stvari rađene na Predavanju 7_b). Ova funkcija
+obavezno treba biti inspektor funkcija, tj. treba biti deklarirana s modifikatorom “const”!
+
+ Preklopljeni operator “[]” koji omogućava da se direktno pročita 𝑖-ta registrirana cijena
+(numeracija ide od jedinice). Ukoliko je indeks izvan dozvoljenog opsega, treba baciti izuzetak
+tipa “range_error” uz prateći tekst “Neispravan indeks”. Pri tome, ovaj operator se ne može
+koristiti za izmjenu podataka, odnosno ne može se koristiti sa lijeve strane znaka jednakosti.
+
+ Preklopljene operatore “++” i “−−” koji povećavaju odnosno smanjuju sve registrirane cijene za
+1 KM. U slučaju da pri tome neka od cijena premaši maksimalno dozvoljenu vrijednost ili
+podbaci minimalno dozvoljenu vrijednost, baca se izuzetak tipa “range_error” uz prateći tekst
+“Prekoracen dozvoljeni opseg cijena”. Potrebno je podržati kako prefiksnu, tako i postfiksnu
+verziju ovih operatora. Za realizaciju nije dozvoljeno koristiti petlje, niti lambda funkcije ili
+pomoćne imenovane funkcije, nego isključivo odgovarajuće funkcije i/ili funktore iz biblioteka
+“algorithm” i “functional” (vrijede iste napomene kao i ranije).
+
+ Preklopljeni unarni operator “-” koji daje kao rezultat novi objekat tipa “Berza” u kojem su sve
+cijene oduzete od zbira maksimalno i minimalno dozvoljene cijene (ovim sve cijene i dalje
+sigurno ostaju u dozvoljenom opsegu). Za realizaciju nije dozvoljeno koristiti petlje, niti
+lambda funkcije ili pomoćne imenovane funkcije, nego isključivo odgovarajuće funkcije i/ili
+funktore iz biblioteka “algorithm” i “functional” (vrijede iste napomene kao i ranije).
+
+ Preklopljene operatore “+” i “-” koji djeluju na sljedeći način. Ukoliko je “X” objekat tipa “Berza”,
+a “Y” cijeli broj, tada je “X + Y” je novi objekat tipa “Berza” u kojem su sve registrirane cijene
+povećane za iznos “Y”. Slično, “X - Y” je novi objekat tipa “Berza” u kojem su sve registrirane
+cijene umanjene za iznos “Y”. Pri istim tipovima operanada “X” i “Y”, izraz “Y + X” treba da ima
+isto značenje kao i izraz “X + Y”, dok izraz “Y - X” predstavlja novi objekat u kojem su sve
+registrirane cijene oduzete od vrijednosti “Y”. Ukoliko se kao rezultat ovih operacija dogodi da
+neka od cijena izađe izvan dozvoljenog opsega, treba baciti izuzetak tipa “domain_error” uz
+prateći tekst “Prekoracen dozvoljeni opseg cijena”. U slučaju kada su i “X” i “Y” objekti tipa
+“Berza”, tada je izraz “X - Y” novi objekat tipa “Berza” koji sadrži razlike odgovarajućih cijena iz
+objekata “X” i “Y”. U ovom posljednjem slučaju se podrazumijeva da “X” i “Y” sadrže isti broj
+registriranih cijena, te da imaju iste minimalne i maksimalne dozvoljene cijene (u suprotnom,
+treba baciti izuzetak tipa “domain_error” uz prateći tekst “Nesaglasni operandi”). Ukoliko pri
+tome bilo koja od razlika izađe izvan dozvoljenog opsega cijena, treba baciti isti izuzetak kao i u
+prethodnim slučajevima. U svim ostalim situacijama, izrazi “X + Y” odnosno “X - Y” ne trebaju
+biti sintaksno ispravni. Za realizaciju koristiti isključivo prikladne funkcije i/ili funktore iz
+biblioteka “algorithm” i “functional” (vrijede iste napomene kao i ranije).
+
+ Preklopljene operatore “+=” i “-=” čiji je cilj da značenje izraza oblika “X += Y” odnosno
+“X –= Y” bude identično značenju izraza “X = X + Y” i “X = X - Y” kad god oni imaju smisla.
+
+ Preklopljene relacione operatore “==” i “!=” koje ispituju da li su dva objekta tipa “Berza”
+jednaka ili nisu. Dva objekta ovog tipa smatraju se jednakim ukoliko sadrže isti broj
+registriranih cijena, i ukoliko su sve odgovarajuće registrirane cijene u oba objekta jednake. Za
+realizaciju ovih operatora koristite isključivo odgovarajuće funkcije i/ili funktore iz biblioteka
+“algorithm” i “functional” (vrijede iste napomene kao i ranije).
+
+Sve metode implementirajte izvan klase, osim metoda čija je implementacija vrlo kratka. Metode
+koje su po prirodi inspektori obavezno treba deklarirati kao takve. Obavezno napišite i mali
+testni program u kojem će se testirati sve elemente napisane klase.
