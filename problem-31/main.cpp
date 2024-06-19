@@ -20,6 +20,28 @@ public:
     }
 };
 
+class Sanduk : public Spremnik {
+    int broj_predmeta;
+    double tezina_predmeta;
+public:
+    Sanduk(double tezina, const char sadrzaj[], int broj_predmeta, double tezina_predmeta) : Spremnik("Sanduk", tezina, sadrzaj), broj_predmeta(broj_predmeta), tezina_predmeta(tezina_predmeta) {}
+    virtual double DajUkupnuTezinu() const override {
+        return DajTezinu() + broj_predmeta * tezina_predmeta;
+    }
+    Spremnik *DajKopiju() const override { return new Sanduk(*this); } // moze bez virtual.. redundant
+};
+
+class Bure : public Spremnik {
+private:
+    double tezina_tecnosti;
+public:
+    Bure(double tezina, const char sadrzaj[], double tezina_tecnosti) : Spremnik("Bure", tezina, sadrzaj), tezina_tecnosti(tezina_tecnosti) {}
+    virtual double DajUkupnuTezinu() const override {
+        return DajTezinu() + tezina_tecnosti;
+    }
+    virtual Spremnik *DajKopiju() const override { return new Bure(*this); }
+};
+
 int main() {
     std::cout << "Hello, World!" << std::endl;
     return 0;
