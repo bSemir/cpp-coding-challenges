@@ -42,6 +42,29 @@ public:
     virtual Spremnik *DajKopiju() const override { return new Bure(*this); }
 };
 
+class Skladiste {
+private:
+    int broj_spremnika;
+    int kapacitet;
+    Spremnik **spremnici;
+public:
+    explicit Skladiste(int kapacitet) : broj_spremnika(0), kapacitet(kapacitet), spremnici(new Spremnik *[kapacitet]{}) {}
+    ~Skladiste();
+    Skladiste(const Skladiste &s);
+    Skladiste(Skladiste &&s);
+    Skladiste &operator=(Skladiste s);
+//    Skladiste &operator=(Skladiste &&s);
+    void DodajSanduk(double tezina, const char sadrzaj[], int broj_predmeta, double tezina_predmeta);
+    void DodajBure(double tezina, const char sadrzaj[], double tezina_tecnosti);
+    Spremnik &DajNajlaksi();
+    const Spremnik &DajNajlaksi() const;
+    Spremnik &DajNajtezi();
+    const Spremnik &DajNajtezi() const;
+    int BrojPreteskih(double granica) const;
+    void IzlistajSkladiste(std::ostream &izlas = std::cout) const;
+    void UcitajPodatke(const char ime[]);
+//    void Dealociraj();
+};
 int main() {
     std::cout << "Hello, World!" << std::endl;
     return 0;
