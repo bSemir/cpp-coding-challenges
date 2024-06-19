@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <fstream>
 
 class Spremnik {
 private:
@@ -90,7 +91,7 @@ public:
 
     int BrojPreteskih(double granica) const;
 
-    void IzlistajSkladiste(std::ostream &izlas = std::cout) const;
+    void IzlistajSkladiste(std::ostream &izlaz = std::cout) const;
 
     void UcitajPodatke(const char ime[]);
 //    void Dealociraj();
@@ -160,6 +161,52 @@ void Skladiste::DodajBure(double tezina, const char *sadrzaj, double tezina_tecn
     if (broj_spremnika == kapacitet)
         throw std::domain_error("Popunjeno skladiste");
     spremnici[broj_spremnika++] = new Bure(tezina, sadrzaj, tezina_tecnosti);
+}
+
+Spremnik &Skladiste::DajNajlaksi() {
+    if (broj_spremnika == 0) throw std::range_error("Skladiste je prazno");
+    // notice double dereferencing!
+    return **std::min_element(spremnici, spremnici + broj_spremnika, [](Spremnik *s1, Spremnik *s2) {
+        return s1->DajTezinu() < s2->DajTezinu();
+    });
+}
+
+const Spremnik &Skladiste::DajNajlaksi() const {
+    if (broj_spremnika == 0) throw std::range_error("Skladiste je prazno");
+    return **std::min_element(spremnici, spremnici + broj_spremnika, [](Spremnik *s1, Spremnik *s2) {
+        return s1->DajTezinu() < s2->DajTezinu();
+    });
+}
+
+Spremnik &Skladiste::DajNajtezi() {
+    if (broj_spremnika == 0) throw std::range_error("Skladiste je prazno");
+    return **std::max_element(spremnici, spremnici + broj_spremnika, [](Spremnik *s1, Spremnik *s2) {
+        return s1->DajTezinu() < s2->DajTezinu();
+    });
+}
+
+const Spremnik &Skladiste::DajNajtezi() const {
+    if (broj_spremnika == 0) throw std::range_error("Skladiste je prazno");
+    return **std::max_element(spremnici, spremnici + broj_spremnika, [](Spremnik *s1, Spremnik *s2) {
+        return s1->DajTezinu() < s2->DajTezinu();
+    });
+}
+
+int Skladiste::BrojPreteskih(double granica) const {
+    return std::count_if(spremnici, spremnici + broj_spremnika, [granica](Spremnik *spr) {
+        return spr->DajUkupnuTezinu() > granica;
+    });
+}
+
+void Skladiste::IzlistajSkladiste(std::ostream &izlaz) const {
+    Spremnik **novi_spremnik = new Spremnik *[broj_spremnika];
+    std::copy(spremnici, spremnici + broj_spremnika, novi_spremnik);
+    std::sort(novi_spremnik, novi_spremnik + broj_spremnika, [](Spremnik *s1, Spremnik *s2) {
+        return s1->DajUkupnuTezinu() > s2->DajUkupnuTezinu();
+    });
+    for (int i = 0; i < broj_spremnika; i++)
+        novi_spremnik[i]->Ispisi(izlaz);
+    delete[] novi_spremnik;
 }
 
 
