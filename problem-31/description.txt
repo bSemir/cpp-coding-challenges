@@ -1,0 +1,73 @@
+Za vođenje evidencije podataka o robi u nekom skladištu potrebno je razviti kontejnersku klasu
+nazvanu “Skladiste”. U skladištu se roba nalazi pohranjena u sanducima (za čvrste predmete) i u
+buradima (za tečnosti). Sanduci i burad se modeliraju pomoću klasa “Sanduk” odnosno “Bure”. Sanduk
+je opisan svojom težinom, nazivom predmeta koji se u njemu čuvaju (pretpostavlja se da jedan
+sanduk čuva samo istovrsne predmete), brojem predmeta koji se u njemu čuvaju i težinom predmeta
+koji se u njemu čuvaju (svi su iste težine). Bure je opisano svojom težinom, nazivom tečnosti koja
+se u njemu čuva, te težinom tečnosti koja se u njemu čuva. Informacijama o robi pohranjenoj u
+skladištu pristupa se pomoću dinamički alociranog niza pokazivača koji pokazuju na objekte tipa
+“Sanduk” ili tipa “Bure”. Tom nizu pokazivača se pristupa preko nekog od atributa pohranjenog
+unutar klase “Skladiste”. Konstruktor klase “Sanduk” kao parametre zahtijeva težinu (realan broj),
+naziv predmeta koji se čuvaju (konstantni niz znakova), broj predmeta koji se u njemu čuvaju
+(cijeli broj) i težina predmeta koji se u njemu čuvaju (realan broj), dok konstruktor klase “Bure”
+prima kao parametre težinu (realan broj), naziv tečnosti koja se čuva (konstantni niz znakova), te
+težinu tečnosti (realan broj). Pored konstruktora, obje klase “Sanduk” i “Bure” podržavaju metode
+“DajTezinu”, “DajUkupnuTezinu” i “Ispisi”. Prva metoda (bez parametara) daje težinu vlastitu težinu
+sanduka ili bureta (bez onoga što je u njima), druga radi istu stvar, samo uračunava u obzir i težinu
+onoga što se nalazi u sanduku ili buretu, dok metoda “Ispisi” ispisuje podatke o sanduku ili buretu
+na tok koji se zadaje kao parametar (ili ekran ako se parametar izostavi) u formatu poput sljedećeg:
+
+Vrsta spremnika: Bure
+Sadrzaj: Trofazni kataklingeri
+Vlastita tezina: 10 kg
+Ukupna tezina: 45 kg
+
+Interfejs klase “Skladiste” treba sadržavati sljedeće elemente:
+
+ Konstruktor sa jednim parametrom koji predstavlja maksimalnu količinu objekata (sanduka
+odnosno buradi) koji se mogu pohraniti u skladištu. Ovaj konstruktor se ne smije koristiti za
+automatsku pretvorbu cijelih brojeva u objekte tipa “Skladiste”.
+
+ Destruktor, koji oslobađa svu memoriju koji su objekti tipa “Skladiste” zauzeli tokom svog života.
+
+ Kopirajući konstruktor i preklopljeni kopirajući operator dodjele koji omogućavaju bezbjedno
+kopiranje i međusobno dodjeljivanje objekata tipa “Skladiste” zasnovano na strategiji dubokog
+kopiranja. Treba također predvidjeti i njihove optimizirane verzije za slučaj kopiranja privremenih
+objekata, odnosno objekata kojima je “istekao rok upotrebe”.
+
+ Metode “DodajSanduk” odnosno “DodajBure” koje kreiraju novi objekat tipa “Sanduk” odnosno
+“Bure” i pohranjuju ga u skladište. Parametri ovih metoda isti su kao i parametri konstruktora
+objekata tipa “Sanduk” odnosno “Bure”. Ukoliko je skladište već popunjeno, treba baciti izuzetak
+tipa “domain_error” uz prateći tekst “Popunjeno skladiste”.
+
+ Metode “DajNajlaksi” odnosno “DajNajtezi” koje vraćaju reference na najlakši odnosno najteži
+objekat (bure ili sanduk) u skladištu, ne računajući ono što je pohranjeno u tom objektu. Ove
+metode ne smiju omogućiti posrednu izmjenu konstantnih objekata tipa “Skladiste”. Ukoliko je
+skladište prazno, treba baciti izuzetak tipa “range_error” uz prateći tekst “Skladiste je prazno”.
+
+ Metodu “BrojPreteskih” koja vraća broj objekata u skladištu čija je ukupna težina (tj. vlastita
+težina zajedno sa težinom onoga što se u njima nalazi) veća od iznosa koji se zadaje putem
+cjelobrojnog parametra. Metoda se mora moći pozvati i nad konstantnim objektom.
+
+ Metodu “IzlistajSkladiste” koja ispisuje spisak svega što se nalazi u skladištu na izlazni tok koji
+se zadaje kao parametar (odnosno ekran ukoliko se parametar ne zada), sortiran u opadajući
+poredak po ukupnoj težini. Ispis se vrši pozivom metode “Ispisi”, bez ikakvih praznih redova
+između objekata. Metoda se mora moći pozvati i nad konstantnim objektom.
+
+ Metodu “UcitajIzDatoteke” koja čita podatke o robi iz tekstualne datoteke čije se ime zadaje kao
+parametar (tipa “string”) i smješta robu u skladište (podaci o robi koja već možda postoji u
+skladištu se brišu). Svaki objekat opisan je s dva reda u datoteci. U prvom redu se nalazi početno
+slovo “S” (za sanduk) ili “B” (za bure) iza kojeg nakon jednog razmaka slijedi naziv predmeta ili
+tečnosti koji su pohranjeni u sanduku odnosno buretu (npr. “S Tepsije” ili “B Maslinovo ulje”). U
+drugom redu se za slučaj sanduka nalazi težina sanduka, broj predmeta i težina svakog od njih,
+razdvojeno po jednim razmakom (npr. “1.2 50 0.35”) dok se za slučaj bureta nalazi težina bureta i
+težina tečnosti (npr. “0.8 16.5”). Ukoliko tražena datoteka ne postoji, treba baciti izuzetak tipa
+“logic_error” uz prateći tekst “Trazena datoteka ne postoji”. Isti izuzetak, ali uz prateći tekst
+“Datoteka sadrzi besmislene podatke” treba baciti ukoliko podaci u datoteci nisu u skladu sa
+specifikacijama. U slučaju bilo kakvih drugih problema pri čitanju (osim pokušaja čitanja iza kraja
+datoteke), treba također baciti isti izuzetak, uz prateći tekst “Problemi pri citanju datoteke”.
+
+Razvijene klase potrebno je demonstrirati u testnom programu koji iščitava podatke iz tekstualne
+datoteke sa imenom “ROBA.TXT”, a nakon toga ispisuje spisak svega što se nalazi u skladištu, sortiran
+u opadajući poredak po ukupnoj težini. U testnom programu obavezno treba predviditi i hvatanje
+eventualno bačenih izuzetaka koji se mogu pojaviti.
