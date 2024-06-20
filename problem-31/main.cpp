@@ -209,8 +209,55 @@ void Skladiste::IzlistajSkladiste(std::ostream &izlaz) const {
     delete[] novi_spremnik;
 }
 
+void Skladiste::UcitajPodatke(const char ime[]) {
+    // ### format datoteke ###
+    /*
+    S Tepsije
+    1.2 50 0.35
+    B Maslinovo ulje
+    0.8 16.5
+    */
+    for (int i = 0; i < broj_spremnika; i++) delete spremnici[i];
+    broj_spremnika = 0;
+    std::ifstream ulaz(ime);
+    if (!ulaz) throw std::logic_error("Trazena datoteka ne postoji");
+    std::logic_error greska("Datoteka sadrzi besmislene podatke"); // we'll use it quite often
+
+    std::string tekst;
+    // read line by line
+    while (std::getline(ulaz, tekst)) { // read line and store it in tekst
+        if (tekst.length() < 3 || tekst[1] != ' ')
+            throw greska; // check if line is valid (at least 3 characters and space at 2nd position)
+        std::string sadrzaj = tekst.substr(2, tekst.length() - 2); // get content of the line
+        if (tekst[0] == 'S') {
+            double tezina;
+            double tezina_predmeta;
+            int broj_predmeta;
+            ulaz >> tezina >> broj_predmeta >> tezina_predmeta; //k read values from the line and store them in variables
+            if (ulaz.bad()) break;
+            if (!ulaz) throw greska;
+            DodajSanduk(tezina, sadrzaj.c_str(), 1, tezina_predmeta); // c_str() returns const char*
+        } else if (tekst[0] == 'B') {
+            double tezina;
+            double tezina_tecnosti;
+            ulaz >> tezina >> tezina_tecnosti;
+            if (ulaz.bad()) break;
+            if (!ulaz) throw greska;
+            DodajBure(tezina, sadrzaj.c_str(), tezina_tecnosti);
+        } else throw greska;
+        ulaz >> std::ws; // skip whitespace
+    }
+    if (!ulaz.eof()) throw std::logic_error("Problemi pri citanju datoteke");
+}
+
 
 int main() {
-    std::cout << "Hello, World!" << std::endl;
+    Skladiste s(100);
+    try {
+        s.UcitajPodatke("skladiste.txt");
+        s.IzlistajSkladiste();
+    } catch (std::exception &e) {
+        std::cout << e.what() << std::endl;
+    }
     return 0;
 }
