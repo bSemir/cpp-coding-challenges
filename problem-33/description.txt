@@ -1,0 +1,12 @@
+Napisati generičku klasu "Skup" koja oponaša najosnovnije funkcionalnosti bibliotečnog tipa "set"
+putem svog jedinog privatnog atributa koji je tipa "vector". Potrebno je podržati konstruktor bez
+parametara koji kreira prazan skup te sekvencijski konstruktor koji prihvata listu inicijalizatora i
+na osnovu nje popunjava atribut-vektor u sortiranom poretku, uz izostavljanje duplikata. Od metoda
+treba podržati metodu "Velicina" koja vraća broj elemenata skupa, zatim "Dodaj" koja u skup dodaje
+novi element proslijeđen kao parametar, vodeći računa da elementi u vektoru ostanu sortirani, te
+metodu "Izbrisi" koja uklanja element proslijeđen kao parametar (vektor treba ostati sortiran). U
+slučaju da element već postoji u skupu, metoda "Dodaj" ne treba uraditi ništa, što je u skladu sa
+ponašanjem metode "insert" tipa "set". Isto vrijedi i za metodu "Izbrisi" u slučaju da element nije
+pronađen. Konačno, treba implementirati i metodu "ImaLiGa" koja testira da li se element zadan kao
+parametar nalazi u skupu ili ne (ona vraća odgovarajuću logičku vrijednost kao rezultat), te metodu
+"Ispisi" koja ispisuje sve elemente skupa na ekran (naravno, u sortiranom poretku).
