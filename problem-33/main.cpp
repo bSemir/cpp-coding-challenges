@@ -45,7 +45,9 @@ public:
     }
 
     bool ImaLiGa(T element) const {
-        return std::find(elementi.begin(), elementi.end(), element) != elementi.end();
+        return std::binary_search(elementi.begin(), elementi.end(), element);
+        // return std::find(elementi.begin(), elementi.end(), element) != elementi.end();
+        // NOTE: npr za n = 1000000 binarna pretraga je 50000 puta brza od find jer je O(log n) naspram O(n)
     }
 
     void Ispisi() const {
