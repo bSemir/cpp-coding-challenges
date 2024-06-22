@@ -1,0 +1,19 @@
+Napisati generičku klasu "Mapa" koja oponaša najosnovnije funkcionalnosti bibliotečnog tipa "map"
+putem svog jedinog privatnog atributa koji je tipa "vector<pair<string, T>>" gdje je "T" neki
+neodređeni tip (metatip) koji će se kasnije zadavati prilikom kreiranja konkretnih instanci
+generičke klase "Mapa". Tip ključa mape je fiksiran na tip "string". Potrebno je podržati konstruktor
+bez parametara koji kreira praznu mapu te sekvencijski konstruktor koji prihvata listu inicijalizatora
+čiji su elementi uređeni parovi i na osnovu nje popunjava atribut-vektor u sortiranom poretku, uz
+izostavljanje duplikata. Tačnije, ukoliko u listi inicijalizatora ima više parova sa istom prvom
+koordinatom, uzima se u obzir samo onaj posljednji, pošto ključ mora biti jedinstven (tako isto radi
+i bibilotečki tip "map"). Od metoda treba podržati metodu "DajVelicinu" koja vraća broj elemenata
+mape, zatim "DodajPar" koja u mapu dodaje novi par kljuc/vrijednost proslijeđen kao parametar
+tipa "pair<string, T>", vodeći računa da elementi u vektoru ostanu sortirani (po ključu), te metodu
+"IzbrisiElement" koja uklanja element s ključem proslijeđenim kao parametar (vektor treba ostati
+sortiran). U slučaju da element sa proslijeđenim ključem već postoji u mapi, metoda "DodajPar"
+treba da izmijeni vrijednost pod tim ključem, što je u skladu sa ponašanjem metode "insert" tipa
+"map". Metoda "IzbrisiElement" ne treba raditi ništa u slučaju da element sa proslijeđenim ključem
+nije pronađen. Konačno, treba podržati i metodu "NadjiElement" koja vraća “const” referencu na
+vrijednost pridruženu ključu koji se zadaje kao parametar (referencom se izbjegava kopiranje
+masivnih objekata), ili baca izuzetak ukoliko se ključ ne pronađe, te metodu "IspisiMapu" koja
+ispisuje sve elemente mape na ekran, u obliku ključ/vrijednost (naravno, u sortiranom poretku).
