@@ -2,6 +2,7 @@
 #include <vector>
 #include <string>
 #include <utility>
+#include <algorithm>
 
 template<typename T>
 class Mapa {
@@ -43,13 +44,12 @@ public:
     }
 
     void IzbrisiElement(const std::string &kljuc) {
-        for (auto it = elementi.begin(); it != elementi.end(); it++) {
-            if (it->first == kljuc) {
-                elementi.erase(it);
-                std::sort(elementi.begin(), elementi.end());
-                break;
-            }
-        }
+        auto it = std::lower_bound(elementi.begin(), elementi.end(), std::make_pair(kljuc,
+                                                                                    T())); // koristimo make_pair kao treci argument jer je potrebno da se proslijedi objekat istog tipa kao i elementi u vektoru
+        if (it != elementi.end() && it->first == kljuc)
+            elementi.erase(it);
+        if (it != elementi.begin() && (it - 1)->first == kljuc) // ako je kljuc na prethodnom mjestu
+            elementi.erase(it - 1);
     }
 
     const T &NadjiElement(const std::string &k) const {
