@@ -1,0 +1,17 @@
+Dizajnirati i implementirati vlastitu generičku klasu "Stek" koja se ponaša vrlo slično kao i bibliotečki
+tip "stack", samo što će se njene metode umjesto “push”, “top”, “pop”, “size” i “empty” respektivno zvati
+“DodajNaVrh” (dodaje novi element na vrh steka), “DajVrh” (daje referencu ili “const” referencu na
+element na vrhu steka, ovisno da li je pozvana nad nekonstantnim ili konstantnim objektom tipa
+“Stek”), “SkiniSVrha” (uklanja element sa vrha steka), “DajVelicinu” (daje broj elemenata na steku)
+i “DaLiJePrazan” (daje informaciju da li je stek prazan ili ne). Elemente reda treba čuvati u
+dinamički alociranom nizu, kojem se pristupa preko nekog privatnog atributa ove klase. Pri tome,
+da bi se izbjegle stalne realokacije prilikom dodavanja novih elemenata (čime broj elemenata
+raste), treba dopustiti da alocirani prostor (kapacitet) bude i veći od broja elemenata u steku. Time
+realokacije očito neće biti potrebne sve dok broj elemenata ne dostigne kapacitet. Kada se to
+dogodi, potrebno je kapacitet povećati za 50% tekućeg kapaciteta i izvršiti realokaciju, nakon čega
+postaje moguće dodavanje novih elemenata bez realokacija sve do novog dostizanja kapaciteta
+(sličan trik koristi bibliotečki tip “vector” da izbjegne da svaki poziv funkcije “push_back” mora
+obavljati realokaciju). Također, da se ne bi suvišno čuvalo previše prostora nakon što se ukloni
+mnogo elemenata sa steka, kada broj elemenata u steku padne ispod 30 % tekućeg kapaciteta, treba
+obaviti realokaciju, uz smanjenje kapaciteta na 50% tekućeg kapaciteta (dakle, treba ipak ostaviti i
+nešto “viška” alociranog prostora), osim ako je tekući kapacitet manji od 10.
