@@ -59,8 +59,8 @@ void Sanduk::Ispisi() const {
     std::cout << "Vrsta spremnika: Sanduk\n";
     std::cout << "Sadrzaj: " << naziv_sadrzaja << std::endl;
     std::cout << "Tezine predmeta: ";
-    for (int i = 0; i < tezine_predmeta.size(); i++)
-        std::cout << tezine_predmeta.at(i) << " ";
+    for (double i: tezine_predmeta)
+        std::cout << i << " ";
     std::cout << "(kg)" << std::endl;
     std::cout << "Vlastita tezina: " << tezina << " (kg)" << std::endl;
     std::cout << "Ukupna tezina: " << this->DajUkupnuTezinu() << " (kg)"
@@ -148,11 +148,11 @@ public:
 
     Skladiste(const Skladiste &s);
 
-    Skladiste(Skladiste &&s);
+    Skladiste(Skladiste &&s) noexcept;
 
     Skladiste &operator=(const Skladiste &s);
 
-    Skladiste &operator=(Skladiste &&s);
+    Skladiste &operator=(Skladiste &&s) noexcept;
 
     ~Skladiste();
 
@@ -195,7 +195,7 @@ Skladiste::Skladiste(const Skladiste &s) {
     }
 }
 
-Skladiste::Skladiste(Skladiste &&s) : spremnici(s.spremnici) {
+Skladiste::Skladiste(Skladiste &&s) noexcept: spremnici(s.spremnici) {
     s.spremnici.resize(0);
 }
 
@@ -212,7 +212,7 @@ Skladiste &Skladiste::operator=(const Skladiste &s) {
     return *this;
 }
 
-Skladiste &Skladiste::operator=(Skladiste &&s) {
+Skladiste &Skladiste::operator=(Skladiste &&s) noexcept {
     if (this == &s)
         return *this;
     std::swap(spremnici, s.spremnici);
@@ -279,7 +279,7 @@ Spremnik &Skladiste::DajNajlaksi() {
 }
 
 Spremnik &Skladiste::DajNajtezi() {
-    if (spremnici.size() == 0)
+    if (spremnici.empty())
         throw std::range_error("Skladiste je prazno");
     return **std::max_element(
             spremnici.begin(), spremnici.end(),
@@ -375,4 +375,35 @@ void Skladiste::UcitajIzDatoteke(std::string ime_datoteke) {
         throw std::logic_error("Problemi pri citanju datoteke");
 }
 
-int main() { return 0; }
+int main() {
+    Skladiste ETF;
+    ETF.DodajSanduk(55, "Voce", {1, 3, 5, 6});
+    ETF.DodajVrecu(0.1, "Brasno", 25.5);
+    ETF.DodajBure(5, "Krv", 1300, 150);
+    ETF.IzlistajSkladiste();
+    Skladiste ETF1(ETF);
+
+    Skladiste ETF2;
+    ETF2 = ETF1;
+    ETF2.IzlistajSkladiste();
+    Spremnik &najtezi_spremnik = ETF2.DajNajtezi();
+    std::cout << "Tezina najtezeg (ETF2): " << najtezi_spremnik.DajTezinu() << std::endl;
+    Spremnik &najlaksi_spremnik = ETF2.DajNajlaksi();
+    std::cout << "Tezina najlakseg (ETF2): " << najlaksi_spremnik.DajTezinu() << std::endl;
+    std::cout << "Ukupno preteskih: " << ETF.BrojPreteskih(40) << std::endl;
+
+    Skladiste ETF3(std::move(ETF2));
+    std::cout << "\nNakon premjestanja ETF2 u ETF3 i brisanja najtezeg spremnika: " << std::endl;
+    ETF3.BrisiSpremnik(&najtezi_spremnik);
+    ETF3.IzlistajSkladiste();
+
+    // testiranje rada s datotekom
+    //   try {
+    //     Skladiste ETF;
+    //     ETF.UcitajIzDatoteke("ROBA.TXT");
+    //     ETF.IzlistajSkladiste();
+    //   } catch (std::logic_error err) {
+    //     std::cout << "Izuzetak: " << err.what() << std::endl;
+    //   }
+    return 0;
+}
