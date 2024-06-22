@@ -1,0 +1,110 @@
+Za vođenje evidencije podataka o robi u nekom skladištu potrebno je razviti kontejnersku klasu
+nazvanu “Skladiste”. U skladištu se roba nalazi pohranjena u sanducima (za čvrste predmete), u
+vrećama (za praškaste materije) i u buradima (za tečnosti). Sanduci, vreće i burad se modeliraju
+redom pomoću klasa “Sanduk”, “Vreca” odnosno “Bure”. Sanduk je opisan svojom težinom u
+kilogramima (realni broj), nazivom predmeta koji se u njemu čuvaju (tipa “string”), pri čemu se
+pretpostavlja se da jedan sanduk čuva samo istovrsne predmete), te težinama predmeta koji se u
+njemu čuvaju, također u kilogramima (ovi podaci se čuvaju u vektoru realnih brojeva, pri čemu
+svaki od elemenata vektora odgovara jednom predmetu). Vreća je također opisana svojom težinom
+(u kilogramima), nazivom praškaste materije koji se u njoj čuva, te težinom pohranjene praškaste
+materije. Bure je opisano svojom težinom, nazivom tečnosti koja se u njemu čuva, specifičnom
+težinom (gustinom) tečnosti u kilogramima po metru kubnom (realan broj), te zapreminom
+pohranjene tečnosti koja se u njemu čuva. Informacijama o robi pohranjenoj u skladištu pristupa se
+pomoću vektora pametnih pokazivača koji pokazuju na objekte tipa “Sanduk”, “Vreca” ili “Bure” (za
+tu svrhu, sve ove klase moraju biti izvedene iz neke apstraktne bazne klase, koju ćete nazvati
+“Spremnik”). Tom nizu pokazivača se pristupa preko nekog od atributa pohranjenog unutar klase
+“Skladiste”. Konstruktor klase “Sanduk” kao parametre zahtijeva težinu, naziv predmeta koji se
+čuvaju, te vektor težina predmeta koji se u njemu čuvaju. Konstruktor klase “Vreca” prima kao
+parametre težinu vreće, naziv pohranjene materije, te težinu pohranjene materije, dok konstruktor
+klase “Bure” prima kao parametre težinu, naziv tečnosti koja se čuva, specifičnu težinu tečnosti, te
+zapreminu pohranjene tečnosti. Atribute koji su zajednički za sanduke, vreće i burad (težina i naziv
+pohranjenog sadržaja) treba čuvati u baznoj klasi, dok izvedene klase čuvaju samo atribute
+specifične za datu vrstu objekta. U baznoj klasi također trebaju biti i metode “DajTezinu”,
+“DajUkupnuTezinu” i “Ispisi” bez parmetara. Prva metoda daje težinu vlastitu težinu sanduka, vreće
+ili bureta (bez onoga što je u njima), druga radi istu stvar, samo uračunava u obzir i težinu onoga
+što se nalazi u sanduku ili buretu, dok metoda “Ispisi” ispisuje podatke o sanduku ili buretu u
+obliku poput sljedećeg:
+
+Vrsta spremnika: Sanduk
+Sadrzaj: Trofazni kataklingeri za auspuhe
+Tezine predmeta: 2 3 1 2 2 4 3 1 3 (kg)
+Vlastita tezina: 10 (kg)
+Ukupna tezina: 31 (kg)
+
+Vrsta spremnika: Vreca
+Sadrzaj: Praskaste cincozne za glajfanje
+Vlastita tezina: 0.2 (kg)
+Tezina pohranjene materije: 5 (kg)
+Ukupna tezina: 5.2 (kg)
+
+Vrsta spremnika: Bure
+Sadrzaj: Rafinirana kalamuta iz Katange
+Vlastita tezina: 5 (kg)
+Specificna tezina tecnosti: 1300 (kg/m^3)
+Zapremina tecnosti: 150 (l)
+Ukupna tezina: 200 (kg)
+
+Razumije se da će metode “DajUkupnuTezinu” i “Ispisi” morati biti apstraktne, s obzirom da u
+baznoj klasi nema dovoljno informacija koje omogućavaju njihovu implementaciju
+
+Što se tiče klase “Skladiste”, primjerci ove klase treba da se mogu kreirati ne navodeći nikakve
+dodatne specifikacije. Pri tome, potrebno je podržati da se prilikom kopiranja ili međusobnog
+dodjeljivanja primjeraka ove klase kreiraju potpune (duboke) a ne plitke kopije. Ovo kopiranje
+mora da korektno radi i ukoliko se u budućnosti pojavi neki novi tip spremnika osim sanduka,
+vreća i buradi (s obzirom da se radi o polimorfnoj kolekciji objekata, za tu svrhu će biti potrebno
+dodati odgovarajuću podršku i u ostale klase).
+
+Za manipulaciju sa podacima u skladištu predviđeno je nekoliko metoda. Na prvom mjestu, metode
+“DodajSanduk”, “DodajVrecu” odnosno “DodajBure” kreiraju novi objekat tipa “Sanduk”, “Vreca”
+odnosno “Bure” i pohranjuju ga u skladište. Parametri ovih metoda isti su kao i parametri
+konstruktora objekata tipa “Sanduk”, “Vreca” odnosno “Bure”. Sve ove tri metode kao rezultat
+vraćaju adresu novokreiranog objekta u formi (običnog) pokazivača čiji je statički tip pokazivač na
+“Spremnik” (ova povratna vrijednost će se obično ignorirati, ali vidjećemo uskoro gdje ova povratna
+vrijednost može biti bitna). Predviđena je i univerznalna metoda za dodavanje sa dva parametra
+nazvana “DodajSpremnik”, koja može dodavati objekte bilo kojeg tipa izvedenog iz bazne klase
+“Spremnik”. Prvi parametar je pokazivač na objekat koji želimo dodati, dok je drugi parametar
+logička vrijednost koja određuje da li se objekat predaje u vlasništvo klasi ili ne. Ukoliko ovaj
+parametar ima vrijednost “true”, pretpostavlja se da je onaj ko poziva ovu metodu kreirao
+dinamički ovaj objekat i ne želi se više brinuti o njemu, nego brigu o njemu prepušta kontejnerskoj
+klasi (tačnije, pametnim pokazivačima koji se u njoj nalaze). S druge strane, ukoliko ovaj parametar
+ima vrijednost “false”, objekat čiju adresu šaljemo u funkciju ne mora uopće biti dinamički
+alociran, a i ukoliko jeste, o njegovom brisanju se treba brinuti onaj ko je pozvao funkciju. U tom
+slučaju (s obzirom da kolekcija svakako mora čuvati dinamički alocirane objekte), treba kreirati
+dinamičku kopiju tog objekta koja se pohranjuje u kolekciju umjesto samog objekta. Funkcija kao
+rezultat vraća adresu pohranjenog objekta, što ovisno o slučaju može biti ista adresa koja je poslana
+kao parametar, ili adresa kreirane dinamičke kopije. Metoda “BrisiSpremnik” omogućava brisanje
+nekog od objekata koji su već pohranjeni u skladištu. Parametar ove funkcije je adresa objekta koji
+se briše, i to je zapravo ista adresa koju vraćaju funkcije poput “DodajSanduk”. Slijedi da ako želimo
+imati mogućnost da brišemo neki objekat (npr. sanduk), moramo negdje sačuvati adresu koja je
+vraćena prilikom kreiranja objekta, jer je taj objekat moguće izbrisati jedino navodeći tu adresu (s
+obzirom da ne postoji nikakav drugi identifikator koji bi mogao jednoznačno identificirati taj
+objekat). Metode “DajNajlaksi” odnosno “DajNajtezi” vraćaju reference na najlakši odnosno
+najteži objekat (sanduk, vreća ili bure) u skladištu, ne računajući ono što je pohranjeno u tom
+objektu. Ove metode se ne smiju moći pozvati nad konstantnim objektima tipa “Skladiste”. U
+slučaju da je skladište prazno, treba baciti izuzetak tipa “range_error” uz prateći tekst “Skladiste je
+prazno”. Metoda “BrojPreteskih” vraća broj objekata u skladištu čija je ukupna težina (tj. vlastita
+težina zajedno sa težinom onoga što se u njima nalazi) veća od iznosa koji se zadaje putem
+cjelobrojnog parametra. Ova metoda se mora moći pozvati i nad konstantnim objektom.
+Predviđena je i metoda “IzlistajSkladiste” koja ispisuje spisak svega što se nalazi u skladištu,
+sortiran u opadajući poredak po ukupnoj težini. Ispis se vrši pozivom metode “Ispisi”, bez ikakvih
+praznih redova između objekata. Metoda se mora moći pozvati i nad konstantnim objektom.
+Konačno, treba implementirati i metodu “UcitajIzDatoteke” koja čita podatke o robi iz tekstualne
+datoteke čije se ime zadaje kao parametar i smješta robu u skladište (u slučaju da u skladištu već
+ima unesene robe, postojeći podaci se brišu). Svaki objekat opisan je sa dva reda u datoteci. U
+prvom redu se nalazi početno slovo “S”, “V” ili “B” (za sanduk, vreću odnosno za bure) iza kojeg
+nakon jednog razmaka slijedi naziv predmeta, praškaste materije ili tečnosti koje su pohranjene
+u sanduku, vreći odnosno buretu (npr. “S Tepsije”, “V Brasno” ili “B Suncokretovo ulje”). U drugom
+redu se za slučaj sanduka nalazi težina sanduka, broj predmeta i težina svakog od njih,
+razdvojeno po jednim razmakom (npr. “10 9 2 3 1 2 2 4 3 1 3”), za slučaj vreće tu su težina vreće i
+težina pohranjene materije (npr. “0.2 5”) dok se za slučaj bureta nalazi težina bureta, te
+specifična težina i zapremina tečnosti (npr. “5 1300 150”). Ukoliko tražena datoteka ne postoji,
+treba baciti izuzetak tipa “logic_error” uz prateći tekst “Trazena datoteka ne postoji”. Isti
+izuzetak, ali uz prateći tekst “Datoteka sadrzi besmislene podatke” treba baciti ukoliko podaci u
+datoteci nisu u skladu sa specifikacijama. U slučaju bilo kakvih drugih problema pri čitanju (osim
+pokušaja čitanja iza kraja datoteke), treba također baciti isti izuzetak, uz prateći tekst “Problemi
+pri citanju datoteke”.
+
+Razvijene klase demonstrirajte u testnom programu koji iščitava podatke iz tekstualne datoteke
+sa imenom “ROBA.TXT”, a nakon toga ispisuje spisak svega što se nalazi u skladištu, sortiran u
+opadajući poredak po ukupnoj težini. U testnom programu obavezno predvidite i hvatanje
+eventualno bačenih izuzetaka koji se mogu pojaviti.
