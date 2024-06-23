@@ -1,0 +1,52 @@
+Data je tekstualna datoteka “TEMPERATURE.TXT” (kreirana pomoću nekog tekstualnog editora, recimo
+NotePad-a), koja sadrži rezultate mjerenja temperature u nekoj meteorološkoj stanici. Datoteka je
+organizirana na sljedeći način. U prvom redu nalazi se datum kada je obavljeno mjerenje, u formatu
+dan/mjesec/godina (npr. 5/12/2014). U drugom redu nalazi se komentar, koji može biti proizvoljan
+tekst (to može biti npr. naziv mjernog mjesta, ili nešto drugo). U trećem redu nalaze se rezultati
+mjerenja temperature za taj dan (mjerenja se vrše nekoliko puta dnevno), koji su međusobno
+razdvojeni zarezima (iza posljednjeg rezultata nema zareza). Dalje se podaci ponavljaju za svaki od
+dana za koji su registrirani rezultati mjerenja. Slijedi primjer mogućeg izgleda ove datoteke:
+
+23/5/2016
+Meteoroloska stanica Bjelave
+7,12,16,20,18,13,6
+9/11/2014
+Mobilno mjerno mjesto Aerodrom, stanica II
+−1,3,6,10,8
+9/11/2014
+Meteoroloska opservatorija Bjelasnica
+−5,−2,0,3,1,2,−1,−4
+
+Napisati program koji iščitava sadržaj ove tekstualne datoteke i kreira drugu tekstualnu datoteku
+“IZVJESTAJ.TXT” koja sadrži izvještaj o mjerenjima koji izgleda poput sljedećeg, pri čemu se prosječna
+temperatura ispisuje fiksno na dvije decimale:
+
+Meteoroloska opservatorija Bjelasnica
+-------------------------------------
+Datum mjerenja: 9/11/2014
+Minimalna temperatura: −5
+Maksimalna temperatura: 3
+Prosjecna temperatura: -0.75
+Mobilno mjerno mjesto Aerodrom, stanica II
+------------------------------------------
+Datum mjerenja: 9/11/2014
+Minimalna temperatura: -1
+Maksimalna temperatura: 10
+Prosjecna temperatura: 5.20
+Meteoroloska stanica Bjelave
+----------------------------
+Datum mjerenja: 23/5/2016
+Minimalna temperatura: 6
+Maksimalna temperatura: 20
+Prosjecna temperatura: 13.14
+
+Spisak treba biti sortiran po datumu mjerenja, kao što je gore prikazano. U slučaju da su za dvije
+grupe mjerenja datumi isti, podaci za grupu sa manjom prosječnom temperaturom trebaju doći
+prije podataka za grupu sa većom prosječnom temperaturom. Pretpostaviti da ulazna datoteka
+sadrži samo ispravne podatke, u ispravnom formatu (uključujući i ispravan format datuma). U
+slučaju da čitanje datoteke protekne korektno, program ne ispisuje ništa na ekran. S druge strane,
+ukoliko datoteka ne postoji, na ekran treba ispisati tekst “Datoteka TEMPERATURE.TXT ne postoji!”
+(sa prelaskom u novi red nakon ispisa), a ukoliko prilikom njenog čitanja dođe do bilo kakvih drugih
+problema osim čitanja iza kraja datoteke (poput fizičkog oštećenja, nailaska na nenumeričke
+podatke prilikom čitanja numeričkih podataka, itd.) na ekran treba ispisati tekst “Problemi pri
+citanju datoteke TEMPERATURE.TXT” (također uz prelazak u novi red).
