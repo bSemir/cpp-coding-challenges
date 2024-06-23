@@ -3,6 +3,8 @@
 #include <cstring>
 #include <stdexcept>
 #include <algorithm>
+#include <fstream>
+
 
 class Tim {
 private:
@@ -98,6 +100,11 @@ public:
 
     void IspisiTabelu() const;
 
+    void ObrisiSve();
+
+    void SacuvajStanje(const std::string &ime_datoteke) const;
+
+    void AzurirajIzDatoteke(const std::string &ime_datoteke);
 };
 
 void Liga::dealociraj() {
@@ -217,6 +224,53 @@ void Liga::IspisiTabelu() const {
     delete[] kopija_timova; // delete the copy
 }
 
+void Liga::ObrisiSve() {
+    for (int i = 0; i < broj_timova; i++) delete timovi[i];
+    broj_timova = 0;
+}
+
+void Liga::SacuvajStanje(const std::string &ime_datoteke) const {
+    // write to a binary file
+    std::ofstream out(ime_datoteke, std::ios::binary);
+//    if (!out) throw std::logic_error("Problemi pri upisu u datoteku");
+    out.write(reinterpret_cast<const char *>(this), sizeof *this);
+    for (int i = 0; i < broj_timova; i++) {
+        out.write(reinterpret_cast<const char *>(timovi[i]), sizeof(Tim)); // sizeof(Tim) is the size of the pointer
+    }
+    if (!out) throw std::logic_error("Problemi pri upisu u datoteku");
+}
+
+void Liga::AzurirajIzDatoteke(const std::string &ime_datoteke) {
+    // read from txt file
+    std::ifstream in(ime_datoteke);
+    // the file content is in the following format:
+    // first_team_name
+    // second_team_name
+    // 3 2
+
+    if (!in) throw std::logic_error("Datoteka ne postoji");
+    // sadrzaj se "nadodaje" na postojecu ligu
+    while (!in.eof()) {
+        char prvi_tim[21], drugi_tim[21];
+        int golovi_prvog, golovi_drugog;
+        in.getline(prvi_tim, 21);
+//        std::cout << "prvi tim: " << prvi_tim << "\n";
+        in.getline(drugi_tim, 21);
+//        std::cout << "drugi tim: " << drugi_tim << "\n";
+        in >> golovi_prvog >> golovi_drugog;
+//        std::cout << "golovi prvog: " << golovi_prvog << " golovi drugog: " << golovi_drugog << "\n";
+        in.ignore(10000, '\n');
+
+        try {
+            RegistrirajUtakmicu(prvi_tim, drugi_tim, golovi_prvog, golovi_drugog);
+        } catch (std::exception &e) {
+            std::cout << e.what() << std::endl;
+        }
+        in >> std::ws; // skip whitespace because getline doesn't skip it
+    }
+    if (!in.eof()) throw std::logic_error("Problemi pri citanju datoteke");
+}
+
 
 int main() {
     try {
@@ -240,6 +294,15 @@ int main() {
         std::cout << "\nAssignment operator: ";
         l = l3; // assignment operator
         std::cout << std::endl;
+        l.IspisiTabelu();
+
+        l.SacuvajStanje("LIGA.DAT");
+
+        std::cout << std::endl;
+
+        // ovi podaci nisu vezani za podatke iz binarne datoteke
+        std::cout << "Liga nakon ucitavanja podataka iz datoteke: \n";
+        l.AzurirajIzDatoteke("podaci_za_ligu.txt");
         l.IspisiTabelu();
     } catch (std::exception &e) {
         std::cout << e.what() << std::endl;
