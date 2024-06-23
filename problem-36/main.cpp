@@ -66,10 +66,20 @@ int main() {
         return a.prosjek < b.prosjek;
     });
 
-    std::cout << "Sortirana mjerenja: " << std::endl;
+    std::ofstream izlazni_tok("IZVJESTAJ.TXT");
+    if (!izlazni_tok) {
+        std::cout << "Greska prilikom otvaranja datoteke IZVJESTAJ.TXT" << std::endl;
+        return 1;
+    }
     for (const auto &item: mjerenja) {
-        std::cout << item.dan << "." << item.mjesec << "." << item.godina << " : " << item.komentar << " (min: "
-                  << item.min_t << ", max: " << item.max_t << ", prosjek: " << item.prosjek << ")" << std::endl;
+        izlazni_tok << item.komentar << std::endl << "-------------------------------------" << std::endl
+                    << "Datum mjerenja: "
+                    << item.dan
+                    << "." << item.mjesec << "." << item.godina << std::endl << "Minimalna temperatura: " << item.min_t
+                    << std::endl << "Maksimalna temperatura: " << item.max_t << std::endl << "Prosjecna temperatura: "
+                    << item.prosjek << std::endl << std::endl;
     }
     return 0;
 }
+
+// TODO: there is one Mjerenje object missing in the output file. Fix the bug.
