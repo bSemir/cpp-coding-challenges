@@ -40,11 +40,36 @@ int main() {
             broj_mjerenja++;
             if (temperatura < m.min_t) m.min_t = temperatura;
             if (temperatura > m.max_t) m.max_t = temperatura;
-            if (ulazni_tok.peek() != ',') break; // ako nije zarez, prekidamo petlju (kraj mjerenja)
+            if (ulazni_tok.peek() != ',')
+                break; // ako nakon procitane temperature nije zarez, prekidamo petlju (kraj mjerenja)
             ulazni_tok >> znak;
         }
         m.prosjek /= broj_mjerenja;
         mjerenja.push_back(m);
+    }
+    std::cout << "Ukupno mjerenja: " << mjerenja.size() << std::endl;
+    std::cout << "Mjerenja: " << std::endl;
+    for (const auto &item: mjerenja) {
+        std::cout << item.dan << "." << item.mjesec << "." << item.godina << " : " << item.komentar << " (min: "
+                  << item.min_t << ", max: " << item.max_t << ", prosjek: " << item.prosjek << ")" << std::endl;
+    }
+    // provjera da li je kraj datoteke
+//    if (!ulazni_tok.eof()) {
+//        std::cout << "Greska prilikom citanja datoteke TEMPERATURE.TXT" << std::endl;
+//        return 1;
+//    }
+
+    std::sort(mjerenja.begin(), mjerenja.end(), [](const Mjerenje &a, const Mjerenje &b) {
+        if (a.godina != b.godina) return a.godina < b.godina;
+        if (a.mjesec != b.mjesec) return a.mjesec < b.mjesec;
+        if (a.dan != b.dan) return a.dan < b.dan;
+        return a.prosjek < b.prosjek;
+    });
+
+    std::cout << "Sortirana mjerenja: " << std::endl;
+    for (const auto &item: mjerenja) {
+        std::cout << item.dan << "." << item.mjesec << "." << item.godina << " : " << item.komentar << " (min: "
+                  << item.min_t << ", max: " << item.max_t << ", prosjek: " << item.prosjek << ")" << std::endl;
     }
     return 0;
 }
