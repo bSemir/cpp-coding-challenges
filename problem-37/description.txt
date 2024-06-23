@@ -1,0 +1,39 @@
+Proširiti klasu “Liga” koja je razvijena u "problem-20" sljedećim dopunskim elementima:
+
+ Metodom “ObrisiSve” koja briše kompletnu ligu, odnosno dovodi je u stanje kakvo je bilo nakon
+kreiranja objekta tipa “Liga”.
+
+ Metodom “SacuvajStanje” koja sprema cijelo stanje lige u binarnu datoteku, pri čemu se kao
+parametar zadaje ime datoteke (tipa “string”). U slučaju bilo kakvih problema pri upisu, metoda
+baca izuzetak tipa “logic_error” uz prateći tekst “Problemi pri upisu u datoteku”.
+
+ Metodom “AzurirajIzDatoteke” koja vrši ažuriranje stanja lige iz tekstualne datoteke čije se ime
+zadane kao parametar (tipa “string”). Datoteka je organizirana tako da za svaku utakmicu prva
+dva reda sadrže imena timova koji su odigrali utakmicu, nakon čega u trećem redu slijedi rezultat
+utakmice u obliku poput “3:2” sa značenjem “3 postignuta gola za prvi tim, a 2 postignuta gola za
+drugi tim”. Postojeći podaci u ligi se ne brišu, nego se samo stanje ažurira dodatnim informacijama.
+Ukoliko datoteka ne postoji, baca se izuzetak tipa “logic_error” uz prateći tekst “Datoteka ne
+postoji”, a u slučaju bilo kakvih problema pri čitanju, metoda baca izuzetak istog tipa uz prateći
+tekst “Problemi pri citanju datoteke” (uključujući i slučaj kada datoteka sadrži nekonzistentne
+podatke, poput nenumeričkih podataka gdje se očekuje broj, ili negativan broj golova, itd.).
+
+ Konstruktorom koji obnavlja stanje lige iz binarne datoteke čije je ime zadano kao parametar
+konstruktora (tipa “string”). Za datoteku se očekuje da je onakva kakva je kreirana pozivom
+metode “SacuvajStanje”. Ukoliko datoteka ne postoji, konstruktor baca izuzetak tipa “logic_error”
+uz prateći tekst “Datoteka ne postoji”, a u slučaju bilo kakvih problema pri čitanju, metoda baca
+izuzetak istog tipa uz prateći tekst “Problemi pri citanju datoteke”. Također, prije nego što se
+izvrši dinamička alokacija za podatke koji će biti obnovljeni, obavezno treba provjeriti da li je
+pročitana informacija o broju timova manja ili jednaka od kapaciteta lige. Ukoliko to nije slučaj
+(što se može desiti jedino ukoliko neko “podvali” neispravnu datoteku koja uopće nije krerirana
+pozivom metode “SacuvajStanje”), treba baciti izuzetak istog tipa uz prateći tekst “Datoteka
+sadrzi fatalne greske”. Ovo je neophodno uraditi, jer bi u suprotnom pokušaj obnove lige iz takve
+datoteke rezultirao krahom programa. Slično, ukoliko se detektira da je neko pokušao “podvaliti”
+datoteku lažnog sadržaja koja sadrži nekonzistentne podatke (npr. negativan broja golova),
+treba baciti izuzetak istog tipa uz prateći tekst “Datoteka sadrzi nekonzistentne podatke”.
+
+Nakon izvršene modifikacije, potrebno je izmijeniti i testni program tako da po završetku rada
+obavezno snima stanje lige u binarnu datoteku “LIGA.DAT”. Na početku rada programa, ukoliko
+datoteka “LIGA.DAT” postoji, program treba da obnovi sadržaj lige iz ove datoteke, tako da program
+prosto nastavlja raditi sa istom ligom i istim rezultatima sa kojima je radio prilikom prethodnog
+pokretanja. U slučaju da datoteka “LIGA.DAT” ne postoji, program treba da kreira novu ligu, onakvu
+kakva je bila i u testnom programu problema 20.
