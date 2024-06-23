@@ -127,4 +127,38 @@ Stek<T> &Stek<T>::operator=(Stek<T> &&s) noexcept {
 }
 
 
-int main() { return 0; }
+int main() {
+    Stek<int> s1;
+    for (int i = 0; i < 10; i++) s1.DodajNaVrh(i);
+    std::cout << "Dodano prvih 10 elemenata na stek: ";
+    s1.Ispisi();
+
+    s1.SkiniSaVrha();
+    std::cout << "Skidanje sa vrha: ";
+    s1.Ispisi();
+
+    std::cout << "Trenutni vrh steka: " << s1.DajVrh() << std::endl;
+
+    s1.SkiniSaVrha();
+    std::cout << "Broj elemenata nakon ponovnog skidanja s1 vrha: " << s1.DajVelicinu() << std::endl;
+
+    Stek<int> s2(s1);
+    std::cout << "Elementi s2 nakon upotrebe kopirajuceg konstruktora s1: ";
+    s2.Ispisi();
+
+    Stek<int> s3;
+    s3 = s2;
+    std::cout << "Elementi s3 nakon upotrebe kopirajuceg operatora dodjele s2: ";
+    s3.Ispisi();
+
+    Stek<int> s4(std::move(s3));
+    std::cout << "Elementi s4 nakon upotrebe pomjerajuceg konstruktora s3: ";
+    s4.Ispisi();
+
+    Stek<int> s5;
+    s5 = std::move(s4);
+    std::cout << "Elementi s5 nakon upotrebe pomjerajuceg operatora dodjele s4: ";
+    s5.Ispisi();
+
+    return 0;
+}
