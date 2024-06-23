@@ -1,0 +1,8 @@
+Data je neka binarna datoteka koja sadrži snimljen sadržaj nekog niza realnih brojeva (tipa “double”).
+Napisati funkciju “IzvrniDatoteku” koja kao parametar prima ime datoteke (tipa “string”), a koja
+izvrće sadržaj datoteke kao “u ogledalu” tako da njen prvi element postane posljednji, drugi
+pretposljednji, itd. Pri tome, sve se mora izvoditi direktno nad sadržajem datoteke, odnosno nije
+dozvoljeno prethodno učitavanje sadržaja datoteke u memoriju. U slučaju da datoteka ne postoji,
+treba baciti izuzetak tipa “logic_error” uz prateći tekst “Datoteka ne postoji”, a u slučaju bilo kakvih
+problema prilikom čitanja ili upisa, treba baciti isti izuzetak, uz prateći tekst “Problemi prilikom
+pristupa datoteci”. Obavezno napisati i testni program u kojem se demonstrira napisana funkcija.
