@@ -32,6 +32,19 @@ void izvrni_datoteku(const std::string &ime_datoteke) {
 }
 
 int main() {
-    std::cout << "Hello, World!" << std::endl;
+    std::fstream tok("brojevi.bin", std::ios::binary | std::ios::out);
+    double kvadrat;
+    for (int i = 1; i <= 7; i++) {
+        kvadrat = i * i;
+        tok.write(reinterpret_cast<char *>(&kvadrat), sizeof(double));
+    }
+    tok.close();
+    izvrni_datoteku("brojevi.bin");
+    tok.open("brojevi.bin", std::ios::binary | std::ios::in);
+
+    for (int i = 1; i <= 7; i++) {
+        tok.read(reinterpret_cast<char *>(&kvadrat), sizeof(double));
+        std::cout << kvadrat << std::endl;
+    }
     return 0;
 }
