@@ -1,7 +1,5 @@
 Napišite funkciju koja prihvata dva cijela broja (tipa “int”) 𝑝 i 𝑞 kao parametre, i koja vraća kao
 rezultat “tačno” ukoliko 𝑝 i 𝑞 sadrže makar jednu istu cifru, a u suprotnom vraća rezultat “netačno”.
 Na primjer, ukoliko je 𝑝 = 35148 i 𝑞 = 7386, funkcija treba da vrati “tačno”, jer 𝑝 i 𝑞 imaju cifre 3 i 8
-kao zajedničke, dok za 𝑝 = 3715 i 𝑞 = 82064 funkcija treba da vrati “netačno”, jer 𝑝 i 𝑞 nemaju ni
-jednu zajedničku cifru.
-Napisanu funkciju demonstrirajte u kratkom isječku programa na dva broja
-koji se unose putem tastature.
+kao zajedničke, dok za 𝑝 = 3715 i 𝑞 = 82064 funkcija treba da vrati “netačno”, jer 𝑝 i 𝑞 nemaju ni jednu zajedničku cifru.
+Napisanu funkciju demonstrirajte u kratkom isječku programa na dva broja koji se unose putem tastature.
