@@ -1,0 +1,38 @@
+Napišite baznu klasu “StedniRacun”, koja čuva stanje bankovnog računa nekog klijenta banke. Klasa
+je predviđena za nasljeđivanje, tako da treba računati da će iz nje eventualno biti naslijeđene druge
+klase i da će se koristiti polimorfno. Neke od funkcionalnosti, za koje će to biti naglašeno, eventualno
+mogu biti izmijenjene u klasama koje su iz nje naslijeđene, pri čemu ukoliko se primjerku izvedene
+klase bude pristupalo preko pokazivača ili reference na baznu klasu, te izmjene moraju biti vidljive.
+Klasa treba sadržavati atribute koji predstavljaju broj računa (cijeli broj), te stanje na računu (realni
+broj). Brojevi računa se dodjeljuju automatski, od 1001 nadalje, tako da prvi kreirani objekat tipa
+“StedniRacun” dobija broj 1001, sljedeći broj 1002, itd. (uglavnom, svaki novi objekat treba dobiti
+broj računa koji je za 1 veći od broja računa prethodno kreiranog objekta). Konstruktor klase treba
+primati jedan parametar koji je realni broj, a koji predstavlja početno stanje računa (broj računa se ne
+zadaje, nego se automatski kreira, na već opisani način). Ukoliko je zadano početno stanje računa
+negativno, ili ima više od dvije decimale (npr. 23.56142), treba baciti izuzetak. Izuzetak također
+treba baciti ukoliko je zadano početno stanje korektno, ali manje od 10 KM (nedovoljno za kreiranje
+računa). Ne smije postojati automatska konverzija realnih brojeva u objekte tipa “StedniRacun”.
+Dodijeljeni broj računa treba da se može saznati pomoću metode “DajBrojRacuna” bez parametara,
+za koju nije predviđeno da će se mijenjati u naslijeđenim klasama. Objekti tipa “StedniRacun” trebaju
+se moći kopirati, ali se prilikom kopiranja treba kopirati samo stanje računa, a ne i broj računa.
+Umjesto toga, kopija treba dobiti posve novi broj računa, kao i uvijek prilikom kreiranja novog
+objekta (što kopija zapravo i jeste). Isto tako, objekti tipa “StedniRacun” trebaju se moći međusobno
+dodjeljivati, ali se prilikom te dodjele treba kopirati samo informacija o stanju računa, dok odredišni
+objekat treba zadržati broj računa koji je i ranije posjedovao. Za manipulaciju s računom, predviđeni
+su operatori “*”. “+=”, “-=” i “*=”. Unarni operator “*” treba kao rezultat dati trenutno stanje računa.
+Operatori “+=” i “-=” namijenjeni su za ulaganje na račun, odnosno podizanje s računa. Prvi operand
+je račun, a drugi operand je iznos koji se ulaže odnosno podiže (realan broj). Oba operatora trebaju
+baciti izuzetak ukoliko je drugi operand negativan, ili ima više od dvije decimale. Također, operator
+“-=” treba baciti izuzetak ukoliko se pokuša podići veći iznos od raspoložive količine. Operator “*=”
+služi za obračun kamate, pri čemu je drugi parametar kamatna stopa u procentima (realan broj).
+Potrebno je baciti izuzetak ukoliko je zadana kamatna stopa negativna. Također, treba podržati i
+binarne operatore “+”, “-” i “*”, koji se od operatora “+=”, “-=” i “*=” razlikuju po tome što kao rezultat
+daju novi objekat tipa “StedniRacun” umjesto da samo modificiraju postojeći objekat (i vrate
+referencu na modificirani objekat kao rezultat). Za sve ove operatore predviđeno je da mogu biti
+modificirani u naslijeđenim klasama i da ta promjena mora biti vidljiva ukoliko se objektima
+pristupa polimorfno. Konačno, klasa “StedniRacun” mora podržavati i operator “<<” koji na izlazni
+tok zadan prvim operandom ispisuje informacije o računu koji je zadan kao drugi operand u formatu
+“Broj racuna: br_racuna Stanje: stanje”. Ovaj operator također treba biti u stanju uzeti u obzir
+izmjene eventualno izvršene u naslijeđenim klasama pri polimorfnoj upotrebi (to nećete moći izvesti
+bez jedne pomoćne funkcije koju ćete pozivati iz operatorske funkcije za podršku operatoru “<<”, koju
+možete staviti u privatni dio klase. 
