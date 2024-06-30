@@ -23,6 +23,13 @@ public:
         stanje_racuna = stanje;
     }
 
+    StedniRacun(const StedniRacun &r) {
+        broj_racuna = ++posljednji_br_racuna;
+        stanje_racuna = r.stanje_racuna;
+    }
+
+    virtual ~StedniRacun() {}
+
     int DajBrojRacuna() const {
         return broj_racuna;
     }
