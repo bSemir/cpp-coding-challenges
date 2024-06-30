@@ -63,6 +63,10 @@ public:
         stanje_racuna -= iznos;
         return *this;
     }
+
+    // TODO: *= operator
+
+    StedniRacun operator+(double iznos) { return StedniRacun(*this) += iznos; } // svodi se na operator +=
 };
 
 int StedniRacun::posljednji_br_racuna = 1000;
