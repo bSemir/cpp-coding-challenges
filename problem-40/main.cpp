@@ -33,6 +33,18 @@ public:
     int DajBrojRacuna() const {
         return broj_racuna;
     }
+
+    StedniRacun &operator=(const StedniRacun &r) {
+        if (this == &r)
+            return *this;
+        stanje_racuna = r.stanje_racuna;
+        // ne kopiramo broj racuna!
+        return *this;
+    }
+
+    virtual double operator*() const {
+        return stanje_racuna;
+    }
 };
 
 int StedniRacun::posljednji_br_racuna = 1000;
