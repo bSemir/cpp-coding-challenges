@@ -7,7 +7,7 @@ private:
     double stanje_racuna;
     static int posljednji_br_racuna;
 protected:
-    bool imaDvijeDecimale(double iznos) {
+    static bool imaDvijeDecimale(double iznos) {
         return (iznos * 100) == (int) (iznos * 100);
     }
 
@@ -44,6 +44,24 @@ public:
 
     virtual double operator*() const {
         return stanje_racuna;
+    }
+
+    virtual StedniRacun &operator+=(double iznos) {
+        if (iznos < 0 || !imaDvijeDecimale(iznos)) {
+            throw "Neispravan iznos";
+        }
+        stanje_racuna += iznos;
+        return *this;
+    }
+
+    virtual StedniRacun &operator-=(double iznos) {
+        if (iznos < 0 || !imaDvijeDecimale(iznos)) {
+            throw "Neispravan iznos";
+        }
+        if (iznos > stanje_racuna || stanje_racuna - iznos < 0)
+            throw std::logic_error("Nemate dovoljno sredstava na racunu");
+        stanje_racuna -= iznos;
+        return *this;
     }
 };
 
