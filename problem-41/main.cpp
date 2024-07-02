@@ -123,9 +123,36 @@ public:
         otvoren = false;
     }
 
-    friend std::ostream &operator<<(std::ostream &tok, const SigurniRacun &r) {
-        if (r.otvoren)
-            return tok << "PIN: " << r.pin << " Broj racuna: " << r.DajBrojRacuna() << ", Stanje: " << *r;
+    StedniRacun &operator+=(double iznos) override {
+        if (!otvoren)
+            throw "Racun nije otvoren";
+        return StedniRacun::operator+=(iznos); // pozivamo operator += iz bazne klase zato sto je on virtualan
+    }
+
+    StedniRacun &operator-=(double iznos) override {
+        if (!otvoren)
+            throw "Racun nije otvoren";
+        return StedniRacun::operator-=(iznos);
+    }
+
+    StedniRacun &operator*=(double kamata) override {
+        if (!otvoren)
+            throw "Racun nije otvoren";
+        return StedniRacun::operator*=(kamata);
+    }
+
+    double operator*() const override {
+        if (!otvoren)
+            throw "Racun nije otvoren";
+        return StedniRacun::operator*();
+    }
+
+    std::ostream &pomocna_za_ispis(std::ostream &tok) const override {
+        if (!otvoren)
+            throw "Racun nije otvoren";
+        return tok << "PIN: " << pin << " Broj racuna: " << DajBrojRacuna() << ", Stanje: " << StedniRacun::operator*()
+                   << std::endl;
+
     }
 };
 
