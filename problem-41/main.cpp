@@ -91,24 +91,59 @@ public:
 
 int StedniRacun::posljednji_br_racuna = 1000;
 
-// TODO: Implement inherited class SigurniRacun
+
+class SigurniRacun : public StedniRacun {
+private:
+    int pin;
+    mutable bool otvoren; // mutable jer se mijenja u const funkcijama
+
+    friend class Banka; // Banka ce moci pristupiti privatnim atributima klase SigurniRacun
+protected:
+    bool jeLiCetvorocifren(int broj) {
+        return broj >= 1000 && broj <= 9999;
+    }
+
+public:
+    SigurniRacun(double stanje, int pin) : StedniRacun(stanje) {
+        if (!jeLiCetvorocifren(pin))
+            throw "Neispravan PIN";
+        this->pin = pin; // koristimo this jer je ime parametra isto kao i ime atributa
+        otvoren = false;
+    }
+
+    void OtvoriRacun(int pin_) const {
+        if (this->pin != pin_)
+            throw "Neispravan PIN prilikom otvaranja racuna";
+        otvoren = true;
+    }
+
+    void ZatvoriRacun(int pin) const {
+        if (this->pin != pin)
+            throw "Neispravan PIN prilikom zatvaranja racuna";
+        otvoren = false;
+    }
+
+    friend std::ostream &operator<<(std::ostream &tok, const SigurniRacun &r) {
+        if (r.otvoren)
+            return tok << "PIN: " << r.pin << " Broj racuna: " << r.DajBrojRacuna() << ", Stanje: " << *r;
+    }
+};
 
 int main() {
     try {
-//        StedniRacun r1(10.5);
-        StedniRacun r2(10.55);
-        std::cout << "Broj racuna: " << r2.DajBrojRacuna() << std::endl; // 1001
-        std::cout << "Stanje racuna: " << *r2 << std::endl; // 10.55
-        r2 += 5.5;
-        std::cout << "Stanje racuna nakon dodavanja: " << *r2 << std::endl; // 16.05
-        r2 -= 10.5;
-        std::cout << "Stanje racuna nakon oduzimanja: " << *r2 << std::endl; // 5.55
-        r2 *= 10;
-        std::cout << "Stanje racuna nakon kamate: " << *r2 << std::endl; // 6.105
-//        StedniRacun r3 = r2 + 5.5;
-//        std::cout << "Stanje racuna nakon dodavanja: " << *r3 << std::endl; // 11.605
-//        StedniRacun r3(9.99);
-        std::cout << "Operator '<<': " << r2 << std::endl; // Broj racuna: 1001, Stanje: 6.105
+        StedniRacun r1(100);
+        StedniRacun r2(200);
+        r1 += 50;
+        r2 -= 100;
+        r1 *= 2;
+        std::cout << r1 << std::endl;
+        std::cout << r2 << std::endl;
+        SigurniRacun r3(300, 1234);
+        r3.OtvoriRacun(1234);
+        r3 += 100;
+        r3 *= 2;
+        std::cout << r3 << std::endl; // PIN: 1234 Broj racuna: 1003, Stanje: 800
+        r3.ZatvoriRacun(1234);
     } catch (const char *msg) {
         std::cout << "Izuzetak: " << msg << std::endl;
     }
