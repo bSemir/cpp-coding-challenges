@@ -1,0 +1,11 @@
+Napišite klasu “SigurniRacun” naslijeđenu iz klase “StedniRacun” razvijene u zadatku "problem-40".
+Njen konstruktor, pored početnog iznosa, treba zahtijevati i dodatni parametar, koji predstavlja PIN
+korisnika računa. PIN mora biti četverocifreni cijeli broj, inače treba baciti izuzetak. Osnovna razlika
+između ove klase i bazne klase “StedniRacun” je što se objekti tipa “SigurniRacun” prije bilo kakve
+transakcije moraju prethodno “otvoriti” pozivom metode “OtvoriRacun”. Parametar ove metode je
+PIN. Ukoliko se zadani PIN ne slaže s PIN-om koji je pohranjen u računu, otvaranje neće uspjeti, uz
+bacanje izuzetka. Bilo koja transakcija s računom osim poziva metode “DajBrojRacuna” treba baciti
+izuzetak u slučaju da račun nije prethodno otvoren. U suprotnom, sve transakcije trebaju raditi kao i
+za klasu “StedniRacun”. Treba predviditi i metodu “ZatvoriRacun”, koja ponovo “zatvara” račun i
+onemogućuje sve transakcije s njim sve do novog otvaranja. Konačno, operator “<<” u ovoj klasi
+treba ispisivati podatke u formi “PIN: PIN Broj racuna: br_racuna Stanje: stanje”.
