@@ -1,0 +1,41 @@
+Napišite klasu “Banka” koja omogućava čuvanje kolekcije objekata koji mogu biti tipa “StedniRacun”
+ili “SigurniRacun”. Ovi objekti će biti dinamički alocirani, a njihove adrese čuva dinamički alocirani
+niz pokazivača (kojem se pristupa preko pokazivača na njegov prvi element, koji je jedan od atributa
+klase). Inicijalno je predviđeno da “kapacitet” banke bude 100 računa. Međutim, ukoliko se dostigne
+trenutni kapacitet, treba povećati kapacitet za 100 (uz odgovarajuću realokaciju). To treba raditi
+kad god se dostigne trenutni kapacitet, tako da će broj računa koji se mogu čuvati biti ograničen
+jedino količinom raspoložive memorije. Objekti tipa “Banka” moraju se moći kopirati, uz optimizaciju
+kopiranja u slučaju da se kopiraju privremeni objekti tipa “Banka”, ali međusobnu dodjelu objekata tipa
+“Banka” treba zabraniti. Po završetku svog života, objekti tipa “Banka” moraju osloboditi sve resurse
+koje su zauzeli tokom života. Konstruktor klase “Banka” prima kao jedini parametar PIN upravitelja
+banke. Za kreiranje novog računa, treba predvidjeti dvije verzije metode nazvane “KreirajRacun”. Prva
+verzija kao parametar traži samo početni iznos. Ona kreira obični račun i registrira ga u banci. Druga
+verzija pored početnog iznoa zahtijeva i PIN, a ona kreira sigurni račun uz odgovarajuću registraciju.
+Za saznavanje da li je račun siguran ili ne, predviđena je statička metoda “DaLiJeSiguran” koja daje
+“tačno” ukoliko je račun na koji pokazuje parametar metode siguran, inače daje “netačno”. Metoda
+“ObrisiRacun” treba da obriše račun čiji je broj zadan kao parametar, ili da baci izuzetak ukoliko
+zadani broj računa ne postoji. Mjesto koje je zauzimao obrisani račun mora biti dostupno da se na
+njega može eventualno upisati novi račun koji se kreira. Sljedeća metoda koju treba podržati je
+“OtvoriRacun”. Ova metoda također treba imati dvije verzije. Prva prima samo jedan parametar, koji je
+broj računa i pomoću nje se može otvoriti samo obični račun. Ona otvara račun čiji je broj zadan kao
+parametar (tj. priprema ga za transakcije),uz bacanje izuzetka ukoliko traženi račun ne postoji, ili
+ukoliko se radi o sigurnom računu. Druga verzija prima dva parametra, od kojih je prvi broj računa, a
+drugi PIN. Ona može otvoriti bilo obični, bilo sigurni račun, pri čemu se sigurni račun može otvoriti
+samo ako je navedeni PIN jednak broju računa, ili PIN-u upravitelja banke (da podržite ovu
+univerzalnost PIN-a upravitelja banke, moraćete u klasi “SigurniRacun” dodati deklaraciju klase
+“Banka” kao prijateljske klase). Nakon otvaranja računa, sve transkakcije se izvode koristeći operatore
+“*”, “+=” i “-=”ali ovaj put s objektom tipa “Banka” kao prvim operandom. Pri tome se transakcije se
+izvode nad trenutno otvorenim računom. Račun treba ostati otvoren sve dok se ne pozove metoda
+“ZatvoriRacun” (bez parametara). Predviđena je i metoda “ObracunajKamate” koja kao parametre
+prima PIN i kamatnu stopu i koja vrši obračun kamate za sve račune, ali samo ukoliko je zadani PIN
+jednak PIN-u upravitelja banke (u suprotnom, treba baciti izuzetak zbog nedovoljnih privilegija).
+Objekti tipa “Banka” trebaju podržavati i operator “[]” koji daje referencu na račun čiji se broj navodi
+unutar uglastih zagrada, uz bacanje izuzetka ukoliko takav ne postoji (za slučaj konstantnih objekata
+tipa “Banka”, treba vratiti konstantnu referencu). Operator “<<” treba da ispiše podatke o svim
+računima u banci (svaki u novom redu) na tok zadan prvim parametrom. Konačno, treba podržati
+metodu “SacuvajUDatoteku” koja čuva podatke o svim računima u tekstualnoj datoteci čije se ime
+zadaje kao parametar (u prvom redu ide PIN upravitelja, a zatim svaki račun u posebnom redu, pri
+čemu se za obične račune piše samo stanje, a za sigurne račune i stanje i PIN koji su razdvojeni
+zarezom), te konstruktor koji kreira banku iz datoteke čije se ime zadaje kao parametar, a koja je
+organizirana u formatu kako je to sačuvala metoda “SacuvajUDatoteku”. U slučaju bilo kakvih problema
+pri radu s datotekom, treba baciti odgovarajući izuzetak.
