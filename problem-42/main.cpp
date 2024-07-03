@@ -246,6 +246,10 @@ public:
     }
 
     void ObracunajKamate(int pin, double kamatna_stopa);
+
+    StedniRacun &operator[](int broj_racuna) { return *racuni[nadjiRacun(broj_racuna)]; }
+
+    const StedniRacun &operator[](int broj_racuna) const { return *racuni[nadjiRacun(broj_racuna)]; }
 };
 
 int Banka::nadjiRacun(int broj_racuna) const {
@@ -319,7 +323,7 @@ void Banka::ObracunajKamate(int pin, double kamatna_stopa) {
     // petlja moze poremetiti status koji je racun eventualno bio otvoren prije poziva OtvoriRacun
     // pa cemo ga sacuvati i vratiti na staro
     auto pomocni = treutno_otvoreni;
-    for(int i = 0; i < broj_racuna; i++) {
+    for (int i = 0; i < broj_racuna; i++) {
         OtvoriRacun(racuni[i]->DajBrojRacuna(), pin);
         *treutno_otvoreni *= kamatna_stopa;
         ZatvoriRacun();
@@ -329,7 +333,7 @@ void Banka::ObracunajKamate(int pin, double kamatna_stopa) {
 }
 
 void Banka::ZatvoriRacun() {
-    if(treutno_otvoreni != nullptr && DaLiJeSiguran(treutno_otvoreni))
+    if (treutno_otvoreni != nullptr && DaLiJeSiguran(treutno_otvoreni))
         static_cast<SigurniRacun *>(treutno_otvoreni)->ZatvoriRacun(PIN_upravitelja);
     treutno_otvoreni = nullptr;
 }
