@@ -1,5 +1,6 @@
 #include <iostream>
 #include <stdexcept>
+#include <fstream>
 
 class StedniRacun {
 private:
@@ -250,6 +251,10 @@ public:
     StedniRacun &operator[](int broj_racuna) { return *racuni[nadjiRacun(broj_racuna)]; }
 
     const StedniRacun &operator[](int broj_racuna) const { return *racuni[nadjiRacun(broj_racuna)]; }
+
+    friend std::ostream &operator<<(std::ostream &tok, const Banka &b);
+
+    void SacuvajUDatoteku(std::string ime_datoteke);
 };
 
 int Banka::nadjiRacun(int broj_racuna) const {
@@ -336,6 +341,35 @@ void Banka::ZatvoriRacun() {
     if (treutno_otvoreni != nullptr && DaLiJeSiguran(treutno_otvoreni))
         static_cast<SigurniRacun *>(treutno_otvoreni)->ZatvoriRacun(PIN_upravitelja);
     treutno_otvoreni = nullptr;
+}
+
+// std::ostream &operator<<(std::ostream &tok, const Banka &b) {
+//    auto pomocni = b.treutno_otvoreni;
+//    for(int i = 0; i < b.broj_racuna; i++) {
+//        OtvoriRacun(b.racuni[i]->DajBrojRacuna(), b.PIN_upravitelja);
+//        tok << *b.treutno_otvoreni << std::endl;
+//        ZatvoriRacun();
+//    }
+//    b.treutno_otvoreni = pomocni;
+//    return tok;
+//}
+
+void Banka::SacuvajUDatoteku(std::string ime_datoteke) {
+    std::ofstream izlaz(ime_datoteke);
+    if (!izlaz)
+        throw std::logic_error("Datoteka se ne moze otvoriti");
+    izlaz << "PIN upravitelja: " << PIN_upravitelja << std::endl;
+    SigurniRacun *pomocni = dynamic_cast<SigurniRacun *>(treutno_otvoreni);
+    for (int i = 0; i < broj_racuna; i++) {
+        OtvoriRacun(racuni[i]->DajBrojRacuna(), PIN_upravitelja);
+        izlaz << *(*treutno_otvoreni);
+        if (DaLiJeSiguran(racuni[i]))
+            izlaz << "," << static_cast<SigurniRacun *>(racuni[i])->pin;
+        izlaz << std::endl;
+        ZatvoriRacun();
+    }
+    treutno_otvoreni = pomocni;
+//    izlaz.close();
 }
 
 int main() {
