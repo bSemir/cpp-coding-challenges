@@ -201,10 +201,7 @@ public:
 
     Banka &operator=(const Banka &b) = delete;
 
-    ~Banka() {
-        for (int i = 0; i < broj_racuna; i++) delete racuni[i];
-        delete[] racuni;
-    }
+    ~Banka() { dealociraj(); }
 
     void KreirajRacun(double stanje) {
         if (broj_racuna == kapacitet)
@@ -228,7 +225,7 @@ public:
 
     void OtvoriRacun(int broj_racuna, int pin_);
 
-    StedniRacun &operator +=(double iznos) {
+    StedniRacun &operator+=(double iznos) {
         return DajTrenutnoOtvoreni() += iznos;
 //         return *this += iznos;
     }
@@ -278,6 +275,23 @@ void Banka::OtvoriRacun(int broj_racuna, int pin_) {
 //        pin_ = sr->pin; // ako je upravitelj, onda moze otvoriti racun bez pina
     sr->OtvoriRacun(pin_);
     treutno_otvoreni = racuni[indeks];
+}
+
+void Banka::dealociraj() {
+    for (int i = 0; i < broj_racuna; i++) delete racuni[i];
+    delete[] racuni;
+
+}
+
+void Banka::realociraj() {
+    if (broj_racuna == kapacitet) {
+        kapacitet *= 2;
+        auto **novi_prostor = new StedniRacun *[kapacitet]{};
+        for (int i = 0; i < broj_racuna; i++) novi_prostor[i] = racuni[i];
+        // or std::copu(racuni, racuni + broj_racuna, novi_prostor);
+        delete[] racuni;
+        racuni = novi_prostor;
+    }
 }
 
 int main() {
