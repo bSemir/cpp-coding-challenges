@@ -185,10 +185,18 @@ public:
     }
 
     Banka(const Banka &b) : kapacitet(b.kapacitet), broj_racuna(b.broj_racuna), PIN_upravitelja(b.PIN_upravitelja),
-                            treutno_otvoreni(nullptr),
+                            treutno_otvoreni(b.treutno_otvoreni),
                             racuni(new StedniRacun *[kapacitet]{}) {
-        for (int i = 0; i < broj_racuna; i++) {
-            racuni[i] = new StedniRacun(*b.racuni[i]);
+        try {
+            for (int i = 0; i < broj_racuna; i++) {
+                if(DaLiJeSiguran(b.racuni[i]))
+                    racuni[i] = new SigurniRacun(*static_cast<SigurniRacun *>(b.racuni[i])); // vrsimo downcast zato sto je b.racuni[i] tipa StedniRacun
+                else
+                    racuni[i] = new StedniRacun(*b.racuni[i]);
+            }
+        } catch (...) {
+            dealociraj();
+            throw;
         }
     }
 
