@@ -189,8 +189,9 @@ public:
                             racuni(new StedniRacun *[kapacitet]{}) {
         try {
             for (int i = 0; i < broj_racuna; i++) {
-                if(DaLiJeSiguran(b.racuni[i]))
-                    racuni[i] = new SigurniRacun(*static_cast<SigurniRacun *>(b.racuni[i])); // vrsimo downcast zato sto je b.racuni[i] tipa StedniRacun
+                if (DaLiJeSiguran(b.racuni[i]))
+                    racuni[i] = new SigurniRacun(
+                            *static_cast<SigurniRacun *>(b.racuni[i])); // vrsimo downcast zato sto je b.racuni[i] tipa StedniRacun
                 else
                     racuni[i] = new StedniRacun(*b.racuni[i]);
             }
@@ -233,10 +234,18 @@ public:
 
     void OtvoriRacun(int broj_racuna, int pin_);
 
+    void ZatvoriRacun();
+
     StedniRacun &operator+=(double iznos) {
         return DajTrenutnoOtvoreni() += iznos;
 //         return *this += iznos;
     }
+
+    StedniRacun &operator-=(double iznos) {
+        return DajTrenutnoOtvoreni() -= iznos;
+    }
+
+    void ObracunajKamate(int pin, double kamatna_stopa);
 };
 
 int Banka::nadjiRacun(int broj_racuna) const {
@@ -300,6 +309,29 @@ void Banka::realociraj() {
         delete[] racuni;
         racuni = novi_prostor;
     }
+}
+
+void Banka::ObracunajKamate(int pin, double kamatna_stopa) {
+    if (pin != PIN_upravitelja)
+        throw "Neispravan PIN upravitelja";
+    if (kamatna_stopa < 0)
+        throw "Neispravna kamatna stopa";
+    // petlja moze poremetiti status koji je racun eventualno bio otvoren prije poziva OtvoriRacun
+    // pa cemo ga sacuvati i vratiti na staro
+    auto pomocni = treutno_otvoreni;
+    for(int i = 0; i < broj_racuna; i++) {
+        OtvoriRacun(racuni[i]->DajBrojRacuna(), pin);
+        *treutno_otvoreni *= kamatna_stopa;
+        ZatvoriRacun();
+    }
+    treutno_otvoreni = pomocni;
+
+}
+
+void Banka::ZatvoriRacun() {
+    if(treutno_otvoreni != nullptr && DaLiJeSiguran(treutno_otvoreni))
+        static_cast<SigurniRacun *>(treutno_otvoreni)->ZatvoriRacun(PIN_upravitelja);
+    treutno_otvoreni = nullptr;
 }
 
 int main() {
