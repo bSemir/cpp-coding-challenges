@@ -99,7 +99,7 @@ private:
 
     friend class Banka; // Banka ce moci pristupiti privatnim atributima klase SigurniRacun
 protected:
-    bool jeLiCetvorocifren(int broj) {
+    static bool jeLiCetvorocifren(int broj) { // static jer ne zavisi od objekta
         return broj >= 1000 && broj <= 9999;
     }
 
@@ -155,6 +155,130 @@ public:
 
     }
 };
+
+class Banka {
+private:
+    int kapacitet;
+    int broj_racuna;
+    int PIN_upravitelja;
+    StedniRacun *treutno_otvoreni;
+    StedniRacun **racuni;
+
+    int nadjiRacun(int broj_racuna) const;
+
+    void realociraj();
+
+    void dealociraj();
+
+    StedniRacun &DajTrenutnoOtvoreni() const {
+        if (treutno_otvoreni == nullptr)
+            throw "Nijedan racun nije otvoren";
+        return *treutno_otvoreni;
+    }
+
+public:
+    Banka(int pin_upravitelja) : kapacitet(100), broj_racuna(0), PIN_upravitelja(pin_upravitelja),
+                                 treutno_otvoreni(nullptr),
+                                 racuni(new StedniRacun *[100]{}) {
+        if (!SigurniRacun::jeLiCetvorocifren(pin_upravitelja))
+            throw "Neispravan PIN upravitelja";
+    }
+
+    Banka(const Banka &b) : kapacitet(b.kapacitet), broj_racuna(b.broj_racuna), PIN_upravitelja(b.PIN_upravitelja),
+                            treutno_otvoreni(nullptr),
+                            racuni(new StedniRacun *[kapacitet]{}) {
+        for (int i = 0; i < broj_racuna; i++) {
+            racuni[i] = new StedniRacun(*b.racuni[i]);
+        }
+    }
+
+    Banka(Banka &&b) noexcept: kapacitet(b.kapacitet), broj_racuna(b.broj_racuna), PIN_upravitelja(b.PIN_upravitelja),
+                               treutno_otvoreni(b.treutno_otvoreni),
+                               racuni(b.racuni) {
+        b.broj_racuna = 0;
+        b.racuni = nullptr;
+    }
+
+    Banka &operator=(const Banka &b) = delete;
+
+    ~Banka() {
+        for (int i = 0; i < broj_racuna; i++) delete racuni[i];
+        delete[] racuni;
+    }
+
+    void KreirajRacun(double stanje) {
+        if (broj_racuna == kapacitet)
+            throw "Dostignut maksimalan broj racuna";
+        racuni[broj_racuna++] = new StedniRacun(stanje);
+    }
+
+    void KreirajRacun(double stanje, int pin) {
+        if (broj_racuna == kapacitet)
+            throw "Dostignut maksimalan broj racuna";
+        racuni[broj_racuna++] = new SigurniRacun(stanje, pin);
+    }
+
+    static bool DaLiJeSiguran(StedniRacun *r) {
+        return dynamic_cast<const SigurniRacun *>(r);
+    }
+
+    void ObrisiRacun(int broj_racuna);
+
+    void OtvoriRacun(int broj_racuna);
+
+    void OtvoriRacun(int broj_racuna, int pin_);
+
+    StedniRacun &operator +=(double iznos) {
+        return DajTrenutnoOtvoreni() += iznos;
+//         return *this += iznos;
+    }
+};
+
+int Banka::nadjiRacun(int broj_racuna) const {
+    for (int i = 0; i < broj_racuna; i++) {
+        if (racuni[i]->DajBrojRacuna() == broj_racuna)
+            return i;
+    }
+    throw "Racun nije nadjen";
+    // alternative way:
+    StedniRacun **p = std::find_if(racuni, racuni + broj_racuna, [broj_racuna](StedniRacun *r) {
+        return r->DajBrojRacuna() == broj_racuna;
+    });
+    if (p == racuni + broj_racuna)
+        throw "Racun nije nadjen";
+    return p - racuni;
+}
+
+void Banka::ObrisiRacun(int broj_racuna) {
+    int indeks = nadjiRacun(broj_racuna);
+    delete racuni[indeks];
+//        for (int i = indeks; i < broj_racuna - 1; i++) racuni[i] = racuni[i + 1];
+    racuni[indeks] = racuni[broj_racuna];
+    racuni[broj_racuna--] = nullptr;
+}
+
+void Banka::OtvoriRacun(int broj_racuna) {
+    int indeks = nadjiRacun(broj_racuna);
+    if (treutno_otvoreni != nullptr)
+        throw "Racun je vec otvoren (OtvoriRacun)";
+    if (DaLiJeSiguran(racuni[indeks]))
+        throw "Zasticen racun, potreban PIN za otvaranje (OtvoriRacun)";
+//    racuni[indeks]->OtvoriRacun(PIN_upravitelja);
+    treutno_otvoreni = racuni[indeks];
+}
+
+void Banka::OtvoriRacun(int broj_racuna, int pin_) {
+    int indeks = nadjiRacun(broj_racuna);
+    if (treutno_otvoreni != nullptr)
+        throw "Racun je vec otvoren (OtvoriRacun)";
+    if (!DaLiJeSiguran(racuni[indeks]))
+        throw "Racun nije zasticen, ne treba PIN za otvaranje (OtvoriRacun)";
+    auto *sr = static_cast<SigurniRacun *>(racuni[indeks]);
+//    if(pin_ == PIN_upravitelja)
+//        pin_ = sr->pin; // ako je upravitelj, onda moze otvoriti racun bez pina
+    sr->OtvoriRacun(pin_);
+    treutno_otvoreni = racuni[indeks];
+}
 
 int main() {
     try {
