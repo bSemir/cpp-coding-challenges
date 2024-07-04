@@ -1,0 +1,6 @@
+Napisite generičku funkciju “SifrirajBinarnuDatoteku”. Pri tome je parametar šablona tip elemenata
+u datoteci, a parametri funkcije su ime datoteke, te funkcija šifriranja (ili dešifriranja, jer će se ista
+funkcija moći koristiti i za dešifriranje). Funkcija šifriranja/dešifriranja prima parametar koji je onog
+tipa kakvog su tipa elementi datoteke, i rezultat joj je istog tipa. Funkcija “SifrirajBinarnuDatoteku”
+treba prosto funkciju šifriranja primijeniti na svaki element datoteke. U slučaju bilo kakvih problema
+pri radu s datotekom, treba baciti izuzetak uz odgovarajući prateći tekst.
