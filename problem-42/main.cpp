@@ -105,11 +105,11 @@ protected:
     }
 
 public:
-    SigurniRacun(double stanje, int pin) : StedniRacun(stanje) {
+    SigurniRacun(int stanje, int pin) : StedniRacun(stanje), pin(pin), otvoren(false) {
         if (!jeLiCetvorocifren(pin))
             throw "Neispravan PIN";
-        this->pin = pin; // koristimo this jer je ime parametra isto kao i ime atributa
-        otvoren = false;
+//        this->pin = pin; // koristimo this jer je ime parametra isto kao i ime atributa
+//        otvoren = false;
     }
 
     void OtvoriRacun(int pin_) const {
@@ -258,10 +258,9 @@ public:
 };
 
 int Banka::nadjiRacun(int broj_racuna) const {
-    for (int i = 0; i < broj_racuna; i++) {
-        if (racuni[i]->DajBrojRacuna() == broj_racuna)
-            return i;
-    }
+    for (int i = 0; i < broj_racuna; i++)
+        if (racuni[i]->DajBrojRacuna() == broj_racuna) return i;
+
     throw "Racun nije nadjen";
     // alternative way:
     StedniRacun **p = std::find_if(racuni, racuni + broj_racuna, [broj_racuna](StedniRacun *r) {
@@ -292,14 +291,14 @@ void Banka::OtvoriRacun(int broj_racuna) {
 
 void Banka::OtvoriRacun(int broj_racuna, int pin_) {
     int indeks = nadjiRacun(broj_racuna);
-    if (treutno_otvoreni != nullptr)
-        throw "Racun je vec otvoren (OtvoriRacun)";
-    if (!DaLiJeSiguran(racuni[indeks]))
-        throw "Racun nije zasticen, ne treba PIN za otvaranje (OtvoriRacun)";
-    auto *sr = static_cast<SigurniRacun *>(racuni[indeks]);
-//    if(pin_ == PIN_upravitelja)
-//        pin_ = sr->pin; // ako je upravitelj, onda moze otvoriti racun bez pina
-    sr->OtvoriRacun(pin_);
+    // TODO: radi kad se otkomentarise linija ispod
+//    if (treutno_otvoreni != nullptr) throw "Racun je vec otvoren (OtvoriRacun)";
+    if (DaLiJeSiguran(racuni[indeks])) {
+        SigurniRacun *sr = static_cast<SigurniRacun *>(racuni[indeks]);
+        if (pin_ == PIN_upravitelja)
+            pin_ = sr->pin; // ako je upravitelj, onda moze otvoriti racun bez pina
+        sr->OtvoriRacun(pin_);
+    }
     treutno_otvoreni = racuni[indeks];
 }
 
@@ -369,24 +368,25 @@ void Banka::SacuvajUDatoteku(std::string ime_datoteke) {
         ZatvoriRacun();
     }
     treutno_otvoreni = pomocni;
-//    izlaz.close();
+    if (!izlaz) throw std::logic_error("Greska prilikom upisa u datoteku");
+    izlaz.close();
 }
 
 int main() {
     try {
-        StedniRacun r1(100);
-        StedniRacun r2(200);
-        r1 += 50;
-        r2 -= 100;
-        r1 *= 2;
-        std::cout << r1 << std::endl;
-        std::cout << r2 << std::endl;
-        SigurniRacun r3(300, 1234);
-        r3.OtvoriRacun(1234);
-        r3 += 100;
-        r3 *= 2;
-        std::cout << r3 << std::endl; // PIN: 1234 Broj racuna: 1003, Stanje: 800
-        r3.ZatvoriRacun(1234);
+        Banka b(1234);
+
+        b.KreirajRacun(300, 1234);
+        b.OtvoriRacun(1001, 1234);
+        b += 50;
+        b.KreirajRacun(200, 1234);
+        b.OtvoriRacun(1002, 1234);
+        b += 100;
+        b.KreirajRacun(400, 1234);
+        b.OtvoriRacun(1003, 1234);
+        b += 200;
+
+        b.SacuvajUDatoteku("racuni.txt");
     } catch (const char *msg) {
         std::cout << "Izuzetak: " << msg << std::endl;
     }
