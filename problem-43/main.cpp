@@ -35,7 +35,7 @@ int main() {
             return x + 2;
         });
     } catch (std::exception &e) {
-        std::cout << "Exception ->: " << e.what() << std::endl;
+        std::cout << "Exception: " << e.what() << std::endl;
     }
     return 0;
 }
