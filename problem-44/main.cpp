@@ -31,6 +31,12 @@ public:
         alociraj();
         int i = 0;
         for (char znak: lista) niz_znakova[i++] = znak;
+        // std::copy(lista.begin(), lista.end(), niz_znakova);
+    }
+
+    String(const String &s) : duzina(s.duzina) {
+        alociraj();
+        strcpy(niz_znakova, s.niz_znakova);
     }
 
     ~String() { delete[] niz_znakova; }
