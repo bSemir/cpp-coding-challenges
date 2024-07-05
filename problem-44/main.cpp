@@ -39,6 +39,10 @@ public:
         strcpy(niz_znakova, s.niz_znakova);
     }
 
+    String(String &&s) : duzina(s.duzina), niz_znakova(s.niz_znakova) {
+        s.niz_znakova = nullptr;
+    }
+
     ~String() { delete[] niz_znakova; }
 
     int DajDuzinu() const { return duzina; }
@@ -53,5 +57,11 @@ int main() {
 
     String s3{'a', 'b', 'c', 'd', 'e'};
     std::cout << s3.DajDuzinu() << std::endl; // 5
+
+    String s4(s3);
+    std::cout << s4.DajDuzinu() << std::endl; // 5
+
+    String s5(std::move(s2));
+    std::cout << s5.DajDuzinu() << std::endl; // 7
     return 0;
 }
