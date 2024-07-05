@@ -8,6 +8,8 @@ class String {
 
     void alociraj() { niz_znakova = new char[duzina + 1]{}; } // +1 za '\0'
 
+    String &dodijeli(const char *odakle, int koliko);
+
 public:
     String(const char niz[] = "") : duzina(strlen(niz)) {
         alociraj();
@@ -39,14 +41,45 @@ public:
         strcpy(niz_znakova, s.niz_znakova);
     }
 
-    String(String &&s) : duzina(s.duzina), niz_znakova(s.niz_znakova) {
-        s.niz_znakova = nullptr;
+    String(String &&s) : duzina(s.duzina), niz_znakova(s.niz_znakova) { s.niz_znakova = nullptr; }
+
+    String &operator=(const String &s) {
+//        if (this == &s) return *this;
+//        delete[] niz_znakova;
+//        duzina = s.duzina;
+//        alociraj();
+//        strcpy(niz_znakova, s.niz_znakova);
+//        return *this;
+        return dodijeli(s.niz_znakova, s.duzina);
     }
+
+    String &operator=(String &&s) noexcept {
+        std::swap(duzina, s.duzina);
+        std::swap(niz_znakova, s.niz_znakova);
+        return *this;
+    }
+
+    String &operator=(const char niz[]) { return dodijeli(niz, strlen(niz)); }
 
     ~String() { delete[] niz_znakova; }
 
     int DajDuzinu() const { return duzina; }
 };
+
+String &String::dodijeli(const char *odakle, int koliko) {
+    if (duzina < koliko) {
+        char *novi = new char[koliko + 1];
+        std::strcpy(novi, odakle);
+        delete[] niz_znakova;
+        niz_znakova = novi;
+    }
+        // nema potrebe za alokacijom novog prostora (duzina >= koliko)
+    else {
+        std::strcpy(niz_znakova, odakle);
+    }
+    duzina = koliko;
+    return *this; // vrati referencu na izmijenjeni objekat
+}
 
 int main() {
     String s("Mrvim dok jedem");
@@ -63,5 +96,14 @@ int main() {
 
     String s5(std::move(s2));
     std::cout << s5.DajDuzinu() << std::endl; // 7
+
+    s5 = s4;
+    std::cout << s5.DajDuzinu() << std::endl; // 5
+
+    s5 = std::move(s3);
+    std::cout << s5.DajDuzinu() << std::endl; // 5
+
+    s5 = "Hello world!";
+    std::cout << s5.DajDuzinu() << std::endl; // 12
     return 0;
 }
