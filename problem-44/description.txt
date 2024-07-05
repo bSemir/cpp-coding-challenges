@@ -1,0 +1,86 @@
+Dizajnirajti i implementirati klasu “String” (sa velikim “S”) koja predstavlja minimalističku verziju
+bibliotečkog tipa “string”. Ova klasa treba posjedovati dva atributa, od kojih je prvi pokazivač na
+dinamički alocirani niz znakova koji čuva sadržaj stringa (sadržaj treba biti nul-terminiran), a drugi
+trenutni broj znakova u stringu. Interfejs ove klase treba da sadrži sljedeće elemente:
+
+◼️ Konstruktor s jednim parametrom koji je konstantni niz znakova, koji omogućava kreiranje
+objekata tipa “String” inicijaliziranih nekim nizom znakova između navodnika ili nekom drugom
+promjenljivom tipa znakovnog niza. Parametar treba da ima podrazumijevanu vrijednost prazan
+niz znakova, tako da se, u slučaju njegovog izostavljanja, kreira prazan string. Ovaj konstruktor
+ujedno treba da omogući i automatsku konverziju nizova znakova u objekte tipa “String”.
+
+◼️ Konstruktor s dva parametra, od kojih je prvi cijeli broj 𝑛 a drugi neki znak, koji kreira string koji se
+sastoji od 𝑛 kopija navedenog znaka. Ukoliko je 𝑛 negativan ili nula, kreira se prazan string.
+
+Sekvencijski konstruktor, koji omogućava inicijalizaciju objekata tipa “String” inicijalizacionom
+listom koja se sastoji od individualnih znakova (npr. “String s{'x', 'y', 'z'};”).
+
+◼️ Kopirajući konstruktor, koji omogućava ispravnu inicijalizaciju objekata tipa “String” pomoću
+drugih objekata istog tipa, odnosno koji općenito omogućava ispravno kopiranje objekata tipa
+“String” zasnovano na strategiji dubokog kopiranja. Potrebno je predvidjeti i pomjerajući
+konstruktor, koji predstavlja optimiziranu verziju kopirajućeg konstruktora za slučaj kopiranja
+privremenih objekata, odnosno objekata kojima je “istekao rok upotrebe”.
+
+◼️ Destruktor, koji oslobađa memoriju koji su objekti tipa “String” zauzeli tokom svog života.
+
+◼️ Operator dodjele koji omogućava korektno međusobno dodjeljivanje objekata tipa “String”,
+zasnovano na strategiji dubokog kopiranja. Treba predvidjeti i optimizaciju za slučaj da je objekat
+koji se dodjeljuje privremeni objekat, odnosno objekat kojem je “istekao rok upotrebe”.
+
+◼️ Operator dodjele koji omogućava da se objektu tipa “String” direktno dodijeli niz znakova, bez
+potrebe da se on prvo konvertira u privremeni objekat tipa “String” (što bi se desilo automatski
+putem konstruktora s jednim parametrom), a zatim obavi klasična međusobna dodjela objekata
+tipa “String” i uništenje privremenog objekta (ovim se znatno povećava efikasnost dodjele).
+
+◼️ Metodu “DajDuzinu” bez parametara, koja daje trenutnu dužinu stringa.
+
+◼️ Metode “begin” i “end” bez parametara, koje će omogućiti da se kroz objekte tipa “String” može
+prolaziti rasponskom for petljom.
+
+◼️ Operatorske funkcije za podršku operatorima “<<” i “<<”, koji vrše ispis objekata tipa “String” na
+proizvoljan izlazni tok, odnosno čitanje objekata tipa “String” iz ulaznog toka, pri čemu se
+ignoriraju bjeline na početku, a čitanje se zaustavlja na prvoj praznini (kao i prilikom čitanja
+bibliotečkog tipa “string” iz ulaznog toka). Također je potrebno podržati i klasičnu funkciju (ne
+članicu) “CitajCijeluLiniju” koja iz ulaznog toka čita sve raspoložive znakove, a ne samo do
+prve praznine i bez ignoriranja bjelina na početku (što radi operator “>>”), dakle koja radi slično
+kao funkcija “getline” za bibliotečki tip “string”. Parametri funkcije trebaju biti objekat ulaznog
+toka i objekat u koji se vrši čitanje, a rezultat referenca na ulazni tok.
+
+◼️ Operatorske funkcije za podršku operatoru “[]”. Ovaj operator daje odgovarajući znak iz stringa na
+osnovu indeksa, kao u slučaju klasičnih stringova. Pri tome, u slučaju da se ovaj operator primijeni
+na nekonstantni objekat tipa “String”, treba vratiti referencu na odgovarajući znak (sa ciljem da se
+omogući njegova promjena). Za razliku od klasičnih stringova, ovaj operator baca izuzetak tipa
+“range_error” uz prateći tekst “Neispravan indeks” ukoliko indeks izlazi izvan dozvoljenog opsega
+(poput metode “at” za bibliotečki tip “String”.
+
+◼️ Operatorsku funkciju za podršku operatoru “()”, koji će omogućiti da se pomoću izraza poput
+“s(i, j)” gdje je “s” neki objekat tipa “String” a “i” i “j” cijeli brojevi dobije podstring stringa “s”
+koji počinje na poziciji “i” a završava na poziciji “j” (interesantno je da upravo ovakvu sintaksu
+za izdvajanje podstringova podržavaju neki programski jezici, a u jeziku C++ s bibliotečkim
+tipom “string” za sličnu namjenu koristi se metoda “substr”, samo što je kod nje “j” broj znakova
+podstringa, a ne pozicija završnog znaka). U slučaju da su parametri “i” i “j” takvi da bi granice
+takvog podstringa izlazile izvan granica stringa, treba baciti izuzetak tipa “range_error” uz
+prateći tekst “Neispravan opseg”.
+
+◼️ Operatorsku funkciju za podršku operatoru “+ ”. Ovaj operator bi trebao kao rezultat da dâ novi
+objekat tipa string koji je nastao nadovezivanjem dva stringa koji su njegovi operandi. Potrebno je
+podržati da jedan od operanada (bilo prvi ili drugi) može biti i klasični niz znakova.
+
+◼️ Operatorsku funkciju za podršku operatoru “+=”. Ovaj operator bi trebao da na svoj prvi operand
+nadoveže svoj drugi operand, i vrati kao rezultat referencu na izmijenjeni objekat. Pri tome drugi
+operand može biti ponovo objekat tipa “String”, ili obični niz znakova, ali može biti i samo jedan
+znak (tipa “char”).
+
+◼️ Operatorske funkcije za podršku relacionim operatorima “==”, “!=”, “<”, “>”, “<=” i “>=” koji obavljaju
+poređenje dva objekta “String” na jednakost ili različitost, odnosno leksikografsko poređenje
+njihovog sadržaja (po ASCII šiframa).
+
+◼️ Metodu “Kapitaliziraj” koja sva mala slova u objektu tipa “String” zamjenjuje odgovarajućim
+velikim slovima. Inače, sličnu metodu ne posjeduje bibliotečki tip “string”, a ime ove metode dato
+je zbog činjenice da je jedan od naziva za velika slova u engleskom jeziku “capital letters”.
+
+◼️ Metodu “DajCString” koja daje konstantni pokazivač na prvi znak niza znakova pohranjenog u
+objektu, tako da se rezultat ove metode može iskoristiti u kontekstima u kojma se očekuju klasični
+nul-terminirani nizovi znakova (poput metode “c_str” bibliotečkog tipa “string”).
+
+Napisati i kratki testni program u kojem se testiraju osnovne funkcionalnosti napisane klase.
