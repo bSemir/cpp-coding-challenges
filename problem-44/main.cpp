@@ -56,7 +56,13 @@ public:
 
     const char *begin() const { return niz_znakova; }
 
-    char *end() const { return niz_znakova + duzina; }
+    char *begin() { return niz_znakova; }
+
+    const char *end() const { return niz_znakova + duzina; }
+
+    char *end() { return niz_znakova + duzina; }
+
+    friend std::ostream &operator<<(std::ostream &tok, const String &s) { return tok << s.niz_znakova; }
 };
 
 String &String::dodijeli(const char *odakle, int koliko) {
@@ -111,5 +117,7 @@ int main() {
 
     s5 = "Hello world!";
     std::cout << s5.DajDuzinu() << std::endl; // 12
+
+    std::cout << "Sadrzaj stringa s5: " << s5 << std::endl; // Hello world!
     return 0;
 }
