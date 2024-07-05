@@ -27,6 +27,12 @@ public:
         }
     }
 
+    String(std::initializer_list<char> lista) : duzina(lista.size()) {
+        alociraj();
+        int i = 0;
+        for (char znak: lista) niz_znakova[i++] = znak;
+    }
+
     ~String() { delete[] niz_znakova; }
 
     int DajDuzinu() const { return duzina; }
@@ -34,9 +40,12 @@ public:
 
 int main() {
     String s("Mrvim dok jedem");
-    std::cout << s.DajDuzinu() << std::endl;
+    std::cout << s.DajDuzinu() << std::endl; // 15
 
     String s2(7, 'a');
-    std::cout << s2.DajDuzinu() << std::endl;
+    std::cout << s2.DajDuzinu() << std::endl; // 7
+
+    String s3{'a', 'b', 'c', 'd', 'e'};
+    std::cout << s3.DajDuzinu() << std::endl; // 5
     return 0;
 }
