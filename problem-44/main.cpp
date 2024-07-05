@@ -16,18 +16,7 @@ public:
         strcpy(niz_znakova, niz);
     }
 
-    String(int n, char c) {
-        if (n <= 0) {
-            // kreiraj prazan string
-            duzina = 0;
-            alociraj();
-        } else {
-            duzina = n;
-            alociraj();
-            for (int i = 0; i < duzina; i++) niz_znakova[i] = c;
-            // std::fill_n(niz_znakova, n, c);
-        }
-    }
+    String(int n, char c);
 
     String(std::initializer_list<char> lista) : duzina(lista.size()) {
         alociraj();
@@ -64,6 +53,10 @@ public:
     ~String() { delete[] niz_znakova; }
 
     int DajDuzinu() const { return duzina; }
+
+    const char *begin() const { return niz_znakova; }
+
+    char *end() const { return niz_znakova + duzina; }
 };
 
 String &String::dodijeli(const char *odakle, int koliko) {
@@ -79,6 +72,19 @@ String &String::dodijeli(const char *odakle, int koliko) {
     }
     duzina = koliko;
     return *this; // vrati referencu na izmijenjeni objekat
+}
+
+String::String(int n, char c) {
+    if (n <= 0) {
+        // kreiraj prazan string
+        duzina = 0;
+        alociraj();
+    } else {
+        duzina = n;
+        alociraj();
+        for (int i = 0; i < duzina; i++) niz_znakova[i] = c;
+        // std::fill_n(niz_znakova, n, c);
+    }
 }
 
 int main() {
