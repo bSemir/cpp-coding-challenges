@@ -1,5 +1,9 @@
 #include <iostream>
 #include <cstring>
+#include <initializer_list>
+#include <algorithm>
+#include <stdexcept>
+#include <cctype>
 
 
 class String {
@@ -9,6 +13,10 @@ class String {
     void alociraj() { niz_znakova = new char[duzina + 1]{}; } // +1 za '\0'
 
     String &dodijeli(const char *odakle, int koliko);
+
+    void provjeri_indeks(int i) const {
+        if (i < 0 || i >= duzina) throw std::range_error("Neispravan indeks");
+    }
 
 public:
     String(const char niz[] = "") : duzina(strlen(niz)) {
@@ -66,12 +74,25 @@ public:
 
     friend std::istream &operator>>(std::istream &tok, String &s);
 
-    // TODO: Implementirati operatore +=
     String &operator+=(const String &s);
 
     String &operator+=(const char niz[]);
 
     String &operator+=(char c);
+
+    char &operator[](int i) {
+        provjeri_indeks(i);
+        return niz_znakova[i];
+    }
+
+    const char &operator[](int i) const {
+        provjeri_indeks(i);
+        return niz_znakova[i];
+    }
+
+    std::istream &CitajCijeluLiniju(std::istream &tok, String &s);
+
+    // TODO: operator ()
 };
 
 String &String::dodijeli(const char *odakle, int koliko) {
@@ -109,6 +130,40 @@ std::istream &operator>>(std::istream &tok, String &s) {
     return tok;
 }
 
+String &String::operator+=(const String &s) {
+    int nova_duzina = duzina + s.duzina;
+    char *novi = new char[nova_duzina + 1];
+    std::strcpy(novi, niz_znakova);
+    std::strcat(novi, s.niz_znakova);
+    delete[] niz_znakova;
+    niz_znakova = novi;
+    duzina = nova_duzina;
+    return *this;
+}
+
+String &String::operator+=(char c) {
+    dodijeli(niz_znakova, duzina + 1); // +1 za novi znak
+    niz_znakova[duzina - 1] = c;
+    return *this;
+}
+
+String &String::operator+=(const char *niz) {
+    if (*niz == 0) return *this;
+    int stara_duzina = duzina; // cuvamo staru jer ce se promijeniti
+    dodijeli(niz_znakova, duzina + strlen(niz));
+    std::strcpy(niz_znakova + stara_duzina, niz); // kopiraj niz na kraj
+    return *this;
+}
+
+std::istream &String::CitajCijeluLiniju(std::istream &tok, String &s) {
+    tok.clear();
+    tok.ignore(10000, '\n');
+    s = "";
+    char c;
+    while ((c = tok.get()) != '\n') s += c;
+    return tok;
+}
+
 int main() {
     String s("Mrvim dok jedem");
     std::cout << s.DajDuzinu() << std::endl; // 15
@@ -135,5 +190,26 @@ int main() {
     std::cout << s5.DajDuzinu() << std::endl; // 12
 
     std::cout << "Sadrzaj stringa s5: " << s5 << std::endl; // Hello world!
+
+    String s6;
+    std::cout << "Unesite string s6: ";
+    std::cin >> s6;
+
+    std::cout << "Sadrzaj stringa s6: " << s6 << std::endl;
+
+    s6 += s5;
+    std::cout << "Sadrzaj stringa s6 nakon nadodavanja s5: " << s6 << std::endl;
+
+
+    s6 += '?';
+    std::cout << "Sadrzaj stringa s6 nakon nadodavanja znaka '?': " << s6 << std::endl;
+
+    s6[0] = 'X';
+    std::cout << "Sadrzaj stringa s6 nakon promjene prvog znaka: " << s6 << std::endl;
+
+    std::cout << "Unesite string s7: ";
+    String s7;
+    s7.CitajCijeluLiniju(std::cin, s7);
+    std::cout << "Sadrzaj stringa s7: " << s7 << std::endl;
     return 0;
 }
