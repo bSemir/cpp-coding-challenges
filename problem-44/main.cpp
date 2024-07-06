@@ -63,6 +63,15 @@ public:
     char *end() { return niz_znakova + duzina; }
 
     friend std::ostream &operator<<(std::ostream &tok, const String &s) { return tok << s.niz_znakova; }
+
+    friend std::istream &operator>>(std::istream &tok, String &s);
+
+    // TODO: Implementirati operatore +=
+    String &operator+=(const String &s);
+
+    String &operator+=(const char niz[]);
+
+    String &operator+=(char c);
 };
 
 String &String::dodijeli(const char *odakle, int koliko) {
@@ -91,6 +100,13 @@ String::String(int n, char c) {
         for (int i = 0; i < duzina; i++) niz_znakova[i] = c;
         // std::fill_n(niz_znakova, n, c);
     }
+}
+
+std::istream &operator>>(std::istream &tok, String &s) {
+    s = "";
+    tok >> std::ws;
+    while (!std::isspace(tok.peek())) s += tok.get();
+    return tok;
 }
 
 int main() {
