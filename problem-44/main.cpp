@@ -116,9 +116,9 @@ public:
 
     friend bool operator>=(const String &s1, const String &s2) { return !(s1 < s2); }
 
-    void Kapitaliziraj() {
-        for (char &c: *this) c = std::toupper(c);
-    }
+    void Kapitaliziraj() { for (char &c: *this) c = std::toupper(c); }
+
+    const char *DajCString() const { return niz_znakova; }
 };
 
 String &String::dodijeli(const char *odakle, int koliko) {
