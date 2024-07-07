@@ -14,6 +14,8 @@ class String {
 
     String &dodijeli(const char *odakle, int koliko);
 
+    String(int n) : duzina(n) { alociraj(); }
+
     void provjeri_indeks(int i) const {
         if (i < 0 || i >= duzina) throw std::range_error("Neispravan indeks");
     }
@@ -92,7 +94,15 @@ public:
 
     std::istream &CitajCijeluLiniju(std::istream &tok, String &s);
 
-    // TODO: operator ()
+    String operator()(int i, int j) const;
+
+    friend String operator+(const String &s1, const String &s2);
+
+    friend bool operator==(const String &s1, const String &s2) {
+        return s1.duzina == s2.duzina && std::strcmp(s1.niz_znakova, s2.niz_znakova) == 0;
+    }
+
+    friend bool operator!=(const String &s1, const String &s2) { return !(s1 == s2); }
 };
 
 String &String::dodijeli(const char *odakle, int koliko) {
@@ -164,6 +174,23 @@ std::istream &String::CitajCijeluLiniju(std::istream &tok, String &s) {
     return tok;
 }
 
+String String::operator()(int i, int j) const {
+    provjeri_indeks(i);
+    provjeri_indeks(j);
+    String s = "";
+    for (int k = i; k <= j; k++) s += niz_znakova[k];
+    return s;
+}
+
+String operator+(const String &s1, const String &s2) {
+    if (s1.duzina == 0) return s2;
+    if (s2.duzina == 0) return s1;
+    String s(s1.duzina + s2.duzina);
+    std::strcpy(s.niz_znakova, s1.niz_znakova);
+    std::strcpy(s.niz_znakova + s1.duzina, s2.niz_znakova);
+    return s;
+}
+
 int main() {
     String s("Mrvim dok jedem");
     std::cout << s.DajDuzinu() << std::endl; // 15
@@ -211,5 +238,7 @@ int main() {
     String s7;
     s7.CitajCijeluLiniju(std::cin, s7);
     std::cout << "Sadrzaj stringa s7: " << s7 << std::endl;
+
+    std::cout << "Podstring od s5 (izmedju 0 i 4): " << s5(0, 4) << std::endl; // "Hello"®
     return 0;
 }
