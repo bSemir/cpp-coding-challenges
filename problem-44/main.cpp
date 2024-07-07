@@ -115,6 +115,10 @@ public:
     friend bool operator<=(const String &s1, const String &s2) { return !(s1 > s2); }
 
     friend bool operator>=(const String &s1, const String &s2) { return !(s1 < s2); }
+
+    void Kapitaliziraj() {
+        for (char &c: *this) c = std::toupper(c);
+    }
 };
 
 String &String::dodijeli(const char *odakle, int koliko) {
@@ -252,5 +256,9 @@ int main() {
     std::cout << "Sadrzaj stringa s7: " << s7 << std::endl;
 
     std::cout << "Podstring od s5 (izmedju 0 i 4): " << s5(0, 4) << std::endl; // "Hello"®
+
+    std::cout << "Kapitaliziran string s5: ";
+    s5.Kapitaliziraj();
+    std::cout << s5 << std::endl;
     return 0;
 }
