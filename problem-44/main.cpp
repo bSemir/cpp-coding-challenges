@@ -5,7 +5,6 @@
 #include <stdexcept>
 #include <cctype>
 
-
 class String {
     char *niz_znakova;
     int duzina;
@@ -103,6 +102,19 @@ public:
     }
 
     friend bool operator!=(const String &s1, const String &s2) { return !(s1 == s2); }
+
+    friend bool operator<(const String &s1, const String &s2) {
+        return std::strcmp(s1.niz_znakova, s2.niz_znakova) < 0;
+    }
+
+    friend bool operator>(const String &s1, const String &s2) {
+        return std::strcmp(s1.niz_znakova, s2.niz_znakova) > 0;
+        // return s2 < s1;
+    }
+
+    friend bool operator<=(const String &s1, const String &s2) { return !(s1 > s2); }
+
+    friend bool operator>=(const String &s1, const String &s2) { return !(s1 < s2); }
 };
 
 String &String::dodijeli(const char *odakle, int koliko) {
