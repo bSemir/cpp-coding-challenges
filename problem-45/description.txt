@@ -1,0 +1,10 @@
+Jedan od načina “šatrovačkog” govora među djecom, koji je bio popularan i u nekim dijelovima naše
+države sredinom prošlog vijeka, sastoji se u tome da se nakon svakog samoglasnika ubaci slovo “p”
+i ponovljeni taj samoglasnik. Na primjer, umjesto “dobar dan” kaže se “dopobapar dapan”. Napisati
+funkciju “Satrovacki” koja kao parametar prima objekat tipa “string” za koji se pretpostavlja da
+predstavlja neku recenicu na našem jeziku, a koja kao rezultat daje novi string koji predstavlja istu
+rečenicu prevedenu na “šatrovački” u skladu sa opisanim pravilom. Dijalog između korisnika i
+programa trebao bi izgledati poput sljedećeg:
+
+Unesite rečenicu: Ovaj dan je dobar dan
+Satrovacki: Opovapaj dapan jepe dopobapar dapan
