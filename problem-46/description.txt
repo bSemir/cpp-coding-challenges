@@ -1,4 +1,4 @@
-Za neki niz brojeva , , …, kažemo da je aritmetički niz ukoliko je razlika ma koja dva susjedna
+Za neki niz brojeva a1, a2, …, an kažemo da je aritmetički niz ukoliko je razlika ma koja dva susjedna
 elementa uvijek ista, a geometrijski niz ukoliko je količnik ma koja dva susjedna elementa uvijek isti.
 Na primjer, nizovi 2, 5, 8, 11, 14, 17 i 29, 25, 21, 17, 13, 9 su aritmetički nizovi, dok su 2, 6, 18, 54, 162 i
 40, 20, 10, 5 geometrijski nizovi. Napišite funkciju koja kao parametar prima vektor cijelih brojeva, a
