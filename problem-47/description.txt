@@ -1,0 +1,7 @@
+Napišite funkciju koja kao parametar prima neki string (tj. parametar tipa “string”), a koja vraća kao
+rezultat vektor čiji su elementi svi podstringovi datog stringa koji imaju više od jednog znaka, a koji se
+jednako čitaju s obje strane (jednoznačni podstringovi se isključuju iz razmatranja, s obzirom da se svi
+takvi podstringovi jednako čitaju s obje strane). Pod podstringom nekog stringa se smatra svaki
+string koji se sastoji od više uzastopnih znakova iz tog stringa.
+Napisanu funkciju demonstrirajte u kratkom isječku programa koji će za string unesen s tastature ispisati
+sve njegove podstringove koji se jednako čitaju s obje strane.
