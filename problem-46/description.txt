@@ -1,0 +1,12 @@
+Za neki niz brojeva , , …, kažemo da je aritmetički niz ukoliko je razlika ma koja dva susjedna
+elementa uvijek ista, a geometrijski niz ukoliko je količnik ma koja dva susjedna elementa uvijek isti.
+Na primjer, nizovi 2, 5, 8, 11, 14, 17 i 29, 25, 21, 17, 13, 9 su aritmetički nizovi, dok su 2, 6, 18, 54, 162 i
+40, 20, 10, 5 geometrijski nizovi. Napišite funkciju koja kao parametar prima vektor cijelih brojeva, a
+koja vraća kao rezultat jednu od tri vrijednosti “Aritmeticki”, “Geometrijski” ili “Nespecificni”, ovisno
+od toga da li elementi tog vektora obrazuju aritmetički niz, geometrijski niz, ili ništa od tog dvoje. Pri
+tome su “Aritmeticki”, “Geometrijski” ili “Nespecificni” pobrojane konstante pobrojanog tipa
+“VrstaNiza” s ograničenim vidokrugom, koji je potrebno prethodno deklarirati. Napišite i kratki isječak
+programa koji demonstrira kako biste mogli upotrijebiti ovu funkciju na nizu brojeva koji se unose
+putem tastature.
+Napomena: Iako zadatak zvuči lagano, ima u njemu dosta “zamki” u koje možete
+upasti ukoliko budete brzopleti i ne razmislite dobro o svemu.
