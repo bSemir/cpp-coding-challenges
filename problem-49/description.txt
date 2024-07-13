@@ -1,0 +1,20 @@
+Napisati funkciju “AnalizaMatrice” koja u matrici realnih brojeva (tipa “double”) koja joj se šalje
+kao prvi parametar traži njene nul-redove (redove koji sadrže isključivo nule) odnosno nul-kolone
+(kolone koje sadrže isključivo nule). Funkcija ne vraća nikakav rezultat, ali u svoj drugi odnosno
+treći parametar, koji su vektori cijelih brojeva (tipa “int”), smješta indekse nađenih nul-redova
+odnosno nul-kolona, u rastućem redoslijedu. U slučaju da prvi parametar nema ispravnu formu
+matrice (tj. ukoliko različiti redovi nemaju isti broj elemenata), funkcija treba baciti izuzetak tipa
+“domain_error” uz prateći tekst “Grbava matrica”.
+
+Napisanu funkciju treba demonstrirati u kratkom testnom programu, koji traži unos dimenzije
+matrice i njenih elemenata s tastature, a zatim prikazuje rezultat njene analize. Dijalog između
+korisnika i programa treba da izgleda kao na sljedećoj slici:
+
+Unesite dimenzije: 4 6
+Unesite elemente:
+0 2 3 0 0 6
+0 0 0 0 0 0
+0 4 0 0 0 3
+0 0 0 0 0 0
+Nul-redovi: 1 3
+Nul-kolone: 0 3 4
