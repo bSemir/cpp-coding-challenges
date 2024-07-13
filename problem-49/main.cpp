@@ -3,7 +3,8 @@
 #include <stdexcept>
 
 
-void AnalizaMatrice(std::vector<std::vector<double>> matrica, std::vector<int> &nul_redovi, std::vector<int> &nul_kolone) {
+void
+AnalizaMatrice(std::vector<std::vector<double>> matrica, std::vector<int> &nul_redovi, std::vector<int> &nul_kolone) {
     nul_redovi.clear();
     nul_kolone.resize(0);
     for (int i = 0; i < matrica.size(); i++) {
@@ -18,6 +19,7 @@ void AnalizaMatrice(std::vector<std::vector<double>> matrica, std::vector<int> &
         if (nul_red) nul_redovi.push_back(i);
     }
 
+    if (matrica[0].size() == 0) return; // zastita od 0x0 matrice
     for (int i = 0; i < matrica[0].size(); i++) { //
         bool nul_kolona = true;
         for (int j = 0; j < matrica.size(); j++) {
