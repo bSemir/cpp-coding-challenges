@@ -1,0 +1,15 @@
+Napišite generičku funkciju koja prima 4 parametra od kojih prva dva omeđuju jedan blok podataka
+a druga dva drugi blok podataka. Ovi parametri mogu biti bilo pokazivači bilo iteratori, pri čemu su
+prva dva istog tipa i druga dva također istog tipa, ali tipovi prva dva parametra i druga dva
+parametra ne moraju biti isti. Ova funkcija treba da pronađe da li se drugi blok nalazi kao podblok u
+prvom bloku (npr. blok {3, 5, 2} nalazi se kao podblok u bloku {1, 7, 3, 5, 2, 6}). Ukoliko se nalazi,
+funkcija kao rezultat vraća pokazivač/iterator na mjesto u prvom bloku na kojem se drugi blok nalazi
+kao podblok. Ukoliko se traženi blok nalazi na više mjesta kao podblok u prvom bloku, treba vratiti
+mjesto njegovog prvog pronalaska. Konačno, ukoliko traženi blok nije nađen kao podblok u prvom
+bloku, treba vratiti pokazivač/iterator koji pokazuje tačno iza kraja prvog bloka. Za iteratore ne
+treba pretpostaviti da podržavaju išta više od minimalnog skupa operacija koji moraju biti podržani
+za sve iteratore (inkrementiranje, dereferenciranje, dodjela, te poređenje na jednakost i različitost).
+Pored toga, funkcija ne smije koristiti nikakve pomoćne kontejnerske tipove podataka, niti dinamičku
+alokaciju, niti funkcije “advance”, “distance”, “next” i “prev”
+. Napišite i kratki isječak programa u
+kojem ćete demonstrirati napisanu funkciju na dva fiksna moderna niza cijelih brojeva.
