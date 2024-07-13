@@ -1,0 +1,65 @@
+Neka je data matrica M. Nova matrica koja se dobija tako što se svi elementi njenog drugog reda
+pomjere za jedno mjesto nadesno, svi elementi njenog trećeg reda za dva mjesta nadesno, itd. pri
+čemu se prazna mjesta popunjavaju nulama (da se dobije ispravan format matrice) naziva se lijevo
+iskošenje matrice M. Analogno se definira i desno iskošenje matrice M (pretposljednji red se
+pomjera jedno mjesto ulijevo, red iznad njega dva mjesta ulijevo, itd.). Na sljedećoj slici prikazan je
+primjer jedne matrice i njenog lijevog i desnog iskošenja:
+
+Matrica M:
+(
+2 5 3 7 4 1
+0 4 2 3 9 5
+6 3 2 4 3 0
+0 0 5 9 7 6
+)
+
+Lijevo iskošenje od matrice M:
+(
+2 5 3 7 4 1 0 0 0
+0 0 4 2 3 9 5 0 0
+0 0 6 3 2 4 3 0 0
+0 0 0 0 0 5 9 7 6
+)
+
+Desno iskošenje od matrice M:
+(
+0 0 0 2 5 3 7 4 1
+0 0 0 4 2 3 9 5 0
+0 6 3 2 4 3 0 0 0
+0 0 5 9 7 6 0 0 0
+)
+
+Napišite funkciju “Iskosi” koja vrši lijevo odnosno desno iskošenje matrice koja joj se zadaje kao
+prvi parametar. Matrica je organizirana kao vektor vektôrā realnih brojeva. Funkcija ne vraća
+nikakvu vrijednost, nego samo vrši modifikaciju matrice koja joj se zadaje kao prvi parametar.
+Drugi parametar određuje da li će iskošenje biti nalijevo ili nadesno. Ovaj parametar je tipa “Smjer”,
+koji je pobrojani tip zadan na globalnom nivou deklaracijom
+
+enum class Smjer {Nalijevo, Nadesno};
+
+U slučaju da prvi parametar nema ispravnu formu matrice, treba baciti izuzetak tipa “domain_error”
+uz prateći tekst “Grbava matrica”. Funkcija ne bi trebala koristiti nikakve pomoćne kontejnerske
+tipove. Za realizaciju funkcije treba iskoristiti funkcije iz biblioteke sa zaglavljem “algorithm”
+gdjegod bi njihova primjena mogla dovesti do kraće i efikasnije izvedbe.
+
+Napisanu funkciju treba demonstrirati u isječku programa koji traži da se unesu dimenzije i
+elementi matrice s tastature, a koji zatim ispisuje njeno lijevo i desno iskošenje (elemente treba
+međusobno razdvojiti jednim razmakom). Dijalog između korisnika i programa treba da izgleda
+ovako (pri čemu nije potrebno provjeravati korektnost unosa):
+
+Unesite dimenzije matrice: 4 6
+Unesite elemente:
+2 5 3 7 4 1
+0 4 2 3 9 5
+6 3 2 4 3 0
+0 0 5 9 7 6
+Lijevo iskosenje:
+2 5 3 7 4 1 0 0 0
+0 0 4 2 3 9 5 0 0
+0 0 6 3 2 4 3 0 0
+0 0 0 0 0 5 9 7 6
+Desno iskosenje:
+0 0 0 2 5 3 7 4 1
+0 0 0 4 2 3 9 5 0
+0 6 3 2 4 3 0 0 0
+0 0 5 9 7 6 0 0 0
