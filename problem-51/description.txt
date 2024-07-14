@@ -1,0 +1,31 @@
+Napisati generičku funkciju “SortirajMatricu” koja prima kao jedini parametar neku matricu (koja
+može biti i grbava) organiziranu kao vektor vektôrā proizvoljnog tipa elemenata, za koje se jedino
+pretpostavlja da se mogu sabirati i porediti po veličini (tj. da je za njih podržana operacija sabiranja,
+te operacije poređenja po veličini). Funkcija treba da ispremješta redove matrice u takav poredak
+da red koji ima manju sumu elemenata dođe prije reda koji ima veću sumu elemenata. Ukoliko dva
+reda imaju istu sumu elemenata, tada prije treba da dođe onaj red koji ima manje elemenata.
+Konačno, ukoliko dva reda s istom sumom elemenata također imaju i isti broj elemenata, tada prije
+treba da dođe onaj red koji dolazi ranije prema leksikografskom poretku (podsjetimo se da se
+leksikografski poredak određuje na osnovu prvog para različitih elemenata, na primjer vektor čiji
+su elementi 3, 5, 2, 7, 1 i 9 dolazi leksikografski prije vektora čiji su elementi 3, 5, 8, 4 i 6, jer je
+2 < 8). Funkcija ne vraća nikakav rezultat, nego samo obavlja opisanu transformaciju nad matricom
+koja joj je poslana kao parametar.
+Traženu funkciju obavezno treba realizirati uz pomoć funkcije “sort” iz biblioteke sa zaglavljem “algorithm”.
+
+Napisanu funkciju treba demonstrirati u kratkom testnom programu, koji traži unos dimenzije
+matrice i njenih elemenata s tastature, pretpostavljajući da su njeni elementi realni brojevi, a zatim
+prikazuje matricu dobijenu nakon opisanog postupka sortiranja (s obzirom da tako unesena
+matrica nikada neće biti grbava, neće se testirati poređenje redova po broju elemenata, što ne znači
+da ga ne treba izvesti). Dijalog između korisnika i programa treba da izgleda kao na sljedećoj slici:
+
+Unesite dimenzije: 4 4
+Unesite elemente:
+1 3 2 6
+4 10 5 6
+2 8 5 6
+4 7 9 5
+Matrica nakon sortiranja:
+4 7 9 5
+4 10 5 6
+2 8 5 6
+1 3 2 6
