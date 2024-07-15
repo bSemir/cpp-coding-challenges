@@ -7,12 +7,24 @@ enum class NacinAlokacije {
 
 int **TablicaMnozenja(int n, NacinAlokacije alokacija) {
     if (n <= 0) return nullptr;
-    int **niz = nullptr;
-    niz = new int *[n];
-    for (int i = 1; i <= n; i++) niz[i] = new int[n];
+    int **niz = nullptr; // {}
+    try {
+        niz = new int *[n]{};
+        if (alokacija == NacinAlokacije::Fragmentirano)
+            for (int i = 0; i < n; i++) niz[i] = new int[n];
+        else {
+            niz[0] = new int[n * n];
+            for (int i = 1; i < n; i++) niz[i] = niz[i - 1] + n; // or niz[0] + n * i;
+        }
+    } catch (...) {
+        if (alokacija == NacinAlokacije::Fragmentirano)
+            for (int i = 0; i < n; i++) delete[] niz[i];
+        delete[] niz;
+        return nullptr;
+    }
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < n; j++) {
-            niz[i][j] = i * j;
+            niz[i][j] = (i + 1) * (j + 1);
         }
     }
     return niz;
