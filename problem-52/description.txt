@@ -1,0 +1,13 @@
+Napisati funkciju “TablicaMnozenja” čiji je prvi parametar cijeli broj 𝑛, a koja dinamički alocira
+prostor za kvadratnu matricu formata 𝑛 × 𝑛 i popunjava sadržaj matrice “tablicom množenja” za
+brojeve od 1 do 𝑛, tj. vrijednost elementa u presjeku 𝑖-tog reda i 𝑗-te kolone treba da bude 𝑖 ∙𝑗.
+Funkcija treba da kao rezultat vrati dvojni pokazivač koji služi za pristup elementima tako kreirane
+matrice. Pored toga, funkcija treba da ima još jedan parametar koji je pobrojanog tipa nazvanog
+“NacinAlokacije”, a koji može imati samo dvije vrijednosti: “Fragmentirano” i “Kontinualno”. Ovaj
+parametar određuje da li će se alokacija izvoditi postupkom kontinualne ili fragmentirane alokacije.
+U slučaju da je 𝑛 ≤ 0, ili u slučaju da alokacija ne uspije, funkcija treba da vrati nu-pokazivač kao
+rezultat (pri tome treba paziti da ne dođedo curenja memorije). Napisanu funkciju treba iskoristiti
+u testnom programu u kojem se sa tastature unosi broj 𝑛, nakon čega se ispisuju elementi tablice
+množenja (tj. odgovarajuće matrice) kreirane postupkom fragmentirane alokacije.
+Za ispis svakog elementa predvidjeti prostor od 4 znaka na ekranu.
+Na kraju je potrebno osloboditi prostora koji je zauzela dinamički alocirana matrica
