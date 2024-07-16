@@ -1,0 +1,19 @@
+Napišite funkciju čiji je prvi parametar neki vektor cijelih brojeva, a drugi parametar prirodni broj 𝑛.
+Funkcija treba da dinamički alocira matricu formata 𝑛 × 𝑚 postupkom kontinualne alokacije, gdje je
+𝑚 broj elemenata ulaznog vektora, i da u svaki red tako alocirane matrice prepiše elemente ulaznog
+vektora, ali sortirane tako da red s indeksom 𝑖 (𝑖 = 0, 1, …, 𝑛 − 1) bude sortiran u rastući redoslijed
+po sumi 𝑖-tih stepeni cifara brojeva u tom redu (npr. za 𝑖 = 3 broj koji ima manju sumu trećih stepeni
+cifara treba da dođe ispred broja koji ima veću sumu trećih stepeni cifara). U slučaju da dva broja
+imaju istu sumu 𝑖-tih stepeni cifara, treba prije doći onaj broj koji je manji (dakle, tada se gleda
+klasični poredak). Radi jednostavnosti, za nalaženje 𝑖-tog stepena dozvoljeno je koristiti funkciju
+“pow” (inače, ako neko nije dosada shvatio da postoje veliki razlozi zbog kojih ovu funkciju treba
+strogo izbjegavati, džabe mu je to i sad govoriti). Za sortiranje obavezno treba koristiti bibliotečku
+funkciju “sort”, uz odgovarajuću funkciju kriterija izvedenu kao lambda funkciju. Kao rezultat,
+funkcija vraća dvojni pokazivač koji omogućava pristup tako kreiranoj matrici. U slučaju da je 𝑛
+negativan ili nula, funkcija treba baciti izuzetak tipa “range_error” uz prateći tekst “Pogrešan broj
+redova matrice”. Isti izuzetak, samo uz prateći tekst “Problemi s alokacijom” treba baciti i u slučaju
+da alokacija ne uspije iz bilo kojeg razloga. Vodite računa da ni u kom slučaju ne smije doći do
+curenja memorije.
+Napisanu funkciju treba demonstrirati u isječku programa koji će za vektor od 5 elemenata
+unesenih s tastature i za 𝑛 = 3 kreirati odgovarajuću matricu, ispisati njene elemente na
+ekran i na kraju izvršiti oslobađanje zauzete memorije.
