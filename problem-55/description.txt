@@ -1,0 +1,30 @@
+Napišite funkciju koja dinamički alocira dvije grbave matrice čiji su elementi tipa “char”. U prvoj
+matrici prvi red treba sadržavati jedan element, drugi red dva elementa, treći tri elementa, i tako
+dalje do 𝑛-tog reda koji treba sadržavati 𝑛 elemenata, pri čemu je 𝑛 prvi parametar funkcije. U
+drugoj matrici je obrnuto: prvi red treba sadržavati 𝑛 elemenata, a zatim se brojevi elemenata u
+redovima postupno smanjuju, sve do posljednjeg 𝑛-tog reda koji treba sadržavati samo jedan
+element. Svi elementi matrica trebaju biti popunjeni zvjezdicama. Prvu matricu treba alocirati
+postupkom kontinualne alokacije, a drugu postupkom fragmentirane alokacije. Kao rezultat,
+funkcija treba da vrati dvojni pokazivač koji omogućava pristup prvoj matrici, dok dvojni pokazivač
+koji omogućava pristup drugoj matrici treba smjestiti u drugi parametar funkcije. U slučaju da se
+kao prvi parametar zada negativan broj ili nula, funkcija treba da baci tekst “Pogrešan parametar”
+kao izuzetak, dok u slučaju da alokacija ne uspije, treba baciti izuzetak koji se sastoji od teksta
+“Kreiranje nije uspjelo”. Pri tome, ni u kom slučaju ne smije doći do curenja memorije.
+
+Napisanu funkciju demonstrirajte u isječku programa koji traži da se sa tastature unese broj 𝑛, a
+zatim pozivom napisane funkcije alocira tražene matrice, i na kraju ih ispisuje na ekran tako da se
+iscrta figura od zvjezdica koju čine trougao i naopaki trougao sa 𝑛 redova, tako da se formira slika
+nalik na slovo D, poput sljedećeg primjera za 𝑛 = 4:
+
+*
+**
+***
+****
+****
+***
+**
+*
+
+Potrebno je predvidjeti i hvatanje eventualno bačenih izuzetaka, kao i oslobađanje prostora koji je
+matrica zauzimala nakon završetka rada. Ne zaboravite predvidjeti drugačije brisanje alociranog
+prostora za dva tipa alokacije.
