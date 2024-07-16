@@ -67,9 +67,6 @@ int main() {
             }
             std::cout << std::endl;
         }
-
-//        for (int i = 0; i < n; i++) delete[] mat[i];
-//        delete[]mat;
     } catch (const std::range_error &e) {
         std::cout << "Exception: " << e.what() << std::endl;
 
@@ -77,24 +74,3 @@ int main() {
 
     return 0;
 }
-
-// n = 4 -> 10
-//*
-//**
-//***
-//****
-
-// n = 5 -> 15
-//*
-//**
-//***
-//****
-//*****
-
-// n = 6 -> 21
-//*
-//**
-//***
-//****
-//*****
-//******

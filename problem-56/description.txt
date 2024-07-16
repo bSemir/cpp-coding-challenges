@@ -1,0 +1,11 @@
+Napišite generičku funkciju koja obavlja “kompaktifikaciju” dinamički alocirane matrice na način
+koji će biti opisan. Funkcija prima 3 parametra nazvana “a”, “m” i “n”. “a” je dvojni pokazivač preko
+kojeg se pristupa elementima neke dinamički alocirane dvodimenzionalne matrice za koju se
+pretpostavlja da je alocirana postupkom fragmentirane alokacije (tip elemenata matrice nije
+unaprijed poznat), dok su “m” i “n” njeni brojevi redova odnosno kolona respektivno. Funkcija treba
+da dinamički alocira novu matricu istog formata kao i početna matrica, ali ovaj put postupkom
+kontinualne alokacije, zatim da prepiše elemente početne matrice u novostvorenu matricu, oslobodi
+memoriju koju je zauzimala početna matrica i na kraju, da preusmjeri pokazivač “a” da pokazuje na
+novokreiranu matricu. U slučaju da nova alokacija ne uspije, funkcija treba da baci izuzetak, pri
+čemu tada izvorna matrica ne smije biti obrisana, niti pokazivač “a” smije biti izmijenjen. Vodite
+računa da funkcija ne smije stvoriti curenje memorije ni pod kojim uvjetima.
