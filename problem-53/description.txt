@@ -1,0 +1,33 @@
+Napisati generičku funkciju “KreirajDinamickuKopiju2D” koja kao svoj parametar prima neki
+dvodimenzionalni kontejner, odnosno dvodimenzionalnu strukturu nalik matrici, ali pri čemu broj
+elemenata u svakom redu ne mora nužno biti isti. Pretpostavlja se da je ta struktura predstavljena
+kao neki kontejnerski tip čiji su elementi ponovo nekog kontejnerskog tipa, ne nužno istog. Recimo,
+to može biti vektor vektōrâ, vektor dekōvâ, dek vektōrâ, dek dekōvâ, pa čak i niz vektōrâ, ili niz
+nizova (odnosno klasična matrica u duhu jezika C). Jedino ograničenje koje se postavlja na te
+kontejnerske tipove je da se mogu indeksirati, te da podržavaju funkcije “begin” i “end” (inače, ove
+dvije funkcije, uz korištenje odgovarajuće sintakse, podržavaju svi kontejnerski tipovi). Pri tome,
+također ne smijemo pretpostaviti da iteratori koje eventualno vrate ove funkcije podržavaju sve što
+podržavaju iteratori s direktnim pristupom, nego se treba ograničiti samo na najnužniji skup
+operacija (inkrementiranje, dereferenciranje, dodjela, te poređenje na jednakost ili različitost).
+Elementi “unutrašnjeg” kontejnerskog tipa mogu također biti proizvoljnog tipa. Funkcija prvo treba
+da dinamički alocira prostor za dvodimenzionalnu strukturu identičnog oblika kao i parametar, zatim
+da u nju prepiše elemente dvodimenzionalne strukture predstavljene parametrom i, konačno, da kao
+rezultat vrati dvojni pokazivač preko kojeg se može izvršiti pristup elementima ove strukture. Za
+alociranje treba koristiti postupak fragmentirane alokacije. U slučaju da dođe do problema sa
+alokacijom memorije, funkcija treba baciti izuzetak tipa “range_error” uz prateći tekst “Nedovoljno
+memorije”. Pri tome, ni u kom slučaju ne smije doći do curenja memorije.
+
+Napisanu funkciju treba demonstrirati u programu koji sa tastature prihvata elemente matrice formata 𝑛 × 𝑛
+organizirane kao vektor dekōvâ cijelih brojeva (𝑛 se prethodno unosi sa tastature), a nakon toga poziva napisanu
+funkciju sa ciljem kreiranja odgovarajuće dinamičke matrice, te konačno, ispisuje elemente tako
+kreirane dinamičke matrice na ekran (svaki red matrice u posebnom redu, uz razmak između
+elemenata unutar jednog reda) i oslobađa zauzetu memoriju. U testnom programu neophodno je
+predvidjeti i eventualno hvatanje bačenih izuzetaka. Dijalog između programa i korisnika treba
+izgledati poput sljedećeg (u slučaju bacanja izuzetka, samo treba ispisati tekst pohranjen u objektu
+kojim se modelira izuzetak):
+
+Unesite broj redova kvadratne matrice: 3
+Unesite elemente matrice: 3 12 5 123 -6 2 17 4 -31
+3 12 5
+123 -6 2
+17 4 -31
