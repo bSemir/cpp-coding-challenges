@@ -1,0 +1,20 @@
+Praktično svi funkcionalni programski jezici poznaju funkciju nazvanu “fold” koja prihvata dva
+parametra. Prvi parametar je neki kontejner (vektor, dek, lista, skup, itd.), dok je drugi parametar
+neka funkcija koja prihvata dva parametra (nazovimo je 𝑓). Kao rezultat, ova funkcija vraća novi
+kontejner sa istim brojem elemenata kao i kontejner zadan kao prvi parametar, samo u kojem su
+vrijednosti svih elemenata početnog spiska (nazvaćemo ih a1, a2, a3, a4, …) zamijenjeni elementima
+𝑓(a0,a1), 𝑓(𝑓( a0, a1), a2), 𝑓(𝑓(𝑓( a0, a1), a2), a3), itd. pri čemu je a0 podrazumijevana vrijednost za
+tip elemenata kontejnera. Na primjer, ukoliko je prvi parametar lista čiji su elementi 3, 6, 1, 4, 2, a
+drugi parametar funkcija koja vraća kao rezultat sumu svoja dva parametra, funkcija “fold” vraća
+kao rezultat drugu listu čiji su elementi redom 3, 9, 10, 14 i 16 (tj. 3, 3 + 6, 3 + 6 + 1, 3 + 6 + 1 + 4 i
+3 + 6 + 1 + 4 + 2). Sam kontejner koji se zadaje kao prvi parametar treba da ostane neizmijenjen.
+
+Vaš zadatak je da napravite tu funkciju, koju ćete nazvati “Umotaj”. Funkcija treba da bude napisana tako
+da bude što univerzalnija, tj. da radi sa što više različitih vrsta kontejnera. Jedino što se za kontejner
+treba podrazumijevati je da podržava iteratore sa kretanjem unaprijed, funkcije “begin” i “end” (što
+isključuje recimo stek kao dozvoljeni tip kontejnera) i funkciju “insert” (ona je odabrana umjesto
+funkcije “push_back”, jer neki kontejneri, poput skupa, ne podržavaju funkciju “push_back”). Isto tako,
+kao drugi parametar se mora moći poslati bilo klasična funkcija, bilo obična lambda funkcija, bilo
+lambda zatvorenje. Napisanu funkciju demonstrirajte u programskom isječku koji će od nekog skupa
+sa 4 elementa koji se unose s tastature napraviti novi skup koristeći funkciju 𝑓 koja računa sumu
+kvadrata svojih argumenata, i ispisati elemente tako dobijenog novog skupa odnosno vektora na ekran.
