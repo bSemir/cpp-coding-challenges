@@ -1,0 +1,22 @@
+U biblioteci sa zaglavljem “algorithm” nalazi se generička funkcija “remove_copy_if” koja kopira sve
+elemente omeđene s prva dva parametra u blok na koji pokazuje treći parametar, osim onih za koje
+funkcija kriterija proslijeđena kao četvrti parametar dâ logičku vrijednost “tačno”. Kao rezultat,
+funkcija vraća pokazivač ili iterator koji pokazuje tačno iza posljednjeg elementa odredišnog
+blokova. Elementi u izvorišnom i odredišnom bloku ne moraju biti istog tipa. Napisati generičku
+funkciju “KopirajUzUvjetnoUklanjanje” koja prima potpuno iste parametre i koja obavlja potpuno
+isti zadatak kao i funkcija “remove_copy_if”. Funkcija bi trebala biti zasnovana na potpunoj
+dedukciji tipova, tako da se umjesto pokazivača mogu koristiti i iteratori, pri čemu se za iteratore
+ne smije pretpostavljati da podržavaju išta drugo osim najosnovnijih operacija koje podržavaju sve
+vrste iteratora. Također, kao posljednji parametar, mora se moći upotrijebiti kako imenovana
+funkcija, tako i lambda funkcija, odnosno lambda zatvorenje.
+
+Napisanu funkciju treba demonstrirati u koratkom programu koji će putem tastature unijeti 5
+brojeva u neku listu cijelih brojeva (tj. kontejner tipa “list<int>”), zatim odstraniti sve brojeve iz te
+liste koji imaju više cifara od broja koji se unosi s tastautre, i na kraju ispisati elemente tako
+modificirane liste (onoliko koliko ih ima nakon obavljenog odstranjivanja) na ekran, pri čemu se
+svaki element ispisuje u novom redu. Kao funkciju kriterija, potrebno je upotrijebiti anonimnu
+(lambda) funkciju. Dijalog između korisnika i programa treba izgledati kao u sljedećem primjeru:
+
+Unesite 5 brojeva: 35214 728 111423 79923 1232
+Unesite dozvoljeni broj cifara: 4
+Preostali brojevi: 728 1232
