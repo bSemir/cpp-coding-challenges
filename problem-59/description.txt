@@ -1,0 +1,16 @@
+Napisati funkciju “Tabeliraj” sa četiri parametra “f” ,“xmin”, “xmax” i “ n”.
+Parametri “xmin” i “xmax” su realni brojevi, “n” je cijeli broj, dok je “f” funkcija (koja može biti i lambda zatvorenje) koja prima
+realni argument i vraća realni broj kao rezultat. Funkcija treba da dinamički alocira niz realnih
+brojeva čiji su elementi vrijednosti funkcije “f” za sve vrijednosti argumenta u opsegu od “xmin” do “xmax”
+uzetih u jednakim razmacima koje treba odrediti tako da ukupan broj izračunatih vrijednosti
+funkcije bude tačno “n”, te da vrati kao rezultat jedinstveni pametni pokazivač koji pokazuje na prvi element tako kreiranog niza.
+Parametar “n” mora imati vrijednost barem 2 ili veću, inače treba
+baciti izuzetak tipa “domain_error” uz prateći tekst “Neispravni parametri”.
+Isti izuzetak treba baciti i u slučaju da je vrijednost “xmin” veća od vrijednosti “xmax”.
+
+Potrebno je također napisati i kratki testni program koji demonstrira kako se napisana funkcija
+može iskoristiti da se kreiraju i ispišu vrijednosti funkcije 𝑓(𝑥) = 𝑥^3 za vrijednosti 𝑥 od 0 do 5 sa
+korakom 0.5. Ispis treba izgledati ovako:
+
+Vrijednosti funkcije f(x)=x^3 za x od 0 do 5 s korakom 0.5:
+0 0.125 1 3.375 8 15.625 27 42.875 64 91.125 125
