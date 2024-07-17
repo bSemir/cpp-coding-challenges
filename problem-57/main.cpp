@@ -1,22 +1,18 @@
 #include <iostream>
 #include <list>
+#include <algorithm>
 
 
 template<typename tip>
-std::list<tip> SortirajListu(std::list<tip> &l) {
-    std::list<tip> lista;
-    auto x = l.begin();
-    auto it = lista.begin();
-    // sort
-    while (x != l.end()) {
-        it = lista.begin();
-        while (it != lista.end() && *it < *x) {
-            it++;
+void SortirajListu(std::list<tip> &l) {
+    for (auto it1 = l.begin(); it1 != l.end(); it1++) {
+        auto min = it1;
+        for (auto it2 = it1; it2 != l.end(); it2++) {
+            if (*it2 < *min)
+                min = it2;
         }
-        lista.insert(it, *x);
-        x++;
+        std::swap(*it1, *min);
     }
-    return lista;
 }
 
 int main() {
@@ -30,10 +26,9 @@ int main() {
         std::cin >> *it;
         it++;
     }
-    std::list<int> rez = SortirajListu(l);
+    SortirajListu(l);
     std::cout << "Sortirana lista: ";
-    for (auto x: rez) {
-        std::cout << x << " ";
-    }
+    for (auto x: l) std::cout << x << " ";
+
     return 0;
 }
