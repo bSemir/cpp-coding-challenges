@@ -1,0 +1,13 @@
+Napisati generičku funkciju “SortirajListu” koja kao parametar prima neku listu (tj. objekat tipa
+“list”) čiji su elementi proizvoljnog tipa, ali koji se mogu upoređivati pomoću operatora “<”. Funkcija
+treba da kao rezultat vrati novu listu čiji su elementi isti kao u listi navedenoj kao parametar, ali
+sortirani u rastući poredak. Pri tome, sortiranje treba obaviti “ručno”, ne koristeći nikakve bibliotečke
+funkcije. Nije bitno da postupak sortiranja bude efikasan, bitno je samo da radi (sa znanjem koje
+trenutno imate, nećete moći napisati ikakav iole efikasniji postupak). Funkciju treba demonstrirati u
+testnom programu koji će za listu cijelih brojeva unesenu sa tastature (broj elemenata se također
+zadaje putem tastature) kreirati novu sortiranu listu i ispisati njen sadržaj na ekran. Dijalog između
+programa i korisnika treba izgledati poput sljedećeg:
+
+Koliko ima elemenata: 5
+Unesite elemente: 3 1 7 6 2
+Sortirana lista: 1 2 3 6 7
