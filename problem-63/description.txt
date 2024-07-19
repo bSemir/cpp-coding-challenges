@@ -1,0 +1,10 @@
+Napisati generičku funkciju sa 4 parametra, pri čemu je prvi parametar niz elemenata proizvoljnog
+tipa, za koje se pretpostavlja da se mogu međusobno upoređivati. Funkcija treba da u drugi i treći
+parametar respektivno smjesti najmanji element niza i prvi element niza koji mu slijedi po veličini
+(tj. u treći i četvrti parametar treba izdvojiti prva dva elementa po veličini). Pri tome, nije dozvoljeno
+sortirati niz, niti kreirati ikakve pomoćne kontejnere. U slučaju da ne postoji drugi element po
+veličini (tj. ukoliko su svi elementi niza jednaki), funkcija treba baciti izuzetak u kojem se govori o
+tome.
+Potrebno je napisati i mali testni program u kojem se demonstrira kako se može upotrijebiti
+napisana funkcija na nizu od 10 elemenata čiji se elementi unose putem tastature (treba predvidjeti
+i hvatanje eventualno bačenog izuzetka).
