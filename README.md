@@ -1,4 +1,4 @@
-Here I push one algorithmic coding problem every (or every other) day until I learn the craft or until I go crazy :)
+Here I push at least one algorithmic coding problem every (or every other) day until I learn the craft or until I go crazy :)
 #
 Using: C++ (14/17)
 #
