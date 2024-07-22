@@ -1,0 +1,14 @@
+Napisati funkciju “Prebrojavanje” koja prima neki string kao parametar (tipa “string”), a koja vrši
+prebrojavanje koliko puta se pojedino slovo engleskog alfabeta javlja unutar tog stringa. Funkcija
+kao rezultat vraća moderni niz (tj. objekat tipa “
+array”) od 26 cijelih brojeva, koji predstavljaju
+rezultate prebrojavanja. Prvi element niza sadrži broj pojavljivanja znaka ‘A’ ili ‘a’, drugi element
+broj pojavljivanja znaka ‘B’ ili ‘b’ i tako dalje do 26. elementa koji sadrži broj pojavljivanja znaka ‘Z’
+ili ‘z’. Napisanu funkciju treba demonstrirati u programu koji traži da se unese string s tastature, a
+koji zatim ispisuje na ekran rezultate prebrojavanja u dva reda, u prvom redu za slova od A do M, a
+u drugom redu za slova od N do Z. Dijalog između korisnika i programa treba da izgleda ovako (u
+ovom primjeru je jedna od najkraćih smislenih rečenica koja sadrži sva slova engleskog alfabeta):
+
+Unesite string: The quick brown fox jumps over a lazy dog
+A:2 B:1 C:1 D:1 E:2 F:1 G:1 H:1 I:1 J:1 K:1 L:1 M:1
+N:1 O:4 P:1 Q:1 R:2 S:1 T:1 U:2 V:1 W:1 X:1 Y:1 Z:1
