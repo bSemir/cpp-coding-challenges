@@ -1,7 +1,6 @@
 Napisati funkciju “Prebrojavanje” koja prima neki string kao parametar (tipa “string”), a koja vrši
 prebrojavanje koliko puta se pojedino slovo engleskog alfabeta javlja unutar tog stringa. Funkcija
-kao rezultat vraća moderni niz (tj. objekat tipa “
-array”) od 26 cijelih brojeva, koji predstavljaju
+kao rezultat vraća moderni niz (tj. objekat tipa “array”) od 26 cijelih brojeva, koji predstavljaju
 rezultate prebrojavanja. Prvi element niza sadrži broj pojavljivanja znaka ‘A’ ili ‘a’, drugi element
 broj pojavljivanja znaka ‘B’ ili ‘b’ i tako dalje do 26. elementa koji sadrži broj pojavljivanja znaka ‘Z’
 ili ‘z’. Napisanu funkciju treba demonstrirati u programu koji traži da se unese string s tastature, a
