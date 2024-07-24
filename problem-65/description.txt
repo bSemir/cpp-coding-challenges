@@ -1,0 +1,19 @@
+Napišite funkciju koja prihvata neki string kao parametar (tj. nešto što je tipa “string”), za koji se
+pretpostavlja da sadrži u sebi neki vrlo jednostavan aritmetički izraz (biće precizno opisano kakav), a
+koja kao rezultat daje rezultat izračunavanja tog izraza. Aritmetički izrazi koji su dopušteni sastoje se
+isključivo od dva operanda koji imaju formu realnih brojeva (koji mogu uključivati i predznak), između
+kojih se nalazi jedna od četiri aritmetičke operacije “+”, “-”, “*” ili “/”. Na početku i na kraju stringa
+mogu se nalaziti razmaci, a razmaci su također dozvoljeni i između operanada i znaka operacije. Na
+primjer, u skladu s ovom definicijom legalni aritmetički izrazi su recimo “15+172”, “ 2.5 − 3.12 “,
+“ 4 + 2.7 “, “ 3.7 *8.0 ”, “ 5 / 16 “ i “5./ 16“. Nijedan string koji nema opisanu formu ne smatra se
+legalnim prema navedenoj definiciji. U slučaju da sadržaj stringa predstavlja legalan aritmetički izraz
+(u skladu s opisanim pravilima šta se smatra legalnim izrazom), funkcija treba da kao rezultat vrati
+rezultat izračunavanja tog izraza. Pri tome, za operaciju dijeljenja “/” rezultat treba da bude
+cjelobrojan ukoliko su oba operanda cjelobrojna, a inače ne mora biti cjelobrojan (tako da bi rezultat
+izraza “ 5 / 16 “ trebao da bude 0, dok bi rezultat izraza “5./ 16” trebao biti 0.3125). U slučaju da
+string ne sadrži legalan aritmetički izraz, funkcija treba baciti izuzetak tipa “domain_error” uz prateći
+tekst “Nelegalan izraz”. Napisanu funkciju demonstrirajte u kratkom isječku programa na stringu koji
+se unose putem tastature. Uputa: Za konverziju sadržaja nekog stringa u cijeli odnosno realni broj,
+trebali biste koristiti funkcije “stoi” i “stod”. Naravno, zadatak se može riješiti i bez njih, ali se stvari
+tada kompliciraju, posebno za slučaj realnih brojeva. Ukoliko znate koristiti tip “istringstream”
+(rađen na Predavanju 14_a), imate ga pravo koristiti (to može neznatno olakšati izradu).
