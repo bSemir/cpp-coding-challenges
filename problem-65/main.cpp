@@ -2,11 +2,16 @@
 #include <string>
 #include <stdexcept>
 
+bool contains_letters(const std::string &s) {
+    for (auto ch: s)
+        if (std::isalpha(ch)) return true;
+    return false;
+}
+
 void fun(const std::string &s, std::string &operand1, std::string &operand2, char &znak) {
     for (int i = 0; i < s.length() / 2; i++) {
         if (isdigit(s.at(i)) || s.at(i) == '.') operand1.push_back(s[i]);
-        // TODO: check if string contains letters
-        // else if (!isdigit(s.at(i)) && s.at(i) != ' ') throw std::domain_error("Nelegalan izraz");
+        if (contains_letters(s)) throw std::domain_error("Nelegalan izraz");
     }
 
     for (int i = 0; i < s.length(); i++) {
@@ -66,7 +71,7 @@ double f(const std::string &s) {
 int main() {
     try {
 //        std::string s = "15+172"; // ok
-        std::string s = "2.5          - 3.12"; // ok
+        std::string s = "2.5         - 3.12"; // ok
 //        std::string s = " 3.7 *8.0 "; // ok
         double r = f(s);
         std::cout << "Rezultat aritmetickog izraza: " << r << std::endl;
