@@ -1,0 +1,21 @@
+Dat je slijed nekih podataka proizvoljnog tipa (recimo, cijelih ili realnih brojeva, ali ne nužno), za
+koje se pretpostavlja da se mogu međusobno sabirati i da se rezultat njihovog sabiranja može
+podijeliti realnim brojem (taj uvjet ispunjavaju, pored cijelih i realnih brojeva, recimo i kompleksni
+brojevi, ili podaci nekog tipa za koje je korisnik sâm definirao odgovarajuće operacije).
+Također se pretpostavlja da se ono što se dobije kao rezultat tog dijeljenja može porediti po veličini (nažalost,
+kompleksni brojevi već ne zadovoljavaju ovaj uvjet). Napišite generičku funkciju koja će izračunati
+prosječnu vrijednost (aritmetičku sredinu) prve i druge polovice tog slijeda podataka i vratiti kao
+rezultat onu od te dvije vrijednosti koja je veća. Slijed mora imati barem dva elementa, inače treba
+baciti izuzetak tipa “domain_error” uz prateći tekst “Prekratak slijed”. U slučaju da slijed ima neparan
+broj elemenata, uzmite da njegova druga “polovica” ima jedan element više nego prva (recimo, ako
+slijed ima 7 elemenata, njegova prva “polovica” imaće 3, a druga 4 elementa). Recimo, ukoliko se
+slijed sastoji od cijelih brojeva 3, 8, 6, 2, 4, 1 i 5, funkcija treba da kao rezultat vrati približno 5.66667,
+s obzirom da je prosječna vrijednost prve polovice slijeda, koja iznosi (3 + 8 + 6) / 3 = 17 / 3 ≈ 5.66667,
+veća od prosječne vrijednosti druge polovice slijeda, koja iznosi (2 + 4 + 1 + 5) / 4 = 12 / 4 = 3. Kao
+parametre, funkcija prima dva iteratora koji redom pokazuju na prvi elemet slijeda i tačno iza
+posljednjeg elementa slijeda. Za te iteratore se ne podrazumijeva da podržavaju ikakve druge
+operacije osim onih operacija koje moraju podržavati svi iteratori (tako da funkcija treba ispravno
+raditi u slučaju da su elementi slijeda smješteni u nekom kontejneru čiji iteratori nisu osobito moćni,
+recimo u listi). Rezultat funkcije treba da bude onakvog tipa kakav je tip rezultata dijeljenja sume
+elemenata slijeda s realnim brojem
+ Napisanu funkciju demonstrirajte na listi od 9 cijelih brojeva čiji se elementi unose putem tastature.
