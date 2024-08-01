@@ -5,7 +5,7 @@
 
 
 template<typename tip>
-void aritmeticka_sredina(tip pocetak, tip iza_kraja) {
+auto aritmeticka_sredina(tip pocetak, tip iza_kraja) {
     // duzina
     int size = std::distance(pocetak, iza_kraja);
     if (size < 2) throw std::domain_error("Prekratak slijed");
@@ -13,16 +13,20 @@ void aritmeticka_sredina(tip pocetak, tip iza_kraja) {
     tip iter_sredina = std::next(pocetak, size / 2);
     auto suma1 = *pocetak, suma2 = *iter_sredina;
     // sum of first half
-    while(++pocetak != iter_sredina) suma1 += *pocetak;
+    while (++pocetak != iter_sredina) suma1 += *pocetak;
     // sum of second half
-    while(++iter_sredina != iza_kraja) suma2 += *iter_sredina;
-    // TODO: correctly divide and compare two sums
+    while (++iter_sredina != iza_kraja) suma2 += *iter_sredina;
+    // prosjeci
+    auto p1 = suma1 / double(size / 2), p2 = suma2 / double(size + 1 / 2);
+    if (p1 > p2) return p1;
+    return p2;
 }
 
 int main() {
     try {
         std::list<int> l{3, 8, 6, 2, 4, 1, 5};
-        aritmeticka_sredina(l.begin(), l.end());
+        auto x = aritmeticka_sredina(l.begin(), l.end());
+        std::cout << "Result: " << x << std::endl;
     } catch (const std::exception &e) {
         std::cout << e.what() << std::endl;
     }
