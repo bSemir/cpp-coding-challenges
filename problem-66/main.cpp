@@ -17,16 +17,19 @@ auto aritmeticka_sredina(tip pocetak, tip iza_kraja) {
     // sum of second half
     while (++iter_sredina != iza_kraja) suma2 += *iter_sredina;
     // prosjeci
-    auto p1 = suma1 / double(size / 2), p2 = suma2 / double(size + 1 / 2);
+    auto p1 = suma1 / double(size / 2);
+    auto p2 = suma2 / double((size + 1) / 2);
     if (p1 > p2) return p1;
     return p2;
 }
 
 int main() {
     try {
-        std::list<int> l{3, 8, 6, 2, 4, 1, 5};
+        std::list<int> l(9);
+        std::cout << "Unesite elemente: ";
+        for (auto &el: l) std::cin >> el;
         auto x = aritmeticka_sredina(l.begin(), l.end());
-        std::cout << "Result: " << x << std::endl;
+        std::cout << "Prosjek elemenata vece polovice: " << x << std::endl;
     } catch (const std::exception &e) {
         std::cout << e.what() << std::endl;
     }
