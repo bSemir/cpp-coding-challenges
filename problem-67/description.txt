@@ -1,0 +1,11 @@
+Napišite generičku funkciju koja nalazi lokacije najvećih i najmanjih elemenata u matrici čiji su
+elementi proizvoljnog tipa, uz jedinu pretpostavku da se mogu međusobno porediti po veličini
+(govori se u množini, jer se najveći odnosno najmanji element mogu naći i na više mjesta u matrici,
+ukoliko se ponavljaju). Matrica može biti i grbava. Prvi parametar funkcije je matrica proizvoljnog
+tipa elemenata za koju se traže lokacije najvećih i najmanjih elemenata. Funkcija treba nađene
+lokacije najvećih odnosno najmanjih elemenata smjestiti redom u drugi odnosno treći parametar
+funkcije. Ovi parametri su vektori kompleksnih brojeva, pri čemu svaki kompleksni broj odgovara
+jednoj nađenoj lokaciji, i to na način da mu je realni dio jednak indeksu reda, a imaginarni dio
+indeksu kolone u kojoj je nađen najmanji odnosno najveći element.
+Napisanu funkciju demonstrirajte u isječku programa u kojem će se za neku matricu formata 5 × 5 čiji se elementi unose putem
+tastature na ekranu ispisati lokacije njenih najvećih elemenata.
