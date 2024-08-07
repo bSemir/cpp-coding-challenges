@@ -1,5 +1,10 @@
-Šta će ispisati sljedeći isječak koda?
-
+1. Šta će ispisati sljedeći isječak koda?
 int a[]{5, 1, 6, 4, 2, 3}, *m = &a[3], &n = *m;
 m += 3;
 std::cout << n;
+
+2. Šta će ispisati sljedeći isječak koda?
+int a[]{5, 1, 4, 3, 8, 6};
+for(int k : a) k *= 2;
+for(int &k : a) k += 2;
+for(int k : a) std::cout << k << " ";
