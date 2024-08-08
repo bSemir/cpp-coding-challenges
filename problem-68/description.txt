@@ -8,3 +8,9 @@ int a[]{5, 1, 4, 3, 8, 6};
 for(int k : a) k *= 2;
 for(int &k : a) k += 2;
 for(int k : a) std::cout << k << " ";
+
+Šta će ispisati sljedeći isječak koda?
+std::string str{"a ba ab aba bab"};
+std::cout << str << " ";
+std::remove_copy(str.rbegin(), str.rend(), std::back_inserter(str), ' ');
+std::cout << str;
