@@ -1,6 +1,7 @@
 #include <iostream>
 #include <algorithm>
 #include <string>
+#include <set>
 
 
 int main() {
@@ -24,6 +25,18 @@ int main() {
     std::cout << str << " ";
     std::remove_copy(str.rbegin(), str.rend(), std::back_inserter(str), ' ');
     std::cout << str;
+
+    std::cout << std::endl;
+
+    // 4
+    std::set<int> s;
+    s.insert(6);
+    s.insert(3);
+    s.insert(9);
+    s.insert(6);
+    s.insert(1);
+    s.insert(8);
+    // for (auto i = s.rbegin(); i != s.rend(); i++) std::cout << (++*i)++ << " "; // syntax error, uncomment to see
     return 0;
 }
 
@@ -50,3 +63,9 @@ int main() {
 // The string `str` is "a ba ab aba bab". First cout prints the original string.
 // The `remove_copy` functions copies the elements of the string in reverse order to the end of the string, removing spaces.
 // Here, reverse iterators are used to iterate over the string in reverse order. The output string becomes "a ba ab aba bab babbabababa".
+
+// ### 4 ###
+// Output: syntax error -> error: cannot assign to return value because function 'operator*' returns a const value
+// Explanation:
+// `(++*i)++` doesn't work because when it comes to sets, the elements are constant and cannot be modified. *i is const!
+// In this case, where we loop through the set in reverse order, the elements are constant and cannot be modified.
