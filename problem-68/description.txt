@@ -19,3 +19,10 @@ std::cout << str;
 std::set<int> s;
 s.insert(6); s.insert(3); s.insert(9); s.insert(6); s.insert(1); s.insert(8);
 for(auto i = s.rbegin(); i != s.rend(); i++) std::cout << (++*i)++ << " ";
+
+5. Uz pretpostavku da je data funkcija
+std::function<int(int)> w(int x) { return [x](double y) { return 3 * x + y; }; }
+odredite šta će ispisati sljedeći isječak koda:
+int q = 4, r{2};
+auto z = w(q + r);
+std::cout << z(q - r);

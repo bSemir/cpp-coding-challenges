@@ -3,6 +3,7 @@
 #include <string>
 #include <set>
 
+std::function<int(int)> w(int x) { return [x](double y) { return 3 * x + y; }; }
 
 int main() {
     // 1
@@ -37,6 +38,14 @@ int main() {
     s.insert(1);
     s.insert(8);
     // for (auto i = s.rbegin(); i != s.rend(); i++) std::cout << (++*i)++ << " "; // syntax error, uncomment to see
+
+    std::cout << std::endl;
+
+    // 5
+    int q = 4, r{2};
+    auto z = w(q + r);
+    std::cout << z(q - r);
+
     return 0;
 }
 
@@ -69,3 +78,11 @@ int main() {
 // Explanation:
 // `(++*i)++` doesn't work because when it comes to sets, the elements are constant and cannot be modified. *i is const!
 // In this case, where we loop through the set in reverse order, the elements are constant and cannot be modified.
+
+// ### 5 ###
+// Output: 20
+// Explanation:
+// The function `w` returns a lambda function that takes a double and returns 3 * x + y.
+// x is the argument passed to `w`, y is the argument passed to the lambda function.
+// z is the lambda function with x = q + r = 4 + 2 = 6.
+// z(q - r) = 3 * 6 + 2 = 20. So, the output is 20.
