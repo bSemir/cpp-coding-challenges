@@ -5,6 +5,9 @@
 
 std::function<int(int)> w(int x) { return [x](double y) { return 3 * x + y; }; }
 
+template<typename T, typename F>
+void f(T p, T q, F r) { while (p != q) r(*--q); }
+
 int main() {
     // 1
     int a[]{5, 1, 6, 4, 2, 3}, *m = &a[3], &n = *m;
@@ -46,6 +49,16 @@ int main() {
     auto z = w(q + r);
     std::cout << z(q - r);
 
+    std::cout << std::endl;
+
+    // 6
+    int arr[]{4, 6, 1, 3, 8, 2}, r_ = 3;
+    f(arr, arr + 5, [&r_](int x) {
+        std::cout << x << "," << r_ << " ";
+        r_ += x;
+    });
+    std::cout << r_;
+
     return 0;
 }
 
@@ -86,3 +99,13 @@ int main() {
 // x is the argument passed to `w`, y is the argument passed to the lambda function.
 // z is the lambda function with x = q + r = 4 + 2 = 6.
 // z(q - r) = 3 * 6 + 2 = 20. So, the output is 20.
+
+// ### 6 ###
+// Output: 8,3 3,11 1,14 6,15 4,21 25
+// Explanation:
+// The function `f` takes two pointers and a function as arguments.
+// The function `f` iterates over the array `arr` in reverse order and calls the lambda function for each element.
+// The lambda function prints the element and the value of r_ separated by a comma.
+// The lambda function also increments r_ by the value of the element.
+// The output shows the element, the value of r_ after incrementing, and the final value of r_ after the loop.
+// r(*--q) first decrements the pointer q and then dereferences it to get the value. This is equivalent to *(--q).
