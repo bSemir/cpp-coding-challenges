@@ -33,3 +33,15 @@ odredite šta će ispisati sljedeći isječak koda:
 int a[]{4, 6, 1, 3, 8, 2}, r = 3;
 f(a, a + 5, [&r](int x) { std::cout << x << "," << r << " "; r += x; });
 std::cout << r;
+
+7. Uz pretpostavku da je data funkcija
+auto g(int &p, int q, int &r) -> decltype(p) {
+p = q + r; q = p + r; r = p + q;
+std::cout << p << " " << q << " " << r << " ";
+return p;
+}
+odredite šta će ispisati sljedeći isječak koda:
+int a[]{1, 4, 2, 7, 5, 3}, *p = a + 2;
+g(*(a + 2), a[4], p[-2]) *= 3;
+for(int p : a) p += 2;
+for(int p : a) std::cout << p << " ";
