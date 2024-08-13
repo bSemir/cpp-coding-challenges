@@ -8,6 +8,14 @@ std::function<int(int)> w(int x) { return [x](double y) { return 3 * x + y; }; }
 template<typename T, typename F>
 void f(T p, T q, F r) { while (p != q) r(*--q); }
 
+auto g(int &p, int q, int &r) -> decltype(p) {
+    p = q + r;
+    q = p + r;
+    r = p + q;
+    std::cout << p << " " << q << " " << r << " ";
+    return p;
+}
+
 int main() {
     // 1
     int a[]{5, 1, 6, 4, 2, 3}, *m = &a[3], &n = *m;
@@ -59,6 +67,13 @@ int main() {
     });
     std::cout << r_;
 
+    std::cout << std::endl;
+
+    int a_[]{1, 4, 2, 7, 5, 3}, *p_ = a_ + 2;
+    g(*(a_ + 2), a_[4], p_[-2]) *= 3;
+    for (int p: a_) p += 2;
+    for (int p: a_) std::cout << p << " ";
+
     return 0;
 }
 
@@ -109,3 +124,15 @@ int main() {
 // The lambda function also increments r_ by the value of the element.
 // The output shows the element, the value of r_ after incrementing, and the final value of r_ after the loop.
 // r(*--q) first decrements the pointer q and then dereferences it to get the value. This is equivalent to *(--q).
+
+// ### 7 ###
+// Output: 6 7 13 13 4 18 7 5 3
+// Explanation:
+// The function `g` takes three arguments by reference and returns a reference to the first argument.
+// Inside `g`, p is assigned the sum of q and r, q is assigned the sum of p and r, and r is assigned the sum of p and q.
+// First, p == 2, q == 5, r == 1. Then p == 6, q == 7, r == 13 and 6 is returned. Function `g` prints 6 7 13.
+// The expression `*(a_ + 2)` is equivalent to `a_[2]`, which is 2. a_[4] is 5. p_[-2] is equivalent to *(p_ - 2), which is 1.
+// Since 6 is returned from `g`, it's multiplied by 3, resulting in 18, which is stored back in the array at the third position.
+// The first range-based for loop does not modify the elements of the array a_, because p is a copy of the elements.
+// The second range-based for loop prints the array. If you ask me, the output should be 6 7 13 1 4 18 7 5 3.
+// But it's not and idk why is there another 13 instead of 1.
