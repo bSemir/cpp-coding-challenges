@@ -1,0 +1,7 @@
+Za neki slijed brojeva `a1, a2, ..., aN` kažemo da je periodičan ukoliko postoji prirodan broj T takav da
+vrijedi `ai = ai+T` za sve vrijednosti indeksa `i` takve da su oba indeksa `i` i `i + T` validni (tj. u opsegu od 1
+do N). Najmanji takav broj T (ako postoji) naziva se period slijeda. Napišite funkciju “PeriodListe”
+koja kao parametar prima listu realnih brojeva. Funkcija treba da ispita da kao rezultat vrati period
+slijeda brojeva koji se nalaze u listi, ili 0 u slučaju da slijed brojeva u listi nije periodočan. Na primjer,
+za listu čiji su elementi 5, 9, 7, 2, 5, 9, 7, 2, 5, 9, 7 funkcija treba da vrati kao rezultat 4, s obzirom da
+ovi brojevi čine periodičan slijed perioda 4.
