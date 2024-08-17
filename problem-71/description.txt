@@ -1,0 +1,9 @@
+Napišite funkciju koja kao parametar prima jedan string (tj. parametar tipa “string”) koji
+predstavlja neku rečenicu, a koja vraća kao rezultat novi string koji predstavlja istu tu rečenicu, ali
+iz koje su uklonjeni eventualni suvišni razmaci. Pod suvišnim razmacima smatramo sve razmake
+koji se nalaze ispred prvog znaka koji nije razmak (tj. razmake na početku stringa), zatim sve
+razmake iza posljednjeg znaka koji nije razmak (tj. razmake na kraju stringa), kao i sve višestruke
+razmake između riječi (tj. riječi u rezultirajućem stringu treba da budu razdvojene samo jednim
+razmakom). Na primjer, ukoliko se funkciji kao parametar proslijedi string “ Ovo je primjer. ”,
+funkcija kao rezultat treba da vrati string “Ovo je primjer.”.
+Napisanu funkciju testirajte u glavnom programu na stringovima koji se unose sa tastature
