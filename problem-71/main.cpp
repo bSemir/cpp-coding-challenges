@@ -19,10 +19,13 @@ std::string IzbaciSuvisneRazmake(std::string &s) {
             result = result + word + ' ';
         }
     }
+
+    if (!result.empty() && result.back() == ' ')
+        result.pop_back();
     return result;
 }
 
-// TODO: remove spaces at the end if found, implement better algorithm to check if sentence is valid
+// TODO: implement better algorithm to check if sentence is valid
 
 int main() {
     try {
