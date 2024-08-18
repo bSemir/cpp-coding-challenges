@@ -13,6 +13,8 @@ std::string IzbaciSuvisneRazmake(std::string &s) {
     return result;
 }
 
+// TODO: remove spaces at the end if found, try-catch..
+
 int main() {
     std::cout << "Unesite recenicu: "; //   "   Ovo    je primjer.    "
     std::string sentence;
