@@ -2,7 +2,7 @@ Here I push at least one algorithmic coding problem every (or every other) day u
 #
 Using: C++ (14/17)
 #
-Covered the following areas so far:
+Covered the following topics so far:
 - Vectors (std::vector)
 - Arrays ("modern" array" std::array)
 - arrays
