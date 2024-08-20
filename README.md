@@ -4,12 +4,12 @@ Using: C++ (14/17)
 #
 Covered the following topics so far:
 - Vectors (std::vector)
-- Arrays ("modern" array" std::array)
-- arrays
+- Arrays (C-like arrays and std::array)
 - Strings (std::string)
 - list (std::list)
 - queue (std::queue)
 - map (std::map)
+- set (std::set)
 - pointers, double pointers and pointer arithmetic
 - smart pointers
 - references
