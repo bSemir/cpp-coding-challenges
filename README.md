@@ -10,6 +10,7 @@ Covered the following topics so far:
 - queue (std::queue)
 - map (std::map)
 - set (std::set)
+- matrices
 - pointers, double pointers and pointer arithmetic
 - smart pointers
 - references
