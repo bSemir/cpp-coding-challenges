@@ -1,0 +1,9 @@
+Napišite funkciju čiji je prvi parametar neki string, a drugi parametar neki znak. Funkcija treba da
+kao rezultat vrati novi string koji se sastoji od istih riječi kao string zadan prvim parametrom, samo
+bez razmaka, i u kojem su riječi međusobno razdvojene znakom koji se zadaje kao drugi parametar.
+Smatra se da je riječ svaki uzastopni niz znakova koji nisu razmaci, omeđen slijeva i zdesna sa po
+jednim razmakom (osim ukoliko se riječ nalazi na početku odnosno kraju stringa, kada ne mora biti
+omeđena razmakom slijeva odnosno zdesna). Recimo, ukoliko se kao prvi parametar zada string “
+Danas je ispit iz TP-a ” a kao drugi parametar znak zarez, funkcija kao rezultat treba da vrati
+string “Danas,je,ispit,iz,TP-a”.
+Napišite i kratki isječak programa koji demonstrira kako se koristi napisana funkcija.
