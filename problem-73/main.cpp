@@ -19,12 +19,12 @@ std::string fun(std::string &s, const std::vector<double> &v) {
         if (s[i] == '%' && i + 1 < s.length()) {
             if (s[i + 1] == 'd') {
                 res = res + std::to_string(int(v[j++]));
-                i++;
+                i++; // skip the next character ('d')
             } else if (s[i + 1] == 'f') {
                 std::ostringstream oss;
                 oss << v[j++];
                 res += oss.str();
-                i++;
+                i++; // skip 'f'
             } else {
                 res = res + s[i];
             }
@@ -41,8 +41,6 @@ int main() {
         std::vector<double> v{12.25, 34.13, 25, 47};
         std::string r = fun(s, v);
         std::cout << r << std::endl;
-        // outputs: abc12xx34.130000yy 25
-        // should be: abc12xx34.13yy 25
     } catch (const std::range_error &err) {
         std::cout << err.what() << std::endl;
     }
