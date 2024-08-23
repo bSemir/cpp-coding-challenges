@@ -1,0 +1,8 @@
+Napišite funkciju čiji je prvi parametar neki string (tj. objekat tipa “string”), a drugi parametar je
+vektor realnih brojeva. Funkcija treba da vrati kao rezultat novi string u kojem se svaka pojava
+sekvence “%d“ ili “%f“ zamijenjuje sa po jednim brojem iz vektora, u redoslijedu pojavljivanja. Pri tome,
+ako je sekvenca “%d“, eventualne decimale u broju se odsjecaju, dok se kod sekvence “%f“ zadržavaju.
+Na primjer, ukoliko string glasi “abc%dxx%fyy %d” i ukoliko se u vektoru nalaze brojevi 12.25, 34.13,
+25 i 47, novi string treba da glasi “abc12xx34.13yy 25” (podatak 47 koji je “viška” prosto se ignorira).
+U slučaju da nema “dovoljno” brojeva u vektoru da se izvrši zamjena, funkcija treba baciti izuzetak
+tipa “range_error” uz prateći tekst “Nedovoljno brojeva”.
