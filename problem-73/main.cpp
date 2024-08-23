@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include <stdexcept>
+#include <sstream>
 
 int broj_pojavljivanja(std::string &s, const std::vector<double> &v) {
     int n = 0;
@@ -15,14 +16,20 @@ std::string fun(std::string &s, const std::vector<double> &v) {
     std::string res;
     int j = 0;
     for (int i = 0; i < s.length(); i++) {
-        if (s[i] == '%' && s[i + 1] == 'd') {
-            res = res + std::to_string(int(v[j++]));
-            i++;
-        } else if (s[i] == '%' && s[i + 1] == 'f') {
-            res = res + std::to_string(v[j++]);
-            i++;
+        if (s[i] == '%' && i + 1 < s.length()) {
+            if (s[i + 1] == 'd') {
+                res = res + std::to_string(int(v[j++]));
+                i++;
+            } else if (s[i + 1] == 'f') {
+                std::ostringstream oss;
+                oss << v[j++];
+                res += oss.str();
+                i++;
+            } else {
+                res = res + s[i];
+            }
         } else {
-            res = res + s[i];
+            res += s[i];
         }
     }
     return res;
@@ -34,6 +41,8 @@ int main() {
         std::vector<double> v{12.25, 34.13, 25, 47};
         std::string r = fun(s, v);
         std::cout << r << std::endl;
+        // outputs: abc12xx34.130000yy 25
+        // should be: abc12xx34.13yy 25
     } catch (const std::range_error &err) {
         std::cout << err.what() << std::endl;
     }
