@@ -1,0 +1,9 @@
+Pod najvecim zajednickim djeliocem (NZD) niza brojeva a1, a2, ..., an podrazumijeva se najveci prirodni
+broj d s kojim su svi brojevi a1, a2, ..., an djeljivi. Napisite funkciju koja kao parametar prima
+vektor cijelih brojeva, a koja kao rezultat vraca najveci zajednicki djelilac svih brojeva u vektoru.
+Pri tome uopce nije bitno da funkcija bude efikasna, tj. ne trebate implementirati nikakve napredne algoritme,
+dovoljna je obicna pretraga "grubom silom" za takvim brojem (pri cemu, ako eventualno znake neki od naprednijih
+algoritama za istu svrhu, poput Euklidovog algoritma, nije zabranjeno da ih koristite, ali Vam to nece nista
+olaksati izvedbu).
+Demonstrirajte kako biste pozvali napisanu funkciju da ispisete na ekran najveci zajednicki djelilac brojeva
+305, 5630, 210, 8470 i 7305, ali da pri tome ne deklarirate nijednu promjenljivu.
