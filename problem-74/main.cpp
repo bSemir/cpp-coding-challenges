@@ -7,9 +7,10 @@ int NZD(const std::vector<int> &v) {
     int najmanji = *std::min_element(v.begin(), v.end());
     for (int i = najmanji; i > 0; i--) {
         bool djeljiv = true;
-        for (int j = 0; j < v.size(); j++) {
-            if (v[j] % i != 0) {djeljiv = false;
-            break;
+        for (int j: v) {
+            if (j % i != 0) {
+                djeljiv = false;
+                break;
             }
         }
         if (djeljiv) return i;
