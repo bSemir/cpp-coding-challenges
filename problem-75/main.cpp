@@ -14,6 +14,9 @@ T1 KopirajBezDuplikata(T1 pocetak, T1 iza_kraja, T2 odrediste) {
         }
         if (unique)
             *odrediste++ = *p;
+//        other way without second for loop:
+//        if(std::find(pocetak, p, *p) == p)
+//            *odrediste++ = *p;
     }
     return odrediste;
 }
