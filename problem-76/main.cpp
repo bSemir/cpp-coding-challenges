@@ -1,10 +1,10 @@
 #include <iostream>
-#include <vector>
+#include <list>
 
 template<typename IterTip1, typename IterTip2, typename FunTip>
 auto
 GeneraliziraniSkalarniProdukt(IterTip1 pocetak_prve, IterTip1 kraj_prve, IterTip2 pocetak_druge, FunTip f) {
-    using tip = std::remove_reference_t<decltype(f(*pocetak_prve, *pocetak_druge) + f(*pocetak_prve, *pocetak_druge))>;
+    using tip = std::remove_reference_t<decltype(f(*pocetak_prve, *pocetak_druge))>;
     tip result{};
     while (pocetak_prve != kraj_prve)
         result += f(*pocetak_prve++, *pocetak_druge++);
@@ -17,9 +17,9 @@ int main() {
     std::cin >> n;
 
     std::cout << "Unesite prvu sekvencu: ";
-    std::vector<double> v1(n);
+    std::list<double> v1(n);
     for (auto &e: v1) std::cin >> e;
-    std::vector<double> v2(n);
+    std::list<double> v2(n);
 
     std::cout << "Unesite drugu sekvencu: ";
     for (auto &e: v2) std::cin >> e;
