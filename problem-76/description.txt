@@ -1,0 +1,22 @@
+Neka su 𝑎1, 𝑎2, ..., 𝑎n i 𝑏1, 𝑏2, ..., 𝑏n dvije sekvence nekakvih elemenata. Generalizirani skalarni
+produkt ove dvije sekvence definira se kao vrijednost izraza 𝑓(𝑎1, 𝑏1)+𝑓(𝑎2, 𝑏2) + … + 𝑓(𝑎n, 𝑏n),
+pri čemu je 𝑓 neka zadana funkcija. Napisati generičku funkciju “GeneraliziraniSkalarniProdukt”
+koja prima četiri parametra p1, p2, p3 i 𝑓. Prva dva parametra su pokazivači ili iteratori koji
+omeđuju blok koji sadrži prvu sekvencu, dok je treći parametar pokazivač ili iterator koji pokazuje
+na početak bloka koji sadrži drugu sekvencu, a za koji se podrazumijeva da ima isti broj elemenata
+kao i prvi blok. Tipovi elemenata ove dvije sekvence ne moraju biti isti. Funkcija treba da kao
+rezultat vrati vrijednost generaliziranog skalarnog produkta ove dvije sekvence, pri čemu se funkcija
+𝑓 zadaje kao četvrti parametar. Rezultat funkcije “GeneraliziraniSkalarniProdukt” je onog tipa
+kakvog je tipa rezultat sabiranja onih vrijednosti kakve vraća funkcija 𝑓 (pretpostavlja se da se te
+vrijednosti mogu međusobno sabirati).
+Pri tome, s iteratorima ne treba koristiti nikakve druge operacije osim dereferenciranja, inkrementiranja i poređenja na različitost, da bi funkcija mogla
+raditi i s iteratorima koji ne posjeduju punu funkcionalnost iteratora s direktnim pristupm..
+
+Napisanu funkciju treba demonstrirati u testnom programu koji će je iskoristiti da izračuna i ispiše
+klasični skalarni produkt (za koji je 𝑓(𝑥, 𝑦) = 𝑥𝑦) dvije sekvence realnih brojeva, a koje se unose
+putem tastature. Dijalog između korisnika i programa treba da izgleda ovako:
+
+Duzina sekvenci: 5
+Unesite prvu sekvencu: 3 5 2 6 1
+Unesite drugu sekvencu: 2 4 0 -1 3
+Skalarni produkt: 23
