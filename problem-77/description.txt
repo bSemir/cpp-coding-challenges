@@ -1,0 +1,15 @@
+Napišite funkciju “DodajSuprotne” koja kao parametar prima neki vektor cijelih brojeva a koja modificira
+taj vektor tako da se iza svakog elementa u vektoru dopiše njemu suprotan (negiran) element.
+Na primjer, ukoliko je vektor prenesen kao parametar sadržavao elemente 3, 10, −5 i 4, nakon poziva
+funkcije isti vektor treba sadržavati elemente 3, −3, 10, −10, −5, 5, 4 i −4.
+Funkcija ne vraća nikakav rezultat nego samo utiče na izmjenu vektora prenesenog kao parametar.
+Također, funkcija ne smije da koristi nikakve pomoćne kontejnerske tipove podataka (nizove, vektore, itd.).
+
+Napisanu funkciju demonstrirajte u glavnom programu koji sa tastature unosi elemenata u vektor (pri
+čemu se prethodno unosi sa tastature), poziva napisanu funkciju nad unesenim vektorom, i na kraju,
+ispisuje elemente modificiranog vektora na ekran. Dijalog između programa i korisnika treba izgledati
+ovako (pri čemu nije potrebno provjeravati korektnost unosa):
+
+Koliko ima brojeva: 4
+Unesite brojeve: 3 10 -5 4
+3 -3 10 -10 -5 5 4 -4
