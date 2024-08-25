@@ -1,0 +1,17 @@
+Napišite generičku funkciju “KopirajBezDuplikata” koja prepisuje elemente bloka omeđenog s prva
+dva parametra (prvi pokazuje na početak, a drugi tačno iza kraja bloka) u blok na čiji početak
+pokazuje treći parametar, ali izostavljajući elemente koji su jednaki nekom elementu koji se već
+ranije pojavljivao u bloku (tj. izostavljajući duplikate). Parametri mogu biti bilo pokazivači, bilo
+iteratori. Pored toga, s iteratorima nije dozvoljeno koristiti nikakve druge operacije osim
+dereferenciranja, inkrementiranja i poređenja na različitost, da bi funkcija mogla korektno raditi i s
+iteratorima koji nemaju punu snagu iteratora s direktnim pristupom. Prva dva parametra moraju
+biti istog tipa, dok se tip trećeg parametra može razlikovati od njihovog tipa (da se omogući recimo
+prepisivanje iz vektora u dek, itd.). Kao rezultat, funkcija treba da vrati pokazivač odnosno iterator
+koji pokazuje tačno iza kraja odredišnog bloka (nakon obavljenog prepisivanja).
+
+Napisanu funkciju treba demonstrirati u isječku programa koji će neki string unesen sa tastature
+prepisati u drugi string izostavljajući duplikate znakova prisutne u prvom stringu i na kraju ispisati
+novodobijeni string. Dijalog između korisnika i programa treba da izgleda ovako:
+
+Unesite string: I corava koka gvozdena vrata otvara...
+String bez duplikata: I coravkgzdent.
