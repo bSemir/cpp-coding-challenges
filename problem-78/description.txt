@@ -1,0 +1,30 @@
+Napisati funkciju “KreirajTrougao” (ili “KreirajTrokut”, ovisno od jezičkih preferencija) s jednim
+cjelobrojnim parametrom 𝑛 koja vrši dinamičku alokaciju “grbave matrice” sa 𝑛 redova u kojoj prvi
+red sadrži samo element 1, drugi red elemente 2, 1 i 2, treći red elemente 3, 2, 1, 2 i 3, četvrti red
+elemente 4, 3, 2, 1, 2, 3 i 4, itd. (elementi su tipa “int”). Kao rezultat, funkcija vraća dvostruki
+pokazivač preko kojeg se može pristupiti elementima tako kreirane grbave matrice. Ukoliko je 𝑛
+negativan ili 0, funkcija treba baciti izuzetak tipa “domain_error”, uz prateći tekst “Broj redova mora
+biti pozitivan”. U slučaju da alokacija ne uspije, funkcija treba baciti izuzetak tipa “bad_alloc”, pazeći
+pri tome da ne dođe do curenja memorije ni u kakvim okolnostima. Za alociranje treba koristiti
+postupak fragmentirane alokacije. Napisanu funkciju treba iskoristiti u testnom programu koji traži
+da se sa tastature unese broj 𝑛, zatim kreira “grbavu matricu” traženih svojstava sa 𝑛 redova, te na
+kraju ispisuje njene elemente red po red (uz jedan razmak između elemenata istog reda) nakon
+čega oslobađa prostor koji je zauzela ta matrica. Pri tome treba predvidjeti i hvatanje svih izuzetaka
+koji bi funkcija eventualno mogla baciti. U slučaju bacanja izuzetka tipa “bad_alloc”, tekst koji se
+prikazuje na ekranu treba glasiti “Izuzetak: Nedovoljno memorije!”.
+Dijalozi između korisnika i programa trebaju izgledati poput sljedećih:
+
+Koliko zelite redova: 5
+1
+2 1 2
+3 2 1 2 3
+4 3 2 1 2 3 4
+5 4 3 2 1 2 3 4 5
+
+
+Koliko zelite redova: -3
+Izuzetak: Broj redova mora biti pozitivan
+
+
+Koliko zelite redova: 1000000000
+Izuzetak: Nedovoljno memorije!
