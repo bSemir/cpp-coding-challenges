@@ -1,0 +1,27 @@
+Napisati generičku funkciju “KreirajMatricu” koja služi za univerzalnu dinamičku alokaciju matrica
+čiji su elementi proizvoljnog tipa. Treba predvidjeti dvije verzije ove funkcije. Prva verzija ima pet
+parametra, od kojih se četvrti i peti mogu izostaviti. Drugi i treći parametar su broj redova odnosno
+kolona matrice. Četvrti parametar je logičkog tipa, i ukoliko on ima vrijednost “tačno”, alokacija će
+se obavljati postupkom kontinualne alokacije, u suprotnom će se koristiti fragmentirana alokacija.
+Podrazumijevana vrijednost ovog parametra (u slučaju njegovog izostavljanja, podrazumijeva se
+fragmentirana alokacija). Peti parametar je inicijalna vrijednost kojom se popunjavaju elementi
+alocirane matrice. U slučaju njegovog izostavljanja, treba uzeti da je inicijalna vrijednost jednaka
+odgovarajućoj podrazumijevnoj vrijednosti za tip elemenata matrice. Ova verzija funkcije treba da
+izvrši dinamičku alokaciju prostora za pamćenje elemenata matrice, zatim da popuni elemente
+matrice zadanom inicijalnom vrijednošću i, konačno, da u prvi parametar funkcije smjesti dvojni
+pokazivač preko kojeg se može pristupiti elementima matrice. U slučaju problema pri alokaciji,
+funkcija treba baciti iste izuzetke kao što inače baca i operator “new” (dakle, “bad_alloc” u slučaju
+neispravne alokacije, odnosno “bad_array_new_length” u slučaju besmislenih dimenzija matrice),
+ali ni u kom slučaju ne smije doći do curenja memorije. Također, ova verzija funkcije ne vraća
+nikakvu vrijednost, nego se povratna informacija ostvaruje isključivo putem prvog parametra.
+Druga verzija funkcije ima četiri parametra, koji imaju ista značenja kao posljednja četiri parametra
+prve verzije (dakle, samo je izostavljen parametar u koji se smješta pokazivač za pristup alociranoj
+matrici). Za razliku od prve verzije, ova verzija vraća kao rezultat pokazicač za pristup alociranoj
+matrici kao rezultat, dok se tip elemenata matrice zadaje putem parametara šablona (s obzirom da
+ni jedan od parametara funkcije ne sadrži informaciju o tipu elemenata matrice).
+
+Napisanu funkciju treba demonstrirati u kratkom testnom programu u kojem se dinamički kreiraju
+dvije matrice realnih brojeva formata 3× 3, od kojih se prva kreira pomoću prve, a druga pomoću
+druge verzije funkcije. Također, prva se kreira putem fragmentirane, a druga putem kontinualne
+alokacije. Nakon toga se putem tastature unose elementi obje matrice, te ispisuju njihovi elementi
+na ekran (svaki element u posebnom redu, a elementi redova se međusobno razdvajaju razmacima.
