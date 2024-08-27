@@ -1,0 +1,38 @@
+Napisati funkciju “KreirajPascalovTrougao” (ili “KreirajPascalovTrokut”) s dva parametra nazvana
+“A” i “n”. Ova funkcija dinamički alocira grbavu matricu cijelih brojeva (tipa “int”) čiji prvi red ima 1
+element, drugi 2 elementa, i tako dalje do posljednjeg reda koji ima 𝑛 elemenata (pri čemu je 𝑛
+vrijednost parametra “n” koji je također tipa “int”). Nakon toga, funkcija popunjava tako formirane
+redove elementima Pascalovog trougla (trokuta). Dakle, prvi red treba sadržavati element 1, drugi
+red elemente 1 i 1, treći red elemente 1, 2 i 1, četvrti red elemente 1, 3, 3 i 1, peti red elemente 1, 4,
+6, 4 i 1, itd. (prvi i posljednji element u svakom redu jednaki su 1, a svaki ostali element jednak je
+zbiru elementa koji se nalazi tačno iznad njega i susjeda tog elementa sa lijeve strane). Za alokaciju
+treba koristiti postupak kontinualne alokacije. Konačno, funkcija treba da u prvi parametar “A”
+smjesti odgovaraći pokazivač preko kojeg se može izvršiti pristup elementima alocirane matrice.
+Funkcija ne vraća nikakav rezultat. U slučaju da se kao drugi parametar zada negativan broj ili nula,
+funkcija treba da baci izuzetak tipa “domain_error” uz prateći tekst “Pogresan broj redova”, dok u
+slučaju da alokacija ne uspije, treba baciti izuzetak tipa “range_error” uz prateći tekst “Kreiranje
+nije uspjelo”. Pri tome, treba voditi računa da ni u kom slučaju ne smije doći do curenja memorije. 
+
+Napisanu funkciju treba demonstrirati u testnom programu koji koristi napisanu funkciju da kreira
+dinamičku grbavu matricu koja sadrži Pascalov trougao (trokut) sa 𝑛 redova, pri čemu se 𝑛 unosi
+putem tastature i ispisuje tako kreiranu grbavu matricu na ekran. Porebno je predviditi i hvatanje
+eventualno bačenih izuzetaka, kao i oslobađanje prostora koji je matrica zauzimala nakon završetka
+rada. Dijalozi između programa i korisnika trebju izgledati poput sljedećih (pri čemu nije potrebno
+provjeravati korektnost unosa):
+
+Broj redova: 7
+1
+1 2 1
+1 3 3 1
+1 4 6 4 1
+1 5 10 10 5 1
+1 6 15 20 15 6 1
+1 7 21 35 35 21 7 1
+
+
+Koliko zelite redova: -2
+Problem: Pogresan broj redova!
+
+
+Koliko zelite redova: 1000000000
+Problem: Kreiranje nije uspjelo!
