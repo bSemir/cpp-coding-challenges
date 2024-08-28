@@ -9,7 +9,7 @@ void KreirajMatricu(tip **&A, int br_redova, int br_kolona, bool nacin = true, t
             // kontinualna
             A = new int *[br_redova]{};
             A[0] = new int[br_redova * br_kolona];
-            // postavljanje pokazivaca da pokazuju na pocetke odg redova
+            // postavljanje pokazivaca da pokazuju na pocetke odg redovak
             for (int i = 1; i < br_redova; i++) A[i] = A[i - 1] + br_kolona;
             // popunjavanje
             for (int i = 0; i < br_redova; i++) {
@@ -35,6 +35,13 @@ void KreirajMatricu(tip **&A, int br_redova, int br_kolona, bool nacin = true, t
         delete[] A;
         throw;
     }
+}
+
+template<typename T>
+T **KreirajMatricu(int br_redova, int br_kolona, bool nacin = true, T inicijalna_vrijednost = {}) {
+    T **A = nullptr;
+    KreirajMatricu(A, br_redova, br_kolona, nacin, inicijalna_vrijednost);
+    return A;
 }
 
 int main() {
@@ -65,7 +72,6 @@ int main() {
             }
             std::cout << std::endl;
         }
-        // TODO: delete
     } catch (std::exception &e) {
         std::cout << "Izuzetak: " << e.what() << std::endl;
     }
