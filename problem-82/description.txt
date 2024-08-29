@@ -1,0 +1,11 @@
+Napišite funkciju "SlikeUOgledalu" koja kao parametar prima vektor cijelih brojeva a koja kao
+rezultat vraća novi vektor koji sadrži brojeve koji su “slika u ogledalu” odgovarajućih brojeva iz
+prvog vektora, odnosno koji se od odgovarajućih brojeva iz prvog vektora razlikuju po tome što im
+je redoslijed cifara obrnut. Na primjer, ukoliko se funkciji proslijedi vektor čiji su elementi redom
+327, 42, 5, 46127, 319 i 87, vektor koji se vraća kao rezultat treba redom da sadrži elemente
+723, 24, 5, 72164, 913 i 78. Napisanu funkciju demonstrirajte u testnom programu koji traži da
+se sa tastature unose brojevi koji se smještaju u neki vektor sve dok se sa tastature ne unese nula
+(koja se ne smješta u vektor), a koji nakon toga poziva napisanu funkciju da odredi "slike u
+ogledalu" unesenih brojeva i ispiše ih na ekran u vidu rečenica oblika “Slika u ogledalu broja 𝑥 glasi
+𝑦” i tako redom za sve brojeve. U programu ne treba testirati ispravnost unesenih podataka, tj.
+pretpostavka je da će korisnik programa zaista unositi brojeve.
