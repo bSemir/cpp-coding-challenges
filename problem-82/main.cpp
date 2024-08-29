@@ -1,5 +1,7 @@
 #include <iostream>
 #include <vector>
+#include <string>
+
 
 int izvrni_cifre(int n) {
     if (n == 0) return 0;
@@ -12,10 +14,8 @@ int izvrni_cifre(int n) {
 
 std::vector<int> SlikeUOgledalu(const std::vector<int> &v) {
     std::vector<int> vec;
-    for (int i = 0; i < v.size(); i++) {
-        int izvrnuti = izvrni_cifre(v.at(i));
-        vec.push_back(izvrnuti); // vec.push_back(izvrni_cifre(v.at(i)));
-    }
+    for (auto &n: v)
+        vec.push_back(izvrni_cifre(n));
     return vec;
 }
 
