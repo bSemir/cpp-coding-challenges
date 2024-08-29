@@ -1,0 +1,14 @@
+U biblioteci "algorithm" postoji funkcija "max_element" koja, u varijanti s 3 parametra,
+vraca pokazivac ili iterator na onaj element bloka omedjenog s prva dva parametra koji je
+"najveci" u odnosu na relaciju poretka koja je definirana funkcijom koja se prenosi kao
+treci parametar. Ta funkcija prima dva elementa bloka kao parametre i vraca logicku
+vrijednost "tacno" ukoliko prvi parametar prethodi drugom u skladu s zeljenim poretkom,
+a u suprotnom vraca logicku vrijednost "netacno". Napravite sami svoju genericku funkciju
+koja radi potpuno istu stvar kao i bibliotecka funkcija "max_element" s 3 parametra, a
+zatim demonstrirajte kako biste upotrijebili napisanu funkciju da u nekoj listi od 10
+cijelih brojeva ciji se elementi unose sa tastature pronadjete i ispisete onaj element
+liste koji ima najvecu sumu djelilaca. Kao funkciju koja definira zeljeni poredak, a
+koju cete slati kao parametar napisanoj funkciji, upotrijebite lambda funkciju.
+Prilikom pisanja funkcije, da bi funkcija bila sto je god moguce univerzalnija, nemojte
+koristiti nikakve druge operacije s iteratorima osim onih operacija koje su garantirano
+podrzane za sve vrste iteratora.
