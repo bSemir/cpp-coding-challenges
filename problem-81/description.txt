@@ -1,0 +1,39 @@
+Neka su date dvije sekvence a1, a2, ..., a𝑚 i b1, b2, ..., b𝑛, kao i funkcija 𝑓 s dva argumenta.
+Matrica C formata 𝑚×𝑛 čiji se elementi , računaju po formuli c𝑖,𝑗 = 𝑓(a𝑖, b𝑗) za sve 𝑖 = 1,2,…,𝑚 i 𝑗 = 1, 2,…,𝑛
+naziva se generalizirani spoljašni proizvod (engl. generalized outer product) ove dvije sekvence
+pomoću funkcije 𝑓. Napisati generičku funkciju nazvanu “GeneraliziraniSpoljasnjiProizvod”, koja
+kao prva dva parametra prihvata kontejnere koji sadrže redom elemente sekvence a1, a2, ..., a𝑚 i b1, b2, ..., b𝑛.
+Za ova dva kontejnera se pretpostavlja da mogu biti ma kakvi kontejneri, koji ne moraju nužno podržavati indeksiranje,
+ali moraju podržavati iteratore te funkcije “begin” i “end”, (što povlači i podršku rasponskim for petljama).
+Tipovi elemenata u ove dvije sekvence mogu se razlikovati (npr. jedna sekvenca može biti vektor cijelih brojeva,
+a druga moderni niz realnih brojeva). Za odgovarajuće iteratore jedino se podrazumijeva da podržavaju najnužnije operacije
+koje moraju biti podržane za sve vrste iteratora (dereferenciranje, dodjela, inkrementiranje te
+poređenje na jednakost i različitost), dok druge operacije ne moraju biti nužno podržane. Što se tiče
+funkcije 𝑓, ona može biti bilo imenovana funkcija, bilo lambda funkcija, pa čak i bilo šta što se
+ponaša poput funkcije (u narednim predavanjima ćemo vidjeti da postoje stvari koje nisu funkcije,
+mada se ponašaju poput funkcija). Jedino ograničenje je da ona mora moći primiti elemente ove
+dvije sekvence kao parametre. Tip vrijednosti koju vraća funkcija 𝑓 može biti bilo kakav, i tog će
+tipa biti elementi matrice C.
+
+Funkcija “GeneraliziraniSpoljasnjiProizvod” treba dinamički alocirati matricu C postupkom
+kontinualne alokacije i popuniti tako kreiranu matricu odgovarajućim vrijednostima tako da ona
+zaista bude generalizirani spoljašni proizvod zadane dvije sekvence. Kao rezultat, funkcija treba da
+vrati dvojni pokazivač pomoću kojeg se može pristupiti elementima kreirane matrice. Ukoliko se
+dogodi da alokacija ne uspije zbog nedovoljne količine raspoložive memorije, funkcija treba baciti
+izuzetak tipa “range_error” uz prateći tekst “Nema dovoljno memorije”. Pri tome, treba paziti da ni
+u kom slučaju ne smije doći do curenja memorije.
+
+Napisanu funkciju potrebno je demonstrirati u kratkom testnom programu, koji traži unos dužina i
+elemenata dvije sekvence, koje treba smjestiti u dva vektora realnih brojeva, a koji zatim računa i
+ispisuje na ekran elemente njihovog generaliziranog spoljašnjeg proizvoda pomoću funkcije
+𝑓(𝑥, 𝑦) = 𝑥 + 2𝑦, te na kraju oslobađa svu alociranu memoriju. Dijalog između korisnika i programa
+treba da izgleda poput sljedećeg:
+
+Duzina prve sekvence: 3
+Elementi prve sekvence: 5 2 8
+Duzina druge sekvence: 4
+Elementi druge sekvence: 1 3 6 2
+Generalizirani spoljasnji proizvod uz f(x,y)=x+2y:
+7 11 17 9
+4 8 14 6
+10 14 20 12
