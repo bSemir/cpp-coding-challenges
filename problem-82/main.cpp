@@ -4,17 +4,10 @@
 int izvrni_cifre(int n) {
     if (n == 0) return 0;
     bool negativan = n < 0;
-    std::string s = "";
-    while (n != 0) {
-        auto c = std::to_string(std::abs(n % 10));
-        std::string str{c};
-        s += str;
-        n /= 10;
-    }
+    std::string s = std::to_string(n);
+    std::reverse(s.begin(), s.end());
     int x = std::stoi(s);
-    if (negativan)
-        return -x;
-    return x;
+    return negativan ? -x : x;
 }
 
 std::vector<int> SlikeUOgledalu(const std::vector<int> &v) {
