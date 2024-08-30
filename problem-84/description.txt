@@ -1,0 +1,28 @@
+Napisati generičku funkciju “ZbirKontejnera” koja ima dva parametra koji su neki kontejnerski tipovi
+podataka, ne nužno iste vrste i ne nužno istog tipa elemenata (recimo, jedan može biti dek cijelih
+brojeva, a drugi moderni niz realnih brojeva). Pri tome se za ove kontejnere ne pretpostavlja da se
+mogu indeksirati, odnosno operator “[]” ne mora biti za njih podržan (tako da se funkcija treba
+ispravno ponašati i s takvim tipovima kontejnera, a koji će se susretati na kasnijim predavanjima).
+Jedino što se o njima zna da podržavaju funkcije “begin” i “end” koje vraćaju kao rezultat odgovarajuće
+pokazivače ili iteratore, koji ne moraju nužno podržavati ništa drugo osim dereferenciranja,
+inkrementiranja i poređenja na različitost. Kao rezultat, funkcija treba da vrati vektor koji se sastoji
+od zbirova odgovarajućih elemenata prvog i drugog kontejnera (podrazumijeva se da je njihovo
+sabiranje podržano). Recimo, ukoliko je prvi parametar dek cijelih brojeva čiji su elementi 3, 5, 2 i 8, a
+drugi parametar niz realnih brojeva čiji su elementi 2.5. 1.72, −1 i 4.9, funkcija kao rezultat treba da
+vrati vektor čiji su elementi 5.5, 6.72, 1 i 12.9 (tip elemenata vektora treba biti onakav kakav je tip
+rezultata sabiranja elemenata prvog i drugog kontejnera). U slučaju da je jedan kontejner kraći od
+drugog, treba smatrati da nedostajući elementi imaju vrijednosti koje su podrazumijevane vrijednosti
+za tip elemenata tog kontejnera (npr. 0 za brojčane tipove, prazan string za stringove, itd.).
+
+Napisanu funkciju treba demonstrirati u kratkom testnom programu, u kojem se traži unos dužina i
+elemenata dvije sekvence, od kojih prvu treba smjestiti u vektor realnih brojeva, a drugu u dek
+cijelih brojeva, a koji zatim računa i ispisuje na ekran njihov zbir (bez obzira na testni program u
+kojem se koriste samo dekovi i vektori čiji su elementi brojeva, napisana funkcija treba da radi
+ispravno s bilo kakvim kontejnerima s bilo kojim tipovima elemenata koji se mogu međusobno
+sabirati). Dijalog između korisnika i programa treba da izgleda kao na sljedećoj slici:
+
+Duzina prvog kontejnera: 5
+Elementi prvog kontejnera: 5 2 8 3 6
+Duzina drugog kontejnera: 3
+Elementi druge sekvence: 6 1 5
+Zbir kontejnera: 11 3 13 3 6
