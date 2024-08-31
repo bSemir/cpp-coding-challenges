@@ -1,0 +1,7 @@
+Napišite funkciju sa dva parametra, pri čemu je prvi parametar tipa “string”, dok je drugi
+parametar prirodan broj 𝑛. Funkcija treba da transformira zadani string u novi string koji se dobija
+tako što se iza svakog znaka izvornog stringa doda 𝑛 razmaka. Na primjer, ukoliko je 𝑛 = 2 i ukoliko
+se kao parametar zada string “lopta”, nakon transformacije string postaje "l o p t a ".
+Funkcija ne vraća nikakvu vrijednost, nego samo transformira svoj parametar.
+Napisanu funkciju demonstrirajte u programu koji u rečenicu unesenu sa tastature umeće po jedan razmak nakon
+svakog znaka i ispisuje tako modificiranu rečenicu na ekran.
