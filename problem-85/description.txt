@@ -1,0 +1,28 @@
+Praktično svi funkcionalni programski jezici poznaju funkciju nazvanu “map” koja prima dva
+parametra. Prvi parametar je neki kontejner (vektor, dek, lista, skup, itd.), dok je drugi parametar
+neka funkcija koja prima jedan parametar. Kao rezultat, ova funkcija vraća novi kontejner istog tipa
+i istog broja elemenata kao i kao i kontejner zadan kao prvi parametar, samo u kojem su vrijednosti
+svih elemenata zamijenjene rezultatima primjene funkcije zadane kao drugi parametar na te
+elemente. Zbog zahtjeva da vraćeni kontejner bude posve istog tipa kao i ulazni, pretpostavlja se da
+funkcija koja se zadaje kao drugi parametar vraća vrijednost istog tipa kao i tip elemenata
+kontejnera, ili barem neki tip koji je kompatibilan s njim (recimo, ukoliko su elementi kontejnera
+tipa “double”, nije sporno ako funkcija vraća nešto tipa “int” kao rezultat, ali je sporno ako vraća
+nešto tipa “string” ). Na primjer, ukoliko je prvi parametar lista čiji su elementi 3, 6, 1, 4, 2, a drugi
+parametar funkcija koja vraća kao rezultat kvadrat svog parametra, funkcija “map” vraća kao
+rezultat drugu listu čiji su elementi redom 9, 36, 1, 16 i 4. Sam kontejner koji se zadaje kao prvi
+parametar treba da ostane neizmijenjen. Napraviti funkciju nazvanu “Mapiraj”, koja obavlja isti
+zadatak kao upravo opisana funkcija “map”. Funkcija treba da bude što univerzalnija da radi sa što
+više različitih vrsta kontejnera. Jedino što se za kontejner treba podrazumijevati je da podržava
+iteratore sa kretanjem unaprijed, funkcije “begin” i “end” (što isključuje recimo stek, red i red s
+prioritetom kao dozvoljene tipove kontejnera), funkciju “insert”, te mogućnost da se čitav kontejner
+kopira u drugi pomoću operatora dodjele “=”. Pored toga, kao drugi parametar se mora moći poslati
+bilo klasična funkcija, bilo obična lambda funkcija, bilo lambda zatvorenje.
+
+Napisanu funkciju treba demonstrirati u programskom isječku koji će od nekog skupa čiji se broj
+elemenata i sami elementi unose putem tastature napraviti novi skup čiji su elementi sume cifara
+izvornih elemenata, i ispisati elemente tako dobijenog novog skupa. Dijalog između programa i
+korisnika treba izgledati ovako (obratiti pažnju na autosortiranje elemenata skupa):
+
+Unesite broj elemenata skupa: 3
+Unesite elemente: 73 412 9
+Novi skup: 7 9 10
