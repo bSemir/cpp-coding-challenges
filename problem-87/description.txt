@@ -1,0 +1,12 @@
+ROT13 je primitivni sistem šifriranja koji se često koristi na web stranicama kada se neki tekst ne
+želi da učini čitljivim na prvi pogled (npr. odgovor na neko pitanje koje je napisano neposredno
+ispod), ali da ga je po potrebi ipak moguće lako dešifrirati. Prema ovom sistemu, slova engleskog
+alfabeta iz opsega od A do M zamijenjuju se sa odgovarajućim slovima iz opsega od N do Z (tj. A se
+zamjenjuje sa N, B sa O, C sa P itd.) i obrnuto (dakle, N se zamjenjuje sa A itd.). Pri tome velika slova
+ostaju velika, mala slova ostaju mala, dok znakovi koji nisu slova (cifre, znaci interpunkcije, itd.)
+ostaju kakvi jesu. Interesatno je da se kod ovog sistema dešifriranje vrši istim postupkom kao i
+šifriranje (što je očigledno iz opisa postupka). Napišite funkciju “ROT13” koja kao parametar prima
+neki tekst (tipa “string”) a koja transformira taj tekst prema ROT13 postupku. Funkcija ne vraća
+nikakav rezultat, već samo utiče na izmjenu stringa koji joj je proslijeđen kao parametar. Funkcija
+ne smije koristiti nikakve pomoćne stringove, nizove, vektore itd.Napišite i kratki isječak programa
+koji za neki tekst unesen sa tastature ispisuje njegovu transformaciju po ROT13 sistemu.
