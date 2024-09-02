@@ -1,0 +1,9 @@
+Napišite funkciju koja prihvata vektor cijelih brojeva, a koja kao rezultat vraća vektor logičkih
+vrijednosti iste dimenzije, pri čemu je -ti element vektora koji se vraća kao rezultat logička
+vrijednost “tačno” ukoliko se -ti element ulaznog vektora može prikazati kao proizvod 5 uzastopnih
+prirodnih brojeva.
+Npr. za broj 720 u rezultirajući vektor treba smjestiti vrijednost “tačno”, jer je on
+jednak proizvodu pet uzastopnih prirodnih brojeva (2 ∙ 3 ∙ 4 ∙ 5 ∙ 6 = 720), a za broj 110 u
+rezultirajući vektor treba smjestiti vrijednost “netačno” jer taj broj nikako ne može biti proizvod
+pet uzastopnih prirodnih brojeva (već za minimalni slučaj imamo 1 ∙ 2 ∙ 3 ∙ 4 ∙ 5 > 110).
+Napišite i kratki isječak programa u kojem ćete testirati napisanu funkciju.
