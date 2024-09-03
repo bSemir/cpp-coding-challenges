@@ -2,14 +2,15 @@ Here I push at least one algorithmic coding problem every (or every other) day u
 #
 Using: C++ (14/17)
 #
-Covered the following topics so far:
+Covered the following programming topics so far:
 - Vectors (std::vector)
 - Arrays (C-like arrays and std::array)
 - Strings (std::string)
-- list (std::list)
-- queue (std::queue)
-- map (std::map)
-- set (std::set)
+- List (std::list)
+- Queue (std::queue, std::priority_queue)
+- Map (std::map)
+- Set (std::set)
+- Stack (std::stack)
 - matrices
 - pointers, double pointers and pointer arithmetic
 - smart pointers
@@ -18,7 +19,7 @@ Covered the following topics so far:
 - dynamic memory allocation
 - structs
 
-OOP:
+Object oriented programming:
 - classes
 - constructors
 - explicit constructors
