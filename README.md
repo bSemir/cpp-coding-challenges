@@ -1,32 +1,35 @@
-Here I push at least one algorithmic coding problem every (or every other) day until I learn the craft or until I go crazy :)
+# Algorithmic Coding Challenges
+Welcome to my algorithmic coding journey! Here, I aim to solve at least one coding problem every day (or every other day) until I master the craft or go crazy trying. 😄
 #
-Using: C++ (14/17)
+### Language of Choice: C++
+### C++ Standards: 14/17
 #
-Covered the following programming topics so far:
-- Vectors (std::vector)
-- Arrays (C-like arrays and std::array)
-- Strings (std::string)
-- List (std::list)
-- Queue (std::queue, std::priority_queue)
-- Map (std::map)
-- Set (std::set)
-- Stack (std::stack)
-- matrices
-- pointers, double pointers and pointer arithmetic
-- smart pointers
-- references
-- anonymous functions (lambdas)
-- dynamic memory allocation
-- structs
-
-Object oriented programming:
-- classes
-- constructors
-- explicit constructors
-- copy and move constructors
-- copy and move assignment operators
-- destructors
-- operator overloading
-- method overriding
-- inheritance
-- files (txt & bin)
+## Topics Covered So Far
+### Data Structures:
+* Vectors (std::vector)
+* Arrays (C-like arrays and std::array)
+* Strings (std::string)
+* Lists (std::list)
+* Queues (std::queue, std::priority_queue)
+* Maps (std::map)
+* Sets (std::set)
+* Stacks (std::stack)
+### Additional Topics:
+- Matrices
+- Pointers (single, double, and pointer arithmetic)
+- Smart Pointers
+- References
+- Anonymous Functions (Lambdas)
+- Dynamic Memory Allocation
+- Structs
+### Object-Oriented Programming:
+- Classes
+- Constructors
+- Explicit Constructors
+- Copy and Move Constructors
+- Copy and Move Assignment Operators
+- Destructors
+- Operator Overloading
+#
+### About this Repository
+This repository is a collection of algorithmic problems I've tackled using C++. It serves as a way to track my progress, refine my skills, and maybe even help others who are on a similar path. Feel free to browse through the solutions, suggest improvements, or contribute your own!
