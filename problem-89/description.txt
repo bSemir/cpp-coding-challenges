@@ -1,0 +1,6 @@
+Napišite funkciju koja za vektor cijelih brojeva koji joj se prosljeđuje kao parametar vraća kao rezultat
+vektor sa istim brojem elemenata, ali čiji su elementi u odnosu na ulazni vektor transformirani na
+način da im je svaka parna cifra uvećana za 1, a svaka neparna cifra umanjena za 1. Na primjer,
+ukoliko je neki element ulaznog vektora glasio 354126079, odgovarajući element u vektoru koji
+predstavlja rezultat treba da glasi 245037168. Slično, od broja 354126079 treba nastati broj
+ 245037168. Napišite i isječak programa koji prikazuje kako se koristi napisana funkcija.
