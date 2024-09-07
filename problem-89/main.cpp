@@ -27,10 +27,17 @@ std::vector<int> transform(const std::vector<int> &v) {
 }
 
 int main() {
-    std::vector<int> v = {123, -456, 789};
+    std::cout << "Enter the size of the vector: ";
+    int n;
+    std::cin >> n;
+    std::vector<int> v(n);
+    std::cout << "Enter the elements of the vector: ";
+    for (int i = 0; i < n; i++)
+        std::cin >> v[i];
+
     std::vector<int> result = transform(v);
-    for (int i: result) {
+    std::cout << "The result is: " << std::endl;
+    for (int i: result)
         std::cout << i << std::endl;
-    }
     return 0;
 }
