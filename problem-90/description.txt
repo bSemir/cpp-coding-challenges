@@ -1,0 +1,23 @@
+Napisati generičku funkciju “TransformiraniStek” koja kao svoj prvi parametar prima neki stek
+proizvoljnog tipa elemenata, a kao drugi parametar neku funkciju (nazovimo je 𝑓 radi lakšeg
+izražavanja) s jednim parametrom koja može da primi kao parametar elemente iz tog steka.
+Funkcija kao rezultat treba da vrati novi stek čiji su elementi onog tipa kakav vraća funkcija 𝑓, a koji
+su jednaki rezultatima primjene funkcije 𝑓 na elemente izvornog steka (zadanog kao prvi parametar
+funkcije “TransformiraniStek”). Na primjer, ukoliko se u steku koji je proslijeđen kao parametar
+nalaze brojevi 2, 5, 3 i 4 (tim redom), i ukoliko se kao drugi parametar proslijedi funkcija koja daje
+kao rezultat kvadrat svog parametra, stek vraćen kao rezultat treba da sadrži brojeve 4, 25, 9 i 16
+(tim redom). Za realizaciju ove funkcije nije dozvoljeno koristiti nikakve pomoćne funkciju, niti
+pomoćne kontejnerske tipove podataka (nizove, vektore, itd.), niti dinamičku alokaciju memorije,
+osim eventualno jednog pomoćnog steka.
+Funkcija 𝑓 može biti bilo imenovana funkcija, bilo lambd funkcija, bilo lambda zatvorenje.
+
+Napisanu funkciju treba demonstrirati u testnom programu koji prvo traži da se sa tastature unese
+veličina steka 𝑛, kao i 𝑛 cijelih brojeva, koji se unose u stek. Nakon toga, program treba pozvati
+napisanu funkciju, prosljeđujući joj kao drugi parametar funkciju koja vraća kao rezultat
+recipročnu vrijednost svog parametra (ovaj rezultat je po tipu realan broj), te ispisati na ekran stek
+koji se dobija kao rezultat (redom od vrha ka dnu). Dijalog između programa i korisnika treba
+izgledati ovako (pri čemu nije potrebno provjeravati korektnost unosa):
+
+Unesite velicinu steka: 5
+Unesite elemente: 1 2 3 4 5
+Stek reciprocnih vrijednosti: 0.2 0.25 0.333333 0.5 1
