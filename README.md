@@ -30,6 +30,10 @@ Welcome to my algorithmic coding journey! Here, I aim to solve at least one codi
 - Copy and Move Assignment Operators
 - Destructors
 - Operator Overloading
+- Abstraction
+- Encapsulation
+- Inheritance
+- Polymorphism
 #
 ### About this Repository
 This repository is a collection of algorithmic problems I've tackled using C++. It serves as a way to track my progress, refine my skills, and maybe even help others who are on a similar path.
