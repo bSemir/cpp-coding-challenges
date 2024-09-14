@@ -22,6 +22,7 @@ Welcome to my algorithmic coding journey! Here, I aim to solve at least one codi
 - Anonymous Functions (Lambdas)
 - Dynamic Memory Allocation
 - Structs
+- Files (ofstream, ifstream, fstream)
 ### Object-Oriented Programming:
 - Classes
 - Constructors
