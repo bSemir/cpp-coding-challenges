@@ -1,5 +1,7 @@
 # Algorithmic Coding Challenges
 Welcome to my algorithmic coding journey! Here, I aim to solve at least one coding problem every day (or every other day) until I master the craft or go crazy trying.
+
+_Update: I finally learned the craft and passed the final exam. I graduated!_
 #
 ### Language of Choice: C++
 ### C++ Standards: 14/17
